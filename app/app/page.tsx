@@ -1,23 +1,25 @@
-async function getApiHealth(): Promise<{ status: string } | null> {
-  try {
-    const base = process.env.API_BASE_URL ?? "http://localhost:8000";
-    const res = await fetch(`${base}/health`, { cache: "no-store" });
-    if (!res.ok) return null;
-    return (await res.json()) as { status: string };
-  } catch {
-    return null;
-  }
-}
+import Hero from "@/components/sections/Hero";
+import Problem from "@/components/sections/Problem";
+import WhatWeDo from "@/components/sections/WhatWeDo";
+import HowItWorks from "@/components/sections/HowItWorks";
+import Vision from "@/components/sections/Vision";
+import Intelligence from "@/components/sections/Intelligence";
+import TheArc from "@/components/sections/TheArc";
+import About from "@/components/sections/About";
+import CTABanner from "@/components/sections/CTABanner";
 
-export default async function Home() {
-  const health = await getApiHealth();
+export default function Home() {
   return (
-    <main style={{ fontFamily: "system-ui", padding: "3rem", maxWidth: 720 }}>
-      <h1>GYF — Get Your Fit</h1>
-      <p>AI-native personal stylist. Phase P0 — Foundations.</p>
-      <p>
-        Core API: <strong>{health ? health.status : "unreachable"}</strong>
-      </p>
-    </main>
+    <>
+      <Hero />
+      <Problem />
+      <WhatWeDo />
+      <HowItWorks />
+      <Vision />
+      <Intelligence />
+      <TheArc />
+      <About />
+      <CTABanner />
+    </>
   );
 }

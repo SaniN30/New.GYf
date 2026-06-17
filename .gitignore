@@ -1,8 +1,15 @@
 # External tooling (vendored plugin, has its own git history)
 ECC/
 
+# Dependencies
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+
 # OS / editor
 .DS_Store
+*.pem
 *.swp
 .idea/
 .vscode/
@@ -12,16 +19,20 @@ ECC/
 .env.*
 !.env.example
 
-# Node
-node_modules/
+# Node / Next / build
+.next/
+out/
 dist/
 build/
-.next/
 .turbo/
 .tmp/
 .bun-cache/
+coverage/
 *.tsbuildinfo
 *.log
+
+# Vercel
+.vercel
 
 # Python
 __pycache__/

@@ -5,13 +5,13 @@ tokens. Follow top to bottom.
 
 ## 1. Create free-tier accounts
 
-| Service | Purpose | Free tier |
-| --- | --- | --- |
-| [Vercel](https://vercel.com) | Web/BFF hosting + CD target | Hobby |
-| [Supabase](https://supabase.com) | Postgres + **pgvector** + storage + auth | Free project |
-| [Upstash](https://upstash.com) | Redis (cache, scale-to-zero) | Free |
-| (later) Redpanda Cloud / Confluent | Event broker | — uses local JSONL sink until then |
-| (later) Hugging Face | ZeroGPU model serving | Free |
+| Service                            | Purpose                                  | Free tier                          |
+| ---------------------------------- | ---------------------------------------- | ---------------------------------- |
+| [Vercel](https://vercel.com)       | Web/BFF hosting + CD target              | Hobby                              |
+| [Supabase](https://supabase.com)   | Postgres + **pgvector** + storage + auth | Free project                       |
+| [Upstash](https://upstash.com)     | Redis (cache, scale-to-zero)             | Free                               |
+| (later) Redpanda Cloud / Confluent | Event broker                             | — uses local JSONL sink until then |
+| (later) Hugging Face               | ZeroGPU model serving                    | Free                               |
 
 ## 2. Collect tokens → `terraform.tfvars`
 
@@ -46,11 +46,11 @@ psql "$DATABASE_URL" -f ../../services/api/db/schema.sql
 
 Repo → Settings → Secrets and variables → Actions → New repository secret:
 
-| Secret | From |
-| --- | --- |
-| `VERCEL_TOKEN` | Vercel token (step 2) |
-| `VERCEL_ORG_ID` | `terraform output` / Vercel project settings |
-| `VERCEL_PROJECT_ID` | `terraform output vercel_project_id` |
+| Secret              | From                                         |
+| ------------------- | -------------------------------------------- |
+| `VERCEL_TOKEN`      | Vercel token (step 2)                        |
+| `VERCEL_ORG_ID`     | `terraform output` / Vercel project settings |
+| `VERCEL_PROJECT_ID` | `terraform output vercel_project_id`         |
 
 Until these exist, `.github/workflows/cd.yml` logs and **no-ops** (pipeline stays green).
 Once set, PRs deploy a Vercel **preview** and `main` deploys to **production**.
@@ -77,4 +77,4 @@ serverless function in a later step).
 - **Cost discipline:** everything above is free tier. Graduate to paid GPU/vector infra only
   when scale forces it (see `docs/implementation-plan.md` §7, P3+).
 - Never commit `terraform.tfvars` or state — both are gitignored.
-</content>
+  </content>
