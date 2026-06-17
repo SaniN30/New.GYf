@@ -5,33 +5,33 @@ import { fadeUp, fadeIn, staggerContainer, viewportOnce } from "@/lib/animations
 
 const phases = [
   {
-    number: "Phase 1",
+    number: "01",
     title: "The Intelligent Stylist",
-    body: "An AI that builds personalized, explained outfits from day one and learns from real user behavior immediately.",
+    body: "Personalized, explained outfits from day one. Learns from real user behavior immediately.",
     active: true,
   },
   {
-    number: "Phase 2",
+    number: "02",
     title: "The Personal Taste Engine",
-    body: "GYF knows your style deeply enough that its picks feel uncannily you. It styles around your real wardrobe.",
+    body: "GYF knows your style deeply. It styles around your real wardrobe and adapts continuously.",
     active: false,
   },
   {
-    number: "Phase 3",
+    number: "03",
     title: "The Shopping Companion",
-    body: "GYF shops with you — across brands and retailers — recommending the smartest things to buy within your budget.",
+    body: "Shops with you across brands and retailers — recommending the smartest additions to your wardrobe.",
     active: false,
   },
   {
-    number: "Phase 4",
+    number: "04",
     title: "The Visualization Layer",
-    body: "See any look realistically on yourself before committing — removing the last barrier between inspiration and confidence.",
+    body: "See any look realistically on yourself before committing. Inspiration becomes confidence.",
     active: false,
   },
   {
-    number: "Phase 5",
+    number: "05",
     title: "The Ambient Stylist",
-    body: "GYF becomes the default way people decide what to wear and what to buy. A trusted companion for every fashion decision.",
+    body: "The default way people decide what to wear. A compounding intelligence present wherever fashion decisions happen.",
     active: false,
   },
 ];
@@ -48,17 +48,19 @@ export default function TheArc() {
           className="mb-16"
         >
           <p
-            className="uppercase tracking-widest text-text-muted mb-4"
-            style={{ fontFamily: "var(--font-dm-mono)", fontSize: "0.65rem" }}
+            className="uppercase tracking-[0.22em] text-text-muted mb-4"
+            style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem" }}
           >
             The Arc
           </p>
           <h2
             className="text-text-primary font-light"
             style={{
-              fontFamily: "var(--font-cormorant)",
-              fontSize: "clamp(2rem, 4vw, 3.5rem)",
-              lineHeight: 1.1,
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(1.8rem,3.5vw,3rem)",
+              fontWeight: 300,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.15,
             }}
           >
             Where GYF is going.
@@ -66,7 +68,7 @@ export default function TheArc() {
         </motion.div>
 
         <motion.div
-          variants={staggerContainer(0.12)}
+          variants={staggerContainer(0.1)}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
@@ -76,29 +78,28 @@ export default function TheArc() {
             <motion.div
               key={number}
               variants={fadeUp}
-              className="flex flex-col sm:flex-row gap-6 sm:gap-10 py-8 border-b border-border last:border-b-0"
+              className="flex flex-col sm:flex-row gap-6 sm:gap-12 py-8 border-b border-border last:border-b-0 group"
             >
-              <div className="shrink-0 flex sm:flex-col items-start gap-3">
+              <div className="flex items-center gap-4 sm:flex-col sm:items-start shrink-0 w-28">
                 <span
-                  className="w-24 shrink-0"
+                  className="transition-colors"
                   style={{
-                    fontFamily: "var(--font-dm-mono)",
+                    fontFamily: "var(--font-mono)",
                     fontSize: "0.6rem",
-                    letterSpacing: "0.15em",
+                    letterSpacing: "0.18em",
                     textTransform: "uppercase",
-                    color: active ? "var(--color-accent)" : "var(--color-text-muted)",
+                    color: active ? "var(--color-accent-warm)" : "var(--color-text-muted)",
                   }}
                 >
                   {number}
                 </span>
                 {active && (
                   <span
-                    className="text-[9px] uppercase tracking-widest px-2 py-0.5 border shrink-0"
+                    className="px-2 py-0.5 border text-[9px] uppercase tracking-widest shrink-0"
                     style={{
-                      fontFamily: "var(--font-dm-mono)",
-                      color: "var(--color-accent)",
-                      borderColor: "var(--color-accent)",
-                      opacity: 0.8,
+                      fontFamily: "var(--font-mono)",
+                      color: "var(--color-accent-warm)",
+                      borderColor: "rgba(200,169,110,0.35)",
                     }}
                   >
                     Now
@@ -107,11 +108,13 @@ export default function TheArc() {
               </div>
               <div className="flex flex-col gap-2">
                 <h3
+                  className="transition-colors"
                   style={{
-                    fontFamily: "var(--font-cormorant)",
-                    fontSize: "clamp(1.25rem, 2.2vw, 1.75rem)",
-                    fontWeight: active ? 500 : 300,
-                    lineHeight: 1.2,
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(1rem,2vw,1.35rem)",
+                    fontWeight: active ? 500 : 400,
+                    letterSpacing: "-0.01em",
+                    lineHeight: 1.25,
                     color: active ? "var(--color-text-primary)" : "var(--color-text-muted)",
                   }}
                 >
