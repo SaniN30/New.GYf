@@ -1,0 +1,37 @@
+# External tooling (vendored plugin, has its own git history)
+ECC/
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+dist/
+build/
+.next/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# ML artifacts / data
+*.ckpt
+*.pt
+*.safetensors
+data/
+models/
+.cache/
