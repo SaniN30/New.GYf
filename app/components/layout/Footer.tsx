@@ -40,18 +40,30 @@ export default function Footer() {
           {/* Brand */}
           <div className="footer-brand">
             <Link href="/" style={{ display: "inline-flex", lineHeight: 0 }}>
-              <Image
-                src="/assets/logo-new.png"
-                alt="GYF"
-                width={120}
-                height={120}
-                style={{
-                  filter: "brightness(0) invert(1)",
-                  objectFit: "contain",
-                  height: "48px",
-                  width: "auto",
-                }}
-              />
+              {/* The logo PNG has ~40% transparent padding around the mark.
+                  We render at 300px and clip a 72×60 window centred on the mark. */}
+              <div style={{
+                width: "72px",
+                height: "60px",
+                overflow: "hidden",
+                position: "relative",
+                flexShrink: 0,
+              }}>
+                <Image
+                  src="/assets/logo-new.png"
+                  alt="GYF"
+                  width={300}
+                  height={300}
+                  style={{
+                    filter: "brightness(0) invert(1)",
+                    position: "absolute",
+                    top: "-120px",
+                    left: "-114px",
+                    width: "300px",
+                    height: "300px",
+                  }}
+                />
+              </div>
             </Link>
             <p style={{
               fontFamily: "var(--font-body)",
