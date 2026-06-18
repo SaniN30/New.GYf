@@ -5,9 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
-  { label: "How it Works", href: "#how-it-works" },
-  { label: "Features", href: "#features" },
-  { label: "Vision", href: "#vision" },
+  { label: "How it Works", href: "/how-it-works" },
+  { label: "Features", href: "/features" },
+  { label: "Vision", href: "/vision" },
+  { label: "Intelligence", href: "/intelligence" },
+  { label: "Team", href: "/team" },
 ];
 
 export default function Navbar() {
@@ -37,7 +39,7 @@ export default function Navbar() {
         <ul className="nav-links" style={{ display: "flex", listStyle: "none", gap: "2.5rem", margin: 0, padding: 0 }}>
           {navLinks.map(({ label, href }) => (
             <li key={label} style={{ display: "none" }} className="md-show">
-              <a href={href}>{label}</a>
+              <Link href={href}>{label}</Link>
             </li>
           ))}
         </ul>
@@ -116,7 +118,7 @@ export default function Navbar() {
           </div>
           <nav style={{ padding: "3rem 2rem", flex: 1, display: "flex", flexDirection: "column", gap: "0.5rem" }}>
             {navLinks.map(({ label, href }) => (
-              <a
+              <Link
                 key={label}
                 href={href}
                 onClick={() => setMenuOpen(false)}
@@ -132,7 +134,7 @@ export default function Navbar() {
                 }}
               >
                 {label}
-              </a>
+              </Link>
             ))}
             <a
               href="#cta"
