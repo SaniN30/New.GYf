@@ -1,10 +1,11 @@
 import Image from "next/image";
 
 const navLinks = [
-  { label: "How it Works", href: "#how-it-works" },
-  { label: "Features", href: "#features" },
-  { label: "Vision", href: "#vision" },
-  { label: "Join Waitlist", href: "#cta" },
+  { label: "How it Works", href: "/how-it-works" },
+  { label: "Features", href: "/features" },
+  { label: "Vision", href: "/vision" },
+  { label: "Intelligence", href: "/intelligence" },
+  { label: "Team", href: "/team" },
 ];
 
 const socials = [
@@ -37,7 +38,7 @@ export default function Footer() {
         <div style={{ display: "flex", flexWrap: "wrap", gap: "3rem", justifyContent: "space-between", marginBottom: "3rem" }}>
           {/* Brand */}
           <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-            <Image src="/assets/logo-new.png" alt="GYF" width={200} height={200} style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }} />
+            <Image src="/assets/logo-new.png" alt="GYF" width={160} height={80} style={{ objectFit: "contain", objectPosition: "left center", filter: "brightness(0) invert(1)", maxHeight: "56px", width: "auto" }} />
             <p style={{
               fontFamily: "var(--font-body)",
               fontSize: "0.82rem",

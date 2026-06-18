@@ -1,6 +1,6 @@
 "use client";
 
-import { useReveal } from "@/lib/useReveal";
+import { useState } from "react";
 
 const phases = [
   {
@@ -35,20 +35,19 @@ const phases = [
     num: "05",
     title: "Ambient Stylist",
     body: "GYF becomes the default way people decide what to wear and what to buy. A trusted companion present wherever fashion decisions happen — getting smarter for every person it dresses, forever.",
-    badge: "soon",
+    badge: "future",
     badgeLabel: "Future",
   },
 ];
 
 export default function Vision() {
-  useReveal();
+  const [active, setActive] = useState(0);
 
   return (
     <section id="vision">
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <p className="eyebrow reveal">The Arc</p>
+        <p className="eyebrow">The Arc</p>
         <h2
-          className="reveal reveal-d1"
           style={{
             fontFamily: "var(--font-display), sans-serif",
             fontSize: "clamp(2rem, 4vw, 3.2rem)",
@@ -57,36 +56,154 @@ export default function Vision() {
             lineHeight: 1.15,
             letterSpacing: "-0.02em",
             maxWidth: "480px",
-            marginBottom: "3.5rem",
+            marginBottom: "4rem",
           }}
         >
           A stylist that compounds.
         </h2>
 
-        <div className="vision-grid">
-          {/* Phases */}
-          <div>
-            {phases.map(({ num, title, body, badge, badgeLabel }, i) => (
-              <div key={num} className={`phase reveal reveal-d${i + 1}`}>
-                <span className="phase-num">{num}</span>
-                <div>
-                  <div className="phase-title">{title}</div>
-                  <div className="phase-body">{body}</div>
-                  <span className={`phase-badge ${badge}`}>{badgeLabel}</span>
+        <div className="hiw-layout">
+          {/* Left: phase list */}
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {phases.map(({ num, title, badge, badgeLabel }, i) => (
+              <button
+                key={num}
+                onClick={() => setActive(i)}
+                style={{
+                  all: "unset",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "1.25rem",
+                  padding: "1.5rem 0",
+                  paddingLeft: active === i ? "1.25rem" : "0",
+                  borderBottom: "1px solid var(--rule)",
+                  borderLeft: `3px solid ${active === i ? "var(--accent)" : "transparent"}`,
+                  transition: "all 0.25s ease",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "var(--font-mono), monospace",
+                    fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)",
+                    fontWeight: 400,
+                    color: active === i ? "rgba(200,169,110,0.45)" : "rgba(255,255,255,0.1)",
+                    lineHeight: 1,
+                    minWidth: "2.8rem",
+                    transition: "color 0.25s ease",
+                  }}
+                >
+                  {num}
+                </span>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem", textAlign: "left" }}>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-display), sans-serif",
+                      fontSize: "clamp(0.9rem, 1.5vw, 1.1rem)",
+                      fontWeight: active === i ? 500 : 400,
+                      color: active === i ? "var(--text)" : "var(--mid)",
+                      lineHeight: 1.3,
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    {title}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono), monospace",
+                      fontSize: "8.5px",
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase",
+                      color: badge === "launch" ? "var(--accent)" : "var(--mid)",
+                      opacity: badge === "launch" ? 1 : 0.6,
+                    }}
+                  >
+                    {badgeLabel}
+                  </span>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
 
-          {/* Sticky quote card */}
-          <div>
-            <div className="vision-quote-card reveal reveal-d2">
-              <div className="vision-quote-mark">&ldquo;</div>
-              <p className="vision-quote-text">
-                A personal stylist — someone who knows what flatters you, what coordinates, and what is worth buying — has always been a luxury for the few. GYF makes that intelligence universal: free, instant, and personal to everyone.
+          {/* Right: detail card */}
+          <div
+            style={{
+              position: "sticky",
+              top: "7rem",
+              background: "var(--surface)",
+              border: "1px solid var(--rule)",
+              borderRadius: "2px",
+              padding: "clamp(2rem, 4vw, 3rem)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "1.5rem",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "var(--font-mono), monospace",
+                fontSize: "clamp(4rem, 8vw, 7rem)",
+                fontWeight: 400,
+                color: "rgba(200,169,110,0.12)",
+                lineHeight: 1,
+              }}
+            >
+              {phases[active].num}
+            </span>
+            <div>
+              <span
+                style={{
+                  fontFamily: "var(--font-mono), monospace",
+                  fontSize: "8.5px",
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: phases[active].badge === "launch" ? "var(--accent)" : "var(--mid)",
+                  display: "block",
+                  marginBottom: "0.75rem",
+                }}
+              >
+                {phases[active].badgeLabel}
+              </span>
+              <div
+                style={{
+                  fontFamily: "var(--font-display), sans-serif",
+                  fontSize: "clamp(1.2rem, 2.2vw, 1.6rem)",
+                  fontWeight: 500,
+                  color: "var(--text)",
+                  lineHeight: 1.25,
+                  marginBottom: "1rem",
+                }}
+              >
+                {phases[active].title}
+              </div>
+              <p
+                style={{
+                  fontFamily: "var(--font-body), sans-serif",
+                  fontSize: "0.95rem",
+                  color: "var(--mid)",
+                  lineHeight: 1.8,
+                  margin: 0,
+                }}
+              >
+                {phases[active].body}
               </p>
-              <div className="vision-quote-rule" />
-              <p className="vision-quote-attr">GYF Vision, 2026</p>
+            </div>
+            <div style={{ display: "flex", gap: "0.5rem" }}>
+              {phases.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActive(i)}
+                  style={{
+                    all: "unset",
+                    cursor: "pointer",
+                    width: active === i ? "24px" : "8px",
+                    height: "8px",
+                    borderRadius: "4px",
+                    background: active === i ? "var(--accent)" : "var(--rule)",
+                    transition: "all 0.25s ease",
+                  }}
+                />
+              ))}
             </div>
           </div>
         </div>

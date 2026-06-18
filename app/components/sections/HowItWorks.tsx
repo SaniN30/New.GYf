@@ -1,6 +1,6 @@
 "use client";
 
-import { useReveal } from "@/lib/useReveal";
+import { useState } from "react";
 
 const steps = [
   {
@@ -41,14 +41,13 @@ const steps = [
 ];
 
 export default function HowItWorks() {
-  useReveal();
+  const [active, setActive] = useState(0);
 
   return (
     <section id="how-it-works">
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <p className="eyebrow reveal">How it Works</p>
+        <p className="eyebrow">How it Works</p>
         <h2
-          className="reveal reveal-d1"
           style={{
             fontFamily: "var(--font-display), sans-serif",
             fontSize: "clamp(2rem, 4vw, 3.2rem)",
@@ -57,22 +56,149 @@ export default function HowItWorks() {
             lineHeight: 1.15,
             letterSpacing: "-0.02em",
             maxWidth: "480px",
+            marginBottom: "4rem",
           }}
         >
           Dressed in three steps.
         </h2>
 
-        <div className="steps-grid">
-          {steps.map(({ num, title, body, icon }, i) => (
-            <div key={num} className={`step reveal reveal-d${i + 1}`}>
-              <div style={{ color: "var(--accent)", marginBottom: "0.25rem" }}>{icon}</div>
-              <div className="step-num">{num}</div>
-              <div className="step-title">{title}</div>
-              <div className="step-body">{body}</div>
+        <div className="hiw-layout">
+          {/* Left: step list */}
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {steps.map(({ num, title, icon }, i) => (
+              <button
+                key={num}
+                onClick={() => setActive(i)}
+                style={{
+                  all: "unset",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "1.25rem",
+                  padding: "1.75rem 0",
+                  paddingLeft: active === i ? "1.25rem" : "0",
+                  borderBottom: "1px solid var(--rule)",
+                  borderLeft: `3px solid ${active === i ? "var(--accent)" : "transparent"}`,
+                  transition: "all 0.25s ease",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "var(--font-mono), monospace",
+                    fontSize: "clamp(2rem, 4vw, 3rem)",
+                    fontWeight: 400,
+                    color: active === i ? "rgba(200,169,110,0.45)" : "rgba(255,255,255,0.1)",
+                    lineHeight: 1,
+                    minWidth: "3rem",
+                    transition: "color 0.25s ease",
+                  }}
+                >
+                  {num}
+                </span>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem", textAlign: "left" }}>
+                  <span style={{ color: active === i ? "var(--accent)" : "var(--mid)", transition: "color 0.2s", display: "flex" }}>
+                    {icon}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-display), sans-serif",
+                      fontSize: "clamp(0.95rem, 1.6vw, 1.2rem)",
+                      fontWeight: active === i ? 500 : 400,
+                      color: active === i ? "var(--text)" : "var(--mid)",
+                      lineHeight: 1.3,
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    {title}
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {/* Right: detail card */}
+          <div
+            style={{
+              position: "sticky",
+              top: "7rem",
+              background: "var(--surface)",
+              border: "1px solid var(--rule)",
+              borderRadius: "2px",
+              padding: "clamp(2rem, 4vw, 3rem)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "1.5rem",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "var(--font-mono), monospace",
+                fontSize: "clamp(4rem, 8vw, 7rem)",
+                fontWeight: 400,
+                color: "rgba(200,169,110,0.12)",
+                lineHeight: 1,
+              }}
+            >
+              {steps[active].num}
+            </span>
+            <div style={{ color: "var(--accent)" }}>{steps[active].icon}</div>
+            <div>
+              <div
+                style={{
+                  fontFamily: "var(--font-display), sans-serif",
+                  fontSize: "clamp(1.2rem, 2.2vw, 1.6rem)",
+                  fontWeight: 500,
+                  color: "var(--text)",
+                  lineHeight: 1.25,
+                  marginBottom: "1rem",
+                }}
+              >
+                {steps[active].title}
+              </div>
+              <p
+                style={{
+                  fontFamily: "var(--font-body), sans-serif",
+                  fontSize: "0.95rem",
+                  color: "var(--mid)",
+                  lineHeight: 1.8,
+                  margin: 0,
+                }}
+              >
+                {steps[active].body}
+              </p>
             </div>
-          ))}
+            <div style={{ display: "flex", gap: "0.5rem" }}>
+              {steps.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActive(i)}
+                  style={{
+                    all: "unset",
+                    cursor: "pointer",
+                    width: active === i ? "24px" : "8px",
+                    height: "8px",
+                    borderRadius: "4px",
+                    background: active === i ? "var(--accent)" : "var(--rule)",
+                    transition: "all 0.25s ease",
+                  }}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
+
+      <style>{`
+        .hiw-layout {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: clamp(2rem, 6vw, 7rem);
+          align-items: start;
+        }
+        @media (max-width: 700px) {
+          .hiw-layout { grid-template-columns: 1fr; }
+        }
+      `}</style>
     </section>
   );
 }

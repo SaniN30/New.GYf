@@ -1,139 +1,166 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { fadeUp, fadeIn, staggerContainer, viewportOnce } from "@/lib/animations";
+import { useState } from "react";
 
 const phases = [
   {
     number: "01",
     title: "The Intelligent Stylist",
     body: "Personalized, explained outfits from day one. Learns from real user behavior immediately.",
-    active: true,
+    status: "now",
   },
   {
     number: "02",
     title: "The Personal Taste Engine",
     body: "GYF knows your style deeply. It styles around your real wardrobe and adapts continuously.",
-    active: false,
+    status: "soon",
   },
   {
     number: "03",
     title: "The Shopping Companion",
     body: "Shops with you across brands and retailers — recommending the smartest additions to your wardrobe.",
-    active: false,
+    status: "roadmap",
   },
   {
     number: "04",
-    title: "The Visualization Layer",
+    title: "The Visualisation Layer",
     body: "See any look realistically on yourself before committing. Inspiration becomes confidence.",
-    active: false,
+    status: "roadmap",
   },
   {
     number: "05",
     title: "The Ambient Stylist",
-    body: "The default way people decide what to wear. A compounding intelligence present wherever fashion decisions happen.",
-    active: false,
+    body: "The default way people decide what to wear. A compounding intelligence, present wherever fashion decisions happen.",
+    status: "future",
   },
 ];
 
-export default function TheArc() {
-  return (
-    <section id="the-arc" className="py-32 px-6 bg-bg border-t border-border">
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          variants={fadeIn}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          className="mb-16"
-        >
-          <p
-            className="uppercase tracking-[0.22em] text-text-muted mb-4"
-            style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem" }}
-          >
-            The Arc
-          </p>
-          <h2
-            className="text-text-primary font-light"
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(1.8rem,3.5vw,3rem)",
-              fontWeight: 300,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.15,
-            }}
-          >
-            Where GYF is going.
-          </h2>
-        </motion.div>
+const statusColor: Record<string, string> = {
+  now: "var(--accent)",
+  soon: "rgba(255,255,255,0.35)",
+  roadmap: "rgba(255,255,255,0.25)",
+  future: "rgba(255,255,255,0.18)",
+};
 
-        <motion.div
-          variants={staggerContainer(0.1)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          className="flex flex-col"
+export default function TheArc() {
+  const [hovered, setHovered] = useState<number | null>(null);
+
+  return (
+    <section
+      style={{
+        padding: "clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,5rem)",
+        borderTop: "1px solid var(--rule)",
+      }}
+    >
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        <p
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: "0.6rem",
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            color: "var(--mid)",
+            marginBottom: "1.5rem",
+          }}
         >
-          {phases.map(({ number, title, body, active }) => (
-            <motion.div
+          The Arc
+        </p>
+        <h2
+          style={{
+            fontFamily: "var(--font-display), sans-serif",
+            fontSize: "clamp(2rem, 4vw, 3.2rem)",
+            fontWeight: 500,
+            color: "var(--text)",
+            lineHeight: 1.15,
+            letterSpacing: "-0.02em",
+            maxWidth: "480px",
+            marginBottom: "4rem",
+          }}
+        >
+          Where GYF is going.
+        </h2>
+
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {phases.map(({ number, title, body, status }, i) => (
+            <div
               key={number}
-              variants={fadeUp}
-              className="flex flex-col sm:flex-row gap-6 sm:gap-12 py-8 border-b border-border last:border-b-0 group"
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "4rem 1fr",
+                gap: "2rem",
+                padding: "2rem 0",
+                borderBottom: "1px solid var(--rule)",
+                cursor: "default",
+                opacity: hovered === null ? 1 : hovered === i ? 1 : 0.4,
+                transition: "opacity 0.2s ease",
+              }}
             >
-              <div className="flex items-center gap-4 sm:flex-col sm:items-start shrink-0 w-28">
-                <span
-                  className="transition-colors"
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.6rem",
-                    letterSpacing: "0.18em",
-                    textTransform: "uppercase",
-                    color: active ? "var(--color-accent-warm)" : "var(--color-text-muted)",
-                  }}
-                >
-                  {number}
-                </span>
-                {active && (
+              {/* Number */}
+              <span
+                style={{
+                  fontFamily: "var(--font-mono), monospace",
+                  fontSize: "0.7rem",
+                  letterSpacing: "0.18em",
+                  color: statusColor[status],
+                  paddingTop: "4px",
+                  transition: "color 0.2s",
+                }}
+              >
+                {number}
+              </span>
+
+              {/* Content */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
                   <span
-                    className="px-2 py-0.5 border text-[9px] uppercase tracking-widest shrink-0"
                     style={{
-                      fontFamily: "var(--font-mono)",
-                      color: "var(--color-accent-warm)",
-                      borderColor: "rgba(200,169,110,0.35)",
+                      fontFamily: "var(--font-display), sans-serif",
+                      fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
+                      fontWeight: status === "now" ? 500 : 400,
+                      color: status === "now" ? "var(--text)" : "var(--mid)",
+                      letterSpacing: "-0.01em",
+                      lineHeight: 1.3,
+                      transition: "color 0.2s",
                     }}
                   >
-                    Now
+                    {title}
                   </span>
-                )}
-              </div>
-              <div className="flex flex-col gap-2">
-                <h3
-                  className="transition-colors"
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "clamp(1rem,2vw,1.35rem)",
-                    fontWeight: active ? 500 : 400,
-                    letterSpacing: "-0.01em",
-                    lineHeight: 1.25,
-                    color: active ? "var(--color-text-primary)" : "var(--color-text-muted)",
-                  }}
-                >
-                  {title}
-                </h3>
+                  {status === "now" && (
+                    <span
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: "8px",
+                        letterSpacing: "0.2em",
+                        textTransform: "uppercase",
+                        color: "var(--accent)",
+                        border: "1px solid rgba(200,169,110,0.35)",
+                        padding: "3px 10px",
+                        borderRadius: "2px",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      Now
+                    </span>
+                  )}
+                </div>
                 <p
                   style={{
-                    fontFamily: "var(--font-inter)",
+                    fontFamily: "var(--font-body), sans-serif",
                     fontSize: "0.875rem",
-                    lineHeight: 1.8,
-                    color: "var(--color-text-muted)",
+                    color: "var(--mid)",
+                    lineHeight: 1.75,
+                    margin: 0,
+                    maxWidth: "640px",
                   }}
                 >
                   {body}
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
