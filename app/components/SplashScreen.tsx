@@ -94,7 +94,7 @@ export default function SplashScreen() {
         }}
       >
         <Image
-          src="/assets/logo.png"
+          src="/assets/logo-new.png"
           alt="GYF"
           width={88}
           height={88}

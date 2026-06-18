@@ -13,7 +13,7 @@ export default function CTABanner() {
     <section id="cta" style={{ textAlign: "center" }}>
       <div style={{ maxWidth: "680px", margin: "0 auto" }}>
         <div className="reveal" style={{ marginBottom: "1.5rem" }}>
-          <Image src="/assets/logo.png" alt="GYF" width={52} height={52} style={{ objectFit: "contain" }} />
+          <Image src="/assets/logo-new.png" alt="GYF" width={52} height={52} style={{ objectFit: "contain" }} />
         </div>
 
         <h2

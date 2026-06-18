@@ -61,7 +61,7 @@ export default function Hero() {
         {/* Logo */}
         <div className="reveal reveal-d1" style={{ marginBottom: "2rem" }}>
           <Image
-            src="/assets/logo.png"
+            src="/assets/logo-new.png"
             alt="GYF"
             width={104}
             height={104}

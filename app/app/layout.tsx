@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${cormorant.variable} ${dmSans.variable} ${dmMono.variable}`}>
-      <body style={{ background: "#F0ECE2" }}>
+      <body style={{ background: "#F5F2ED" }}>
         <Navbar />
         <main>{children}</main>
         <Footer />
