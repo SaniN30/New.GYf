@@ -440,3 +440,96 @@ footer.gyf-footer {
   background: var(--bg);
   padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
 }
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+.footer-brand { display: flex; flex-direction: column; }
+.footer-nav { display: flex; flex-direction: column; gap: 0.65rem; }
+.footer-bottom {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Nav logo */
+  nav.gyf-nav { height: 64px; padding: 0 1.25rem; }
+
+  /* Section padding tighter on mobile */
+  section { padding: clamp(3rem, 8vw, 5rem) clamp(1rem, 5vw, 1.5rem); }
+
+  /* Page headers */
+  .page-header {
+    padding-top: 100px !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  /* How it Works / Vision timeline stacks */
+  .hiw-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Feature / Intel / Team / Values grids — single column */
+  .feat-grid,
+  .problem-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Stats row wraps */
+  .stats-row {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .stat {
+    flex: 0 0 calc(50% - 0.75rem);
+    border-right: none;
+    padding: 0;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.25rem;
+  }
+
+  /* CTA form stacks */
+  .cta-form {
+    flex-direction: column;
+    border: none;
+    gap: 0.5rem;
+  }
+  .cta-input {
+    border: 1px solid var(--border-mid);
+    width: 100%;
+  }
+  .cta-btn { width: 100%; justify-content: center; }
+
+  /* Footer stacks cleanly */
+  .footer-top {
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  .footer-brand { width: 100%; }
+  .footer-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+  }
+  .footer-bottom { flex-direction: column; gap: 0.75rem; }
+
+  /* Vision grid stacks */
+  .vision-grid { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 900px) {
+  /* 2-col grids drop to 1 on tablets */
+  .hiw-layout {
+    grid-template-columns: 1fr !important;
+  }
+}

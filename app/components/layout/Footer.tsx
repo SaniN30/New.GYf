@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const navLinks = [
   { label: "How it Works", href: "/how-it-works" },
@@ -35,25 +36,39 @@ export default function Footer() {
   return (
     <footer className="gyf-footer">
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "3rem", justifyContent: "space-between", marginBottom: "3rem" }}>
+        <div className="footer-top">
           {/* Brand */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-            <Image src="/assets/logo-new.png" alt="GYF" width={160} height={80} style={{ objectFit: "contain", objectPosition: "left center", filter: "brightness(0) invert(1)", maxHeight: "56px", width: "auto" }} />
+          <div className="footer-brand">
+            <Link href="/" style={{ display: "inline-flex", lineHeight: 0 }}>
+              <Image
+                src="/assets/logo-new.png"
+                alt="GYF"
+                width={120}
+                height={120}
+                style={{
+                  filter: "brightness(0) invert(1)",
+                  objectFit: "contain",
+                  height: "48px",
+                  width: "auto",
+                }}
+              />
+            </Link>
             <p style={{
               fontFamily: "var(--font-body)",
               fontSize: "0.82rem",
               color: "var(--faint)",
               lineHeight: 1.7,
               maxWidth: "220px",
+              marginTop: "0.75rem",
             }}>
               An AI-native personal stylist that learns what looks good on you.
             </p>
           </div>
 
           {/* Nav */}
-          <nav style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+          <nav className="footer-nav">
             {navLinks.map(({ label, href }) => (
-              <a
+              <Link
                 key={label}
                 href={href}
                 style={{
@@ -65,10 +80,11 @@ export default function Footer() {
                   color: "var(--mid)",
                   textDecoration: "none",
                   transition: "color 0.2s",
+                  display: "block",
                 }}
               >
                 {label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -89,14 +105,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div style={{
-          borderTop: "1px solid var(--rule)",
-          paddingTop: "1.5rem",
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-          gap: "1rem",
-        }}>
+        <div className="footer-bottom">
           <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--faint)", letterSpacing: "0.1em" }}>
             © 2026 Get Your Fit Ltd
           </p>

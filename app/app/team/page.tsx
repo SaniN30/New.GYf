@@ -71,6 +71,7 @@ export default function TeamPage() {
     <div>
       {/* Page header */}
       <div
+        className="page-header"
         style={{
           paddingTop: "140px",
           paddingBottom: "4rem",

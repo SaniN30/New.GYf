@@ -10,6 +10,7 @@ export default function FeaturesPage() {
   return (
     <div>
       <div
+        className="page-header"
         style={{
           paddingTop: "140px",
           paddingBottom: "4rem",

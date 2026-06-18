@@ -10,6 +10,7 @@ export default function HowItWorksPage() {
   return (
     <div>
       <div
+        className="page-header"
         style={{
           paddingTop: "140px",
           paddingBottom: "4rem",
