@@ -37,7 +37,7 @@ export default function Hero() {
       <div style={{
         position: "absolute",
         inset: 0,
-        backgroundImage: "radial-gradient(rgba(26,23,20,0.035) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)",
         backgroundSize: "44px 44px",
         pointerEvents: "none",
       }} />
@@ -50,7 +50,7 @@ export default function Hero() {
         transform: "translateX(-50%)",
         width: "600px",
         height: "320px",
-        background: "radial-gradient(ellipse at 50% 0%, rgba(139,107,62,0.11) 0%, transparent 70%)",
+        background: "radial-gradient(ellipse at 50% 0%, rgba(212,175,122,0.10) 0%, transparent 70%)",
         pointerEvents: "none",
       }} />
 
@@ -59,17 +59,19 @@ export default function Hero() {
         <p className="eyebrow reveal">Introducing GYF</p>
 
         {/* Logo */}
-        <div className="reveal reveal-d1" style={{ marginBottom: "2rem" }}>
+        <div className="reveal reveal-d1" style={{ marginBottom: "2rem", display: "flex", justifyContent: "center" }}>
           <Image
             src="/assets/logo-new.png"
             alt="GYF"
-            width={104}
-            height={104}
+            width={120}
+            height={120}
             priority
             onLoad={() => setLogoLoaded(true)}
             style={{
-              height: "clamp(64px, 12vw, 104px)",
+              height: "clamp(72px, 12vw, 120px)",
               width: "auto",
+              display: "block",
+              filter: "brightness(0) invert(1)",
               opacity: logoLoaded ? 1 : 0,
               transition: "opacity 0.8s ease",
             }}

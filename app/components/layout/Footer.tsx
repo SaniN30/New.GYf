@@ -37,7 +37,7 @@ export default function Footer() {
         <div style={{ display: "flex", flexWrap: "wrap", gap: "3rem", justifyContent: "space-between", marginBottom: "3rem" }}>
           {/* Brand */}
           <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-            <Image src="/assets/logo-new.png" alt="GYF" width={36} height={36} style={{ objectFit: "contain" }} />
+            <Image src="/assets/logo-new.png" alt="GYF" width={36} height={36} style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }} />
             <p style={{
               fontFamily: "var(--font-body)",
               fontSize: "0.82rem",

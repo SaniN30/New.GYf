@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --bg:         #F5F2ED;   /* warm editorial white */
-  --surface:    #EDEAE4;   /* slightly deeper surface */
-  --text:       #2E2A25;   /* charcoal — drawn from logo tone */
-  --mid:        #5C5750;   /* refined muted brown */
-  --faint:      #8A847C;   /* lighter muted */
-  --gold:       #7A5C2E;   /* deeper, richer gold */
-  --gold-light: rgba(122,92,46,0.09);
-  --wash:       #DDD8CE;
-  --rule:       #CBC5BA;
-  --border:     rgba(46,42,37,0.08);
-  --border-mid: rgba(46,42,37,0.15);
+  --bg:         #0D0D0D;
+  --surface:    #161616;
+  --text:       #F0F0F0;
+  --mid:        #999999;
+  --faint:      #666666;
+  --gold:       #D4AF7A;
+  --gold-light: rgba(212,175,122,0.10);
+  --wash:       #1F1F1F;
+  --rule:       #2A2A2A;
+  --border:     rgba(255,255,255,0.07);
+  --border-mid: rgba(255,255,255,0.12);
   --lux: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -41,7 +41,7 @@ body {
   top: 0; left: 0;
   width: 36px; height: 36px;
   border-radius: 50%;
-  border: 1px solid rgba(26,23,20,0.22);
+  border: 1px solid rgba(240,240,240,0.25);
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
@@ -92,7 +92,7 @@ nav.gyf-nav {
   transition: background 0.4s, backdrop-filter 0.4s, border-bottom 0.4s;
 }
 nav.gyf-nav.scrolled {
-  background: rgba(245,242,237,0.9);
+  background: rgba(13,13,13,0.85);
   backdrop-filter: blur(22px);
   border-bottom: 1px solid var(--rule);
 }
@@ -161,7 +161,7 @@ section { padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 5vw, 3.5rem); }
   font-size: clamp(1rem, 1.8vw, 1.25rem);
   font-weight: 300;
   font-style: italic;
-  color: rgba(245,242,237,0.7);
+  color: rgba(240,240,240,0.7);
   line-height: 1.55;
 }
 
@@ -327,7 +327,7 @@ section { padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 5vw, 3.5rem); }
   font-size: clamp(1.1rem, 2vw, 1.4rem);
   font-weight: 300;
   font-style: italic;
-  color: rgba(245,242,237,0.88);
+  color: rgba(13,13,13,0.85);
   line-height: 1.55;
 }
 .vision-quote-rule {
@@ -339,7 +339,7 @@ section { padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 5vw, 3.5rem); }
 .vision-quote-attr {
   font-family: var(--font-body), sans-serif;
   font-size: 0.78rem;
-  color: rgba(245,242,237,0.4);
+  color: rgba(13,13,13,0.45);
   letter-spacing: 0.1em;
 }
 
@@ -368,7 +368,7 @@ section { padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 5vw, 3.5rem); }
 .intel-body {
   font-family: var(--font-body), sans-serif;
   font-size: 0.875rem;
-  color: rgba(245,242,237,0.52);
+  color: rgba(13,13,13,0.55);
   line-height: 1.75;
 }
 
