@@ -63,12 +63,12 @@ export default function Hero() {
           <Image
             src="/assets/logo-new.png"
             alt="GYF"
-            width={120}
-            height={120}
+            width={200}
+            height={200}
             priority
             onLoad={() => setLogoLoaded(true)}
             style={{
-              height: "clamp(72px, 12vw, 120px)",
+              height: "clamp(120px, 16vw, 200px)",
               width: "auto",
               display: "block",
               filter: "brightness(0) invert(1)",

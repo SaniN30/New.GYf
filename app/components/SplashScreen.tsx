@@ -124,8 +124,8 @@ export default function SplashScreen() {
         <Image
           src="/assets/logo-new.png"
           alt="GYF"
-          width={180}
-          height={180}
+          width={280}
+          height={280}
           style={{ filter: "brightness(0) invert(1)" }}
           priority
         />
