@@ -82,9 +82,9 @@ export default function Hero() {
         <h1
           className="reveal reveal-d2"
           style={{
-            fontFamily: "var(--font-display)",
+            fontFamily: "var(--font-display), sans-serif",
             fontSize: "clamp(2.2rem, 5.5vw, 4.8rem)",
-            fontWeight: 300,
+            fontWeight: 500,
             color: "var(--text)",
             lineHeight: 1.12,
             letterSpacing: "-0.02em",
@@ -92,8 +92,8 @@ export default function Hero() {
           }}
         >
           Your AI-Native Personal Stylist.{" "}
-          <em style={{ color: "var(--gold)", fontStyle: "italic" }}>Complete Outfits.</em>{" "}
-          <em style={{ color: "var(--gold)", fontStyle: "italic" }}>Clear Reasons.</em>{" "}
+          <em style={{ color: "var(--accent)", fontStyle: "italic" }}>Complete Outfits.</em>{" "}
+          <em style={{ color: "var(--accent)", fontStyle: "italic" }}>Clear Reasons.</em>{" "}
           Yours.
         </h1>
 

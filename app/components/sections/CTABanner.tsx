@@ -13,7 +13,7 @@ export default function CTABanner() {
     <section id="cta" style={{ textAlign: "center" }}>
       <div style={{ maxWidth: "680px", margin: "0 auto" }}>
         <div className="reveal" style={{ marginBottom: "1.5rem" }}>
-          <Image src="/assets/logo-new.png" alt="GYF" width={52} height={52} style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }} />
+          <Image src="/assets/logo-new.png" alt="GYF" width={72} height={72} style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }} />
         </div>
 
         <h2
@@ -29,7 +29,7 @@ export default function CTABanner() {
           }}
         >
           Stop second-guessing.{" "}
-          <em style={{ color: "var(--gold)", fontStyle: "italic" }}>Start getting dressed.</em>
+          <em style={{ color: "var(--accent)", fontStyle: "italic" }}>Start getting dressed.</em>
         </h2>
 
         <p

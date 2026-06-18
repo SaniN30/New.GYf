@@ -18,20 +18,20 @@ export default function Problem() {
       style={{ background: "var(--text)", color: "var(--bg)" }}
     >
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <p className="eyebrow reveal" style={{ color: "var(--gold)" }}>The Problem</p>
+        <p className="eyebrow reveal" style={{ color: "var(--accent)" }}>The Problem</p>
         <h2
           className="reveal reveal-d1"
           style={{
-            fontFamily: "var(--font-display)",
+            fontFamily: "var(--font-display), sans-serif",
             fontSize: "clamp(2rem, 4.5vw, 3.5rem)",
-            fontWeight: 300,
+            fontWeight: 500,
             color: "var(--bg)",
             lineHeight: 1.15,
             letterSpacing: "-0.02em",
             maxWidth: "560px",
           }}
         >
-          Everyone lives the same quiet friction. The market sells items. GYF delivers <em style={{ color: "var(--gold)", fontStyle: "italic" }}>outfits, confidence, and taste.</em>
+          Everyone lives the same quiet friction. The market sells items. GYF delivers <em style={{ color: "var(--accent)", fontStyle: "italic" }}>outfits, confidence, and taste.</em>
         </h2>
 
         <div className="problem-grid">

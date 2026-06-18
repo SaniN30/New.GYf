@@ -7,22 +7,31 @@ export default function SplashScreen() {
   const [visible, setVisible] = useState(true);
   const stageRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
+  const trailRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage) return;
 
-    // 3D mouse tracking
+    // 3D mouse tracking + cursor glow trail
     const onMouseMove = (e: MouseEvent) => {
       const rect = stage.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
-      const rx = ((e.clientY - cy) / rect.height) * -12;
-      const ry = ((e.clientX - cx) / rect.width) * 12;
-      stage.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+      const rx = ((e.clientY - cy) / rect.height) * -10;
+      const ry = ((e.clientX - cx) / rect.width) * 10;
+      stage.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+
+      // Move the radial cursor glow
+      if (trailRef.current) {
+        trailRef.current.style.left = `${e.clientX}px`;
+        trailRef.current.style.top = `${e.clientY}px`;
+        trailRef.current.style.opacity = "1";
+      }
     };
     const onMouseLeave = () => {
-      stage.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg)";
+      stage.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg)";
+      if (trailRef.current) trailRef.current.style.opacity = "0";
     };
 
     document.addEventListener("mousemove", onMouseMove);
@@ -76,28 +85,47 @@ export default function SplashScreen() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        background:
-          "radial-gradient(460px circle at 50% 44%, rgba(139,107,62,.18), transparent 62%), radial-gradient(circle at 50% 42%, #201C18 0%, #0E0C0A 74%)",
-        cursor: "pointer",
+        background: "#000000",
+        cursor: "none",
+        overflow: "hidden",
       }}
     >
+      {/* Cursor glow trail */}
+      <div
+        ref={trailRef}
+        style={{
+          position: "fixed",
+          pointerEvents: "none",
+          width: "320px",
+          height: "320px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%)",
+          transform: "translate(-50%, -50%)",
+          transition: "left 0.08s ease, top 0.08s ease, opacity 0.4s ease",
+          opacity: 0,
+          zIndex: 1,
+        }}
+      />
+
       {/* Stage with 3D tilt */}
       <div
         ref={stageRef}
         style={{
+          position: "relative",
+          zIndex: 2,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "1.25rem",
+          gap: "1.5rem",
           transformStyle: "preserve-3d",
-          transition: "transform 0.1s ease",
+          transition: "transform 0.12s ease",
         }}
       >
         <Image
           src="/assets/logo-new.png"
           alt="GYF"
-          width={160}
-          height={160}
+          width={180}
+          height={180}
           style={{ filter: "brightness(0) invert(1)" }}
           priority
         />
@@ -105,32 +133,33 @@ export default function SplashScreen() {
           style={{
             fontFamily: "var(--font-body), sans-serif",
             fontWeight: 300,
-            fontSize: "0.6rem",
+            fontSize: "0.58rem",
             textTransform: "uppercase",
-            letterSpacing: "0.48em",
-            color: "rgba(240,236,226,0.45)",
+            letterSpacing: "0.55em",
+            color: "rgba(255,255,255,0.3)",
           }}
         >
           Get Your Fit
         </p>
       </div>
 
-      {/* Skip text */}
+      {/* Skip hint */}
       <p
         style={{
           position: "absolute",
           bottom: "3.5rem",
           fontFamily: "var(--font-mono), monospace",
           fontSize: "9px",
-          letterSpacing: "0.25em",
-          color: "rgba(240,236,226,0.2)",
+          letterSpacing: "0.28em",
+          color: "rgba(255,255,255,0.18)",
           textTransform: "uppercase",
+          zIndex: 2,
         }}
       >
         Click to enter
       </p>
 
-      {/* Gold bottom line */}
+      {/* White bottom line */}
       <div
         ref={lineRef}
         style={{
@@ -139,7 +168,8 @@ export default function SplashScreen() {
           left: 0,
           height: "1px",
           width: "0%",
-          background: "var(--gold)",
+          background: "rgba(255,255,255,0.3)",
+          zIndex: 2,
         }}
       />
     </div>

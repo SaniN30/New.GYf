@@ -31,13 +31,13 @@ export default function Intelligence() {
   return (
     <section id="intelligence" style={{ background: "var(--text)" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <p className="eyebrow reveal" style={{ color: "var(--gold)" }}>The Intelligence</p>
+        <p className="eyebrow reveal" style={{ color: "var(--accent)" }}>The Intelligence</p>
         <h2
           className="reveal reveal-d1"
           style={{
-            fontFamily: "var(--font-display)",
+            fontFamily: "var(--font-display), sans-serif",
             fontSize: "clamp(2rem, 4vw, 3.2rem)",
-            fontWeight: 300,
+            fontWeight: 500,
             color: "var(--bg)",
             lineHeight: 1.15,
             letterSpacing: "-0.02em",
@@ -45,7 +45,7 @@ export default function Intelligence() {
           }}
         >
           GYF&apos;s core differentiation. Intelligence as the foundation —{" "}
-          <em style={{ color: "var(--gold)", fontStyle: "italic" }}>not a feature added later.</em>
+          <em style={{ color: "var(--accent)", fontStyle: "italic" }}>not a feature added later.</em>
         </h2>
 
         <div className="intel-grid">

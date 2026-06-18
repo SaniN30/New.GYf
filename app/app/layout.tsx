@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { cormorant, dmSans, dmMono } from "@/lib/fonts";
+import { spaceGrotesk, dmSans, dmMono } from "@/lib/fonts";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${dmSans.variable} ${dmMono.variable}`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${dmSans.variable} ${dmMono.variable}`}>
       <body style={{ background: "#0D0D0D" }}>
         <Navbar />
         <main>{children}</main>

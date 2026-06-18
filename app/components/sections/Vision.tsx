@@ -50,9 +50,9 @@ export default function Vision() {
         <h2
           className="reveal reveal-d1"
           style={{
-            fontFamily: "var(--font-display)",
+            fontFamily: "var(--font-display), sans-serif",
             fontSize: "clamp(2rem, 4vw, 3.2rem)",
-            fontWeight: 300,
+            fontWeight: 500,
             color: "var(--text)",
             lineHeight: 1.15,
             letterSpacing: "-0.02em",
