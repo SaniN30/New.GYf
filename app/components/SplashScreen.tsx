@@ -126,7 +126,7 @@ export default function SplashScreen() {
           alt="GYF"
           width={600}
           height={600}
-          style={{ filter: "brightness(0) invert(1)", width: "clamp(260px, 45vw, 600px)", height: "auto" }}
+          style={{ filter: "brightness(0) invert(1)", width: "clamp(180px, 28vw, 380px)", height: "auto" }}
           priority
         />
         <p

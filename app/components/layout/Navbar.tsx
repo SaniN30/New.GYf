@@ -30,7 +30,7 @@ export default function Navbar() {
       <nav className={`gyf-nav${scrolled ? " scrolled" : ""}`}>
         {/* Logo */}
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: "0.65rem", textDecoration: "none" }}>
-          <Image src="/assets/logo-new.png" alt="GYF" width={160} height={160} priority style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }} />
+          <Image src="/assets/logo-new.png" alt="GYF" width={320} height={320} priority style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }} />
         </Link>
 
         {/* Desktop links */}
@@ -96,7 +96,7 @@ export default function Navbar() {
               borderBottom: "1px solid var(--rule)",
             }}
           >
-            <Image src="/assets/logo-new.png" alt="GYF" width={130} height={130} style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }} />
+            <Image src="/assets/logo-new.png" alt="GYF" width={240} height={240} style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }} />
             <button
               onClick={() => setMenuOpen(false)}
               aria-label="Close menu"
