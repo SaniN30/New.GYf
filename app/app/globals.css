@@ -35,33 +35,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Custom cursor */
-#cursor-ring {
-  position: fixed;
-  top: 0; left: 0;
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.35);
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.22s var(--lux), height 0.22s var(--lux), border-color 0.22s, background 0.22s;
-}
-#cursor-ring.hovered {
-  width: 54px; height: 54px;
-  border-color: rgba(255,255,255,0.6);
-  background: rgba(255,255,255,0.04);
-}
-#cursor-dot {
-  position: fixed;
-  top: 0; left: 0;
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.9);
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-}
+/* cursor handled inline by CustomCursor component */
 
 /* Scroll reveal */
 .reveal {
@@ -86,7 +60,7 @@ nav.gyf-nav {
   top: 0; left: 0; right: 0;
   z-index: 100;
   padding: 0 clamp(1.5rem, 5vw, 3.5rem);
-  height: 68px;
+  height: 88px;
   display: flex;
   align-items: center;
   justify-content: space-between;
