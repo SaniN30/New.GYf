@@ -6,22 +6,22 @@ const pillars = [
   {
     num: "01",
     title: "Visual Style Intelligence",
-    body: "Sees clothing like a stylist — reading vibe, colour harmony, silhouette, and texture directly from images. Not tags. Not labels.",
+    body: "Sees and understands clothing the way a stylist does — reading aesthetic, vibe, colour harmony, silhouette, and texture directly from imagery. Coordination based on real visual harmony, not metadata.",
   },
   {
     num: "02",
     title: "Deep Personal Taste Modelling",
-    body: "Builds a living model of your preferences from every save, skip, and reaction. Anticipates what you'll love before you see it.",
+    body: "A living, individual representation of each user's preferences — updated continuously, deepening far beyond onboarding. Anticipates what you will love before you have seen it.",
   },
   {
     num: "03",
     title: "Collective Intelligence",
-    body: "Patterns discovered across thousands of users, privacy-preserved and distilled into recommendations that are entirely personal to you.",
+    body: "Learns from how thousands of people react to combinations — discovering styling patterns no rulebook contains. Those insights are distilled and tailored back to you specifically, privately.",
   },
   {
     num: "04",
     title: "Trust as a Feature",
-    body: "Every outfit comes with a clear reason. GYF is transparent about what it knows, what it's still learning, and how confident it is.",
+    body: "Every recommendation is explainable and honest about its confidence. Sophistication and transparency advance together — always. Trust is the product, not a feature bolted on later.",
   },
 ];
 
@@ -44,8 +44,8 @@ export default function Intelligence() {
             maxWidth: "520px",
           }}
         >
-          Four pillars of AI that earns{" "}
-          <em style={{ color: "var(--gold)", fontStyle: "italic" }}>trust.</em>
+          GYF&apos;s core differentiation. Intelligence as the foundation —{" "}
+          <em style={{ color: "var(--gold)", fontStyle: "italic" }}>not a feature added later.</em>
         </h2>
 
         <div className="intel-grid">

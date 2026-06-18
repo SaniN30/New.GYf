@@ -3,10 +3,10 @@
 import { useReveal } from "@/lib/useReveal";
 
 const problems = [
-  { num: "01", text: "A full closet and still nothing to wear — the daily decision that drains you before the day even starts." },
-  { num: "02", text: "Shopping apps show items, never complete outfits. You're left to figure out how things work together alone." },
-  { num: "03", text: "Constant second-guessing: does this match? Is it right for the occasion? Does it actually suit me?" },
-  { num: "04", text: "A personal stylist has always been a luxury for the few. Everyone else figures it out alone." },
+  { num: "01", text: "A full closet, yet nothing to wear — every single morning, the same quiet decision fatigue before the day has even started." },
+  { num: "02", text: "Shopping apps show single items but never how to wear them together. You are left assembling outfits alone, with no system and no context." },
+  { num: "03", text: "Constant doubt: does this match? Is this right for the occasion? Does it actually flatter me? Style is learnable — but no one taught you how." },
+  { num: "04", text: "A personal stylist — someone who knows what flatters you, what coordinates, and what is worth buying — has always been a luxury for the few." },
 ];
 
 export default function Problem() {
@@ -31,7 +31,7 @@ export default function Problem() {
             maxWidth: "560px",
           }}
         >
-          Everyone lives the same quiet friction.
+          Everyone lives the same quiet friction. The market sells items. GYF delivers <em style={{ color: "var(--gold)", fontStyle: "italic" }}>outfits, confidence, and taste.</em>
         </h2>
 
         <div className="problem-grid">

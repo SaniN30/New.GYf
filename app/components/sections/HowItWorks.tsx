@@ -6,7 +6,7 @@ const steps = [
   {
     num: "01",
     title: "Tell GYF about yourself",
-    body: "Upload a photo or describe your body type, skin tone, budget, and occasions. Nothing is locked in — update anytime.",
+    body: "Upload a photo and GYF auto-deduces your body type and skin tone — or set everything manually. Budget, occasion, preferred styling. Nothing is locked in; update any preference at any time.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="8" r="4" />
@@ -17,7 +17,7 @@ const steps = [
   {
     num: "02",
     title: "GYF builds your first outfit",
-    body: "A complete look — top, bottom, footwear — chosen for your specific body and taste. Every choice comes with a clear reason.",
+    body: "A complete look — top, bottom, footwear — coordinated as one outfit for your specific body, skin tone, budget, and occasion. Every single choice comes with a clear, human-readable stylist explanation.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2L2 7l10 5 10-5-10-5z" />
@@ -29,7 +29,7 @@ const steps = [
   {
     num: "03",
     title: "It gets smarter with you",
-    body: "Every save, skip, and reaction trains your personal taste model. GYF matures the longer you use it — like a fine wine.",
+    body: "Every save, skip, and reaction trains your personal taste model. The more you use GYF, the more it feels uncannily, uniquely you — a stylist who has known you for years.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 20V10" />

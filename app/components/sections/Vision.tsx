@@ -6,35 +6,35 @@ const phases = [
   {
     num: "01",
     title: "Intelligent Stylist",
-    body: "Onboarding, cold start, explained outfits, occasion-aware recommendations, basic try-on, social posts.",
+    body: "AI that builds personalized, explained outfits from day one. Occasion-aware, region-aware, cold-start ready. Learns from real user behavior immediately — zero friction from the very first screen.",
     badge: "launch",
     badgeLabel: "Launching",
   },
   {
     num: "02",
     title: "Personal Taste Engine",
-    body: "Wardrobe-aware styling, deeper personalisation, context-aware recommendations, badges.",
+    body: "GYF knows your style deeply enough that picks feel uncannily you. Styles around your real wardrobe. Adapts to context — weather, event, mood. Earns badges, builds your profile.",
     badge: "soon",
     badgeLabel: "Coming Soon",
   },
   {
     num: "03",
     title: "Shopping Companion",
-    body: "Multi-retailer recommendations, smarter buying decisions, richer commerce integrations.",
+    body: "GYF shops with you across brands and retailers — recommending not just looks but the smartest things to buy to complete your wardrobe, within your budget.",
     badge: "soon",
     badgeLabel: "Roadmap",
   },
   {
     num: "04",
     title: "Visualisation Layer",
-    body: "High-fidelity multi-garment on-body try-on — photo-realistic, true to your body.",
+    body: "See any full look — top, bottom, footwear — realistically rendered on your own body before committing. Removing the last barrier between inspiration and confidence.",
     badge: "soon",
     badgeLabel: "Roadmap",
   },
   {
     num: "05",
     title: "Ambient Stylist",
-    body: "Compounding collective intelligence and a B2B data product built from the world's taste.",
+    body: "GYF becomes the default way people decide what to wear and what to buy. A trusted companion present wherever fashion decisions happen — getting smarter for every person it dresses, forever.",
     badge: "soon",
     badgeLabel: "Future",
   },
@@ -83,8 +83,7 @@ export default function Vision() {
             <div className="vision-quote-card reveal reveal-d2">
               <div className="vision-quote-mark">&ldquo;</div>
               <p className="vision-quote-text">
-                A personal stylist has always been a luxury for the few. GYF makes that
-                intelligence universal — not by simplifying style, but by learning it.
+                A personal stylist — someone who knows what flatters you, what coordinates, and what is worth buying — has always been a luxury for the few. GYF makes that intelligence universal: free, instant, and personal to everyone.
               </p>
               <div className="vision-quote-rule" />
               <p className="vision-quote-attr">GYF Vision, 2026</p>

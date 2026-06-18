@@ -44,7 +44,7 @@ export default function CTABanner() {
             margin: "0 auto 0.5rem",
           }}
         >
-          Join the waitlist. Be among the first to experience an AI stylist that truly knows you.
+          Join the waitlist for early access. GYF is built for people who want to look their best — without the effort, the doubt, or the expensive stylist. Free, instant, and personal to you.
         </p>
 
         <div className="reveal reveal-d3">

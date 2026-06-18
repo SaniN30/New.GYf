@@ -5,7 +5,7 @@ import { useReveal } from "@/lib/useReveal";
 const features = [
   {
     title: "Complete Outfit Generation",
-    body: "Top, bottom, and footwear coordinated as one complete look — never single items in isolation.",
+    body: "Top, bottom, and footwear assembled as one coordinated look — never single items in isolation. Each outfit comes with a diverse ranked set of options and an honest confidence signal.",
     tag: "Core",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -15,7 +15,7 @@ const features = [
   },
   {
     title: "Visual Style Intelligence",
-    body: "Reads vibe, color harmony, silhouette, and texture directly from images — not just tags and labels.",
+    body: "Perceives garments the way a stylist does — reading vibe, colour harmony, silhouette, texture, and formality directly from imagery. Coordination based on real visual harmony, not product tags.",
     tag: "AI Vision",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -25,7 +25,7 @@ const features = [
   },
   {
     title: "Deep Taste Modelling",
-    body: "Builds a living model of your preferences from every interaction. Gets more personal the more you use it.",
+    body: "Builds a continuously-updating model of your taste, body, budget, and occasions from every interaction. Deepens far beyond onboarding — matures like a fine wine the more you use it.",
     tag: "Personalisation",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -35,7 +35,7 @@ const features = [
   },
   {
     title: "See It On You",
-    body: "Select a full outfit and see it rendered photo-realistically on your own body — before you commit.",
+    body: "Select a top, bottom, and footwear and see all three rendered photo-realistically on your own body — giving you a genuinely accurate idea of what fit and which garments actually look good on you.",
     tag: "Try-On",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -45,7 +45,7 @@ const features = [
   },
   {
     title: "Inspiration & Social",
-    body: "Follow someone's style and have it re-rendered for your own skin tone and preferences — never blindly copied.",
+    body: "LTK-inspired shoppable looks and creator feeds. Follow someone's style and see it re-rendered for your own skin tone, body type, and preferences — never blindly copied, always personally yours.",
     tag: "Social",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -55,7 +55,7 @@ const features = [
   },
   {
     title: "Shop the Look",
-    body: "Every outfit links directly to the retailer product page. Affiliate-powered, with no markups or hidden costs.",
+    body: "Every article carries an affiliate link to the retailer's own product page. From inspiration to ownership in one tap — no markups, no middleman, no hidden costs.",
     tag: "Commerce",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
