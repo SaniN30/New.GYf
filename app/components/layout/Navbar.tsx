@@ -26,7 +26,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <motion.div whileHover={{ scale: 1.04 }} transition={{ type: 'spring', stiffness: 400, damping: 20 }}>
           <Link href="/" className="flex items-center gap-3">
-            <Image src="/assets/logo-new.png" alt="GYF" width={110} height={110} className="h-[86px] w-auto" />
+            <Image src="/assets/logo-new.png" alt="GYF" width={150} height={150} className="h-[150px] w-auto" />
             <span className="font-bold text-gray-900 text-sm tracking-wider hidden sm:block" style={{ fontFamily: 'var(--font-display)' }}>GET YOUR FIT</span>
           </Link>
         </motion.div>
