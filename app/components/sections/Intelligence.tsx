@@ -10,20 +10,23 @@ const pillars = [
 
 export default function Intelligence() {
   return (
-    <section className="py-32 bg-[#08080C]">
+    <section className="py-32 bg-white">
       <div className="max-w-5xl mx-auto px-6">
-        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.7}}
-          className="mb-16 text-center">
-          <div className="text-xs font-mono text-purple-400 uppercase tracking-widest mb-4">Under the Hood</div>
-          <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-white leading-tight">The Intelligence</h2>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          className="text-center mb-16">
+          <div className="text-xs font-mono font-medium text-[#7C3AED] uppercase tracking-widest mb-3">Under the Hood</div>
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-[#0F0A1E] leading-tight">The Intelligence</h2>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {pillars.map((p, i) => (
-            <motion.div key={p.title} initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6,delay:i*0.12}}
-              className="gradient-border-card rounded-2xl bg-[#0F0F18] p-8 hover:bg-[#16162A] transition-colors duration-300 group">
-              <div className="text-3xl mb-5">{p.icon}</div>
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">{p.title}</h3>
-              <p className="text-gray-400 leading-relaxed">{p.body}</p>
+            <motion.div key={p.title}
+              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="group rounded-3xl bg-[#FAFAFA] border border-gray-200 p-8 card-hover hover:border-purple-200 hover:bg-purple-50/20 cursor-default">
+              <div className="w-12 h-12 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-xl mb-5 group-hover:bg-purple-100 transition-colors">
+                {p.icon}
+              </div>
+              <h3 className="text-lg font-bold text-[#0F0A1E] mb-3 group-hover:text-[#7C3AED] transition-colors">{p.title}</h3>
+              <p className="text-gray-500 leading-relaxed">{p.body}</p>
             </motion.div>
           ))}
         </div>

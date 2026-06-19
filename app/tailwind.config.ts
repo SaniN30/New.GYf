@@ -1,35 +1,30 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    './app/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
       colors: {
         gyf: {
-          bg: '#08080C',
-          surface: '#0F0F18',
-          'surface-2': '#16162A',
-          accent: '#A855F7',
+          purple: '#7C3AED',
+          'purple-light': '#8B5CF6',
+          'purple-pale': '#F5F3FF',
           pink: '#EC4899',
-          text: '#F8F8FF',
-          muted: '#9CA3AF',
+          bg: '#FFFFFF',
+          surface: '#F5F3FF',
+          text: '#0F0A1E',
+          muted: '#6B7280',
         }
       },
       fontFamily: {
         body: ['var(--font-body)', 'sans-serif'],
         mono: ['var(--font-mono)', 'monospace'],
       },
-      animation: {
-        shimmer: 'shimmer 4s linear infinite',
-        float: 'float 4s ease-in-out infinite',
-      }
-    },
+    }
   },
   plugins: [],
-};
-
-export default config;
+}
+export default config

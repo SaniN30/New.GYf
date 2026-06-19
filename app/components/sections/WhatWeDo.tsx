@@ -3,26 +3,29 @@ import { motion } from 'framer-motion'
 
 const features = [
   { icon: '👁️', title: 'Sees', body: 'Understands clothing visually — vibe, color harmony, silhouette. Not just tags.' },
-  { icon: '🧠', title: 'Learns', body: 'Builds a model of your personal taste from every interaction, not just onboarding.' },
-  { icon: '✦', title: 'Builds', body: 'Delivers complete outfits — top, bottom, footwear — coordinated as one look with a clear reason.' },
+  { icon: '🧠', title: 'Learns', body: 'Builds a model of your personal taste from every interaction.' },
+  { icon: '✦', title: 'Builds', body: "Delivers complete outfits — top, bottom, footwear — with a stylist's explanation." },
 ]
 
 export default function WhatWeDo() {
   return (
-    <section className="py-32 bg-[#08080C] border-t border-white/5">
+    <section className="py-32 bg-[#FAFAFA]">
       <div className="max-w-5xl mx-auto px-6">
-        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.7}}
-          className="mb-16 text-center">
-          <div className="text-xs font-mono text-purple-400 uppercase tracking-widest mb-4">Core</div>
-          <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-white leading-tight">What GYF Does</h2>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          className="text-center mb-16">
+          <div className="text-xs font-mono font-medium text-[#7C3AED] uppercase tracking-widest mb-3">Core Capabilities</div>
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-[#0F0A1E] leading-tight">What GYF Does</h2>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {features.map((f, i) => (
-            <motion.div key={f.title} initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6,delay:i*0.12}}
-              className="gradient-border-card rounded-2xl bg-[#0F0F18] p-8 hover:bg-[#16162A] transition-colors duration-300 group">
-              <div className="text-3xl mb-5">{f.icon}</div>
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">{f.title}</h3>
-              <p className="text-gray-400 leading-relaxed">{f.body}</p>
+            <motion.div key={f.title}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="group rounded-3xl bg-white border border-gray-200 p-8 card-hover cursor-default hover:border-purple-200">
+              <div className="w-14 h-14 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center text-2xl mb-6 group-hover:bg-purple-100 transition-colors">
+                {f.icon}
+              </div>
+              <h3 className="text-xl font-bold text-[#0F0A1E] mb-3 group-hover:text-[#7C3AED] transition-colors">{f.title}</h3>
+              <p className="text-gray-500 leading-relaxed">{f.body}</p>
             </motion.div>
           ))}
         </div>
