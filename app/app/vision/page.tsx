@@ -14,7 +14,7 @@ export default function VisionPage() {
   return (
     <div className="bg-white min-h-screen">
       <Navbar />
-      <div className="pt-28 pb-8 max-w-5xl mx-auto px-6">
+      <div className="pt-44 pb-8 max-w-5xl mx-auto px-6">
         <p className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Vision</p>
         <h1 className="text-[clamp(2.8rem,7vw,6rem)] font-black text-gray-900 leading-tight mb-4" style={{ fontFamily: 'var(--font-display)' }}>
           A universal personal stylist. Free, instant, yours.
