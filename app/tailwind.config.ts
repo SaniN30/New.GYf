@@ -9,20 +9,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#0A0A0A",
-        surface: "#111111",
-        "surface-2": "#1A1A1A",
-        border: "#222222",
-        "text-primary": "#EFEFEF",
-        "text-muted": "#666666",
-        accent: "#BFBFBF",
-        "accent-warm": "#C8A96E",
+        gyf: {
+          bg: '#08080C',
+          surface: '#0F0F18',
+          'surface-2': '#16162A',
+          accent: '#A855F7',
+          pink: '#EC4899',
+          text: '#F8F8FF',
+          muted: '#9CA3AF',
+        }
       },
       fontFamily: {
-        display: ["var(--font-display)", "system-ui", "sans-serif"],
-        body: ["var(--font-inter)", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "monospace"],
+        body: ['var(--font-body)', 'sans-serif'],
+        mono: ['var(--font-mono)', 'monospace'],
       },
+      animation: {
+        shimmer: 'shimmer 4s linear infinite',
+        float: 'float 4s ease-in-out infinite',
+      }
     },
   },
   plugins: [],
