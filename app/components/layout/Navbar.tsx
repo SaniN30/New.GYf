@@ -1,152 +1,59 @@
-"use client";
+'use client'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-
-const navLinks = [
-  { label: "How it Works", href: "/how-it-works" },
-  { label: "Features", href: "/features" },
-  { label: "Vision", href: "/vision" },
-  { label: "Intelligence", href: "/intelligence" },
-  { label: "Team", href: "/team" },
-];
+const links = [
+  { href: '#how-it-works', label: 'How It Works' },
+  { href: '#perception', label: 'Perception Layer' },
+  { href: '#cta', label: 'Early Access' },
+]
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [menuOpen]);
+    const handler = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', handler)
+    return () => window.removeEventListener('scroll', handler)
+  }, [])
 
   return (
-    <>
-      <nav className={`gyf-nav${scrolled ? " scrolled" : ""}`}>
-        {/* Logo */}
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: "0.65rem", textDecoration: "none" }}>
-          <Image src="/assets/logo-new.png" alt="GYF" width={320} height={320} priority style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }} />
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-[#08080C]/80 backdrop-blur-xl border-b border-white/5' : ''}`}>
+      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-3">
+          <Image src="/assets/logo.png" alt="GYF" width={36} height={36} className="brightness-0 invert" />
+          <span className="font-bold text-white text-sm tracking-wider hidden sm:block">GET YOUR FIT</span>
         </Link>
 
-        {/* Desktop links */}
-        <ul className="nav-links" style={{ display: "flex", listStyle: "none", gap: "2.5rem", margin: 0, padding: 0 }}>
-          {navLinks.map(({ label, href }) => (
-            <li key={label} style={{ display: "none" }} className="md-show">
-              <Link href={href}>{label}</Link>
-            </li>
+        <div className="hidden md:flex items-center gap-8">
+          {links.slice(0, 2).map(l => (
+            <a key={l.href} href={l.href} className="text-sm text-gray-400 hover:text-white transition-colors font-medium">{l.label}</a>
           ))}
-        </ul>
-
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <a href="#cta" className="nav-cta" style={{ display: "none" }} id="nav-cta-desktop">
-            Join Waitlist
+          <a href="#cta" className="px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 transition-all duration-300 hover:scale-105">
+            Get Early Access
           </a>
-          {/* Hamburger */}
-          <button
-            onClick={() => setMenuOpen(true)}
-            aria-label="Open menu"
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              display: "flex",
-              flexDirection: "column",
-              gap: "5px",
-              padding: "4px",
-            }}
-          >
-            <span style={{ display: "block", width: "20px", height: "1px", background: "var(--text)" }} />
-            <span style={{ display: "block", width: "14px", height: "1px", background: "var(--text)" }} />
-          </button>
         </div>
-      </nav>
 
-      {/* Desktop nav via style injection */}
-      <style>{`
-        @media (min-width: 768px) {
-          .md-show { display: list-item !important; }
-          #nav-cta-desktop { display: inline-flex !important; }
-        }
-      `}</style>
+        <button onClick={() => setOpen(!open)} className="md:hidden text-gray-400 hover:text-white p-2">
+          <div className={`w-5 h-0.5 bg-current mb-1.5 transition-all ${open ? 'rotate-45 translate-y-2' : ''}`} />
+          <div className={`w-5 h-0.5 bg-current mb-1.5 transition-all ${open ? 'opacity-0' : ''}`} />
+          <div className={`w-5 h-0.5 bg-current transition-all ${open ? '-rotate-45 -translate-y-2' : ''}`} />
+        </button>
+      </div>
 
-      {/* Mobile drawer */}
-      {menuOpen && (
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 200,
-            background: "var(--bg)",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              padding: "0 1.5rem",
-              height: "64px",
-              borderBottom: "1px solid var(--rule)",
-            }}
-          >
-            <Image src="/assets/logo-new.png" alt="GYF" width={240} height={240} style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }} />
-            <button
-              onClick={() => setMenuOpen(false)}
-              aria-label="Close menu"
-              style={{
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                fontFamily: "var(--font-mono)",
-                fontSize: "0.6rem",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "var(--mid)",
-              }}
-            >
-              Close
-            </button>
-          </div>
-          <nav style={{ padding: "3rem 2rem", flex: 1, display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            {navLinks.map(({ label, href }) => (
-              <Link
-                key={label}
-                href={href}
-                onClick={() => setMenuOpen(false)}
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "clamp(2rem, 7vw, 3.5rem)",
-                  fontWeight: 300,
-                  color: "var(--text)",
-                  textDecoration: "none",
-                  padding: "0.75rem 0",
-                  borderBottom: "1px solid var(--rule)",
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                {label}
-              </Link>
+      <AnimatePresence>
+        {open && (
+          <motion.div initial={{opacity:0,height:0}} animate={{opacity:1,height:'auto'}} exit={{opacity:0,height:0}}
+            className="md:hidden bg-[#0F0F18] border-t border-white/5 px-6 py-6 flex flex-col gap-4">
+            {links.map(l => (
+              <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-gray-300 hover:text-white transition-colors font-medium py-2">{l.label}</a>
             ))}
-            <a
-              href="#cta"
-              onClick={() => setMenuOpen(false)}
-              className="nav-cta"
-              style={{ marginTop: "2.5rem", alignSelf: "flex-start" }}
-            >
-              Join Waitlist
-            </a>
-          </nav>
-        </div>
-      )}
-    </>
-  );
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  )
 }

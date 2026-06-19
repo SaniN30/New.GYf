@@ -1,170 +1,88 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { useReveal } from "@/lib/useReveal";
+'use client'
+import { motion } from 'framer-motion'
 
 export default function Hero() {
-  useReveal();
-  const [emailVal, setEmailVal] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [logoLoaded, setLogoLoaded] = useState(false);
-
-  // Show page immediately if no splash (e.g. server render or direct nav)
-  useEffect(() => {
-    const page = document.getElementById("page");
-    if (page && !page.classList.contains("show")) {
-      // Will be shown by SplashScreen on dismiss
-    }
-  }, []);
-
   return (
-    <section
-      id="hero"
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "clamp(6rem,12vh,9rem) clamp(1.5rem,5vw,3.5rem) clamp(4rem,8vh,6rem)",
-        position: "relative",
-        overflow: "hidden",
-        textAlign: "center",
-      }}
-    >
-      {/* Dot grid background */}
-      <div style={{
-        position: "absolute",
-        inset: 0,
-        backgroundImage: "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)",
-        backgroundSize: "44px 44px",
-        pointerEvents: "none",
-      }} />
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#08080C]">
+      {/* Ambient glow orbs */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-purple-600/10 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] rounded-full bg-pink-600/8 blur-[100px] pointer-events-none" />
 
-      {/* Gold radial glow top */}
-      <div style={{
-        position: "absolute",
-        top: 0,
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: "600px",
-        height: "320px",
-        background: "radial-gradient(ellipse at 50% 0%, rgba(212,175,122,0.10) 0%, transparent 70%)",
-        pointerEvents: "none",
-      }} />
+      <div className="relative z-10 text-center max-w-5xl mx-auto px-6 pt-32 pb-20">
+        {/* Badge */}
+        <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.6}}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-300 text-sm font-mono mb-8">
+          <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+          AI Personal Stylist — Early Access
+        </motion.div>
 
-      <div style={{ position: "relative", zIndex: 1, maxWidth: "780px", width: "100%" }}>
-        {/* Eyebrow */}
-        <p className="eyebrow reveal">Introducing GYF</p>
+        {/* Headline */}
+        <motion.h1 initial={{opacity:0,y:30}} animate={{opacity:1,y:0}} transition={{duration:0.8,delay:0.1}}
+          className="text-[clamp(3rem,8vw,7rem)] font-black leading-[0.9] tracking-tight text-white mb-6">
+          Your Style.<br />
+          <span className="shimmer-text">Finally Intelligent.</span>
+        </motion.h1>
 
-        {/* Logo */}
-        <div className="reveal reveal-d1" style={{ marginBottom: "2rem", display: "flex", justifyContent: "center" }}>
-          <Image
-            src="/assets/logo-new.png"
-            alt="GYF"
-            width={480}
-            height={480}
-            priority
-            onLoad={() => setLogoLoaded(true)}
-            style={{
-              height: "clamp(200px, 28vw, 480px)",
-              width: "auto",
-              display: "block",
-              filter: "brightness(0) invert(1)",
-              opacity: logoLoaded ? 1 : 0,
-              transition: "opacity 0.8s ease",
-            }}
-          />
-        </div>
+        {/* Sub */}
+        <motion.p initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.8,delay:0.3}}
+          className="text-[clamp(1rem,2vw,1.25rem)] text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+          GYF reads your body, learns your taste, and builds complete outfits in real time — no stylist, no guesswork.
+        </motion.p>
 
-        {/* H1 */}
-        <h1
-          className="reveal reveal-d2"
-          style={{
-            fontFamily: "var(--font-display), sans-serif",
-            fontSize: "clamp(2.2rem, 5.5vw, 4.8rem)",
-            fontWeight: 500,
-            color: "var(--text)",
-            lineHeight: 1.12,
-            letterSpacing: "-0.02em",
-            marginBottom: "1.5rem",
-          }}
-        >
-          Your AI-Native Personal Stylist.{" "}
-          <em style={{ color: "var(--accent)", fontStyle: "italic" }}>Complete Outfits.</em>{" "}
-          <em style={{ color: "var(--accent)", fontStyle: "italic" }}>Clear Reasons.</em>{" "}
-          Yours.
-        </h1>
+        {/* CTAs */}
+        <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.8,delay:0.5}}
+          className="flex flex-wrap items-center justify-center gap-4 mb-20">
+          <a href="#perception" className="px-8 py-4 rounded-full font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 transition-all duration-300 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-105">
+            Get Early Access
+          </a>
+          <a href="#how-it-works" className="px-8 py-4 rounded-full font-semibold text-gray-300 border border-white/10 hover:border-white/20 hover:text-white transition-all duration-300">
+            See How It Works ↓
+          </a>
+        </motion.div>
 
-        {/* Sub copy */}
-        <p
-          className="reveal reveal-d3"
-          style={{
-            fontFamily: "var(--font-body)",
-            fontSize: "clamp(0.9rem, 1.4vw, 1rem)",
-            fontWeight: 300,
-            color: "var(--faint)",
-            lineHeight: 1.8,
-            maxWidth: "520px",
-            margin: "0 auto 2.5rem",
-          }}
-        >
-          An AI stylist that sees your clothes visually, learns your personal taste, and builds
-          complete coordinated looks — with a clear reason for every choice.
-        </p>
-
-        {/* Email form */}
-        <div className="reveal reveal-d4" style={{ display: "flex", justifyContent: "center" }}>
-          {submitted ? (
-            <div>
-              <p style={{ fontFamily: "var(--font-display)", fontSize: "1.4rem", fontWeight: 300, color: "var(--text)" }}>
-                You&apos;re on the list.
-              </p>
-              <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.2em", color: "var(--faint)", textTransform: "uppercase", marginTop: "0.5rem" }}>
-                We&apos;ll be in touch when your spot is ready.
-              </p>
+        {/* Floating product mockup */}
+        <motion.div initial={{opacity:0,y:40}} animate={{opacity:1,y:0}} transition={{duration:1,delay:0.7}}
+          className="float-anim relative mx-auto max-w-2xl">
+          <div className="gradient-border-card rounded-2xl bg-[#0F0F18] p-6 glow-purple">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-3 h-3 rounded-full bg-red-500/60" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
+              <div className="w-3 h-3 rounded-full bg-green-500/60" />
+              <span className="ml-2 text-xs text-gray-500 font-mono">GYF Stylist</span>
             </div>
-          ) : (
-            <form
-              onSubmit={(e) => { e.preventDefault(); if (emailVal.trim()) setSubmitted(true); }}
-              className="cta-form"
-              style={{ margin: 0 }}
-            >
-              <input
-                type="email"
-                value={emailVal}
-                onChange={(e) => setEmailVal(e.target.value)}
-                placeholder="your@email.com"
-                required
-                className="cta-input"
-              />
-              <button type="submit" className="cta-btn">Get Early Access</button>
-            </form>
-          )}
-        </div>
+            <div className="grid grid-cols-3 gap-3">
+              {['Top', 'Bottom', 'Footwear'].map((item, i) => (
+                <div key={item} className="rounded-xl bg-[#16162A] border border-white/5 p-4 text-center">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 mx-auto mb-2 flex items-center justify-center text-2xl">
+                    {['👕','👖','👟'][i]}
+                  </div>
+                  <div className="text-xs text-gray-400">{item}</div>
+                  <div className="text-xs text-purple-400 mt-1">Matched ✓</div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 p-3 rounded-lg bg-purple-500/10 border border-purple-500/20">
+              <p className="text-xs text-purple-300 font-mono">&quot;Structured silhouette suits your inverted triangle build. Navy anchors the palette.&quot;</p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
 
-        {/* Note */}
-        <p className="cta-note reveal reveal-d5" style={{ marginTop: "1rem" }}>
-          Free to join · No spam · Leave anytime
-        </p>
-
-        {/* Stats row */}
-        <div className="stats-row reveal reveal-d5">
-          <div className="stat">
-            <span className="stat-num">AI</span>
-            <span className="stat-label">Powered styling</span>
-          </div>
-          <div className="stat">
-            <span className="stat-num">3-in-1</span>
-            <span className="stat-label">Top · Bottom · Footwear</span>
-          </div>
-          <div className="stat">
-            <span className="stat-num">∞</span>
-            <span className="stat-label">Learns with every use</span>
-          </div>
+      {/* Stats strip */}
+      <div className="relative z-10 w-full border-t border-white/5 py-8">
+        <div className="max-w-4xl mx-auto px-6 grid grid-cols-3 gap-6">
+          {[
+            { num: '<400ms', label: 'Response Time' },
+            { num: '98%', label: 'Fit Accuracy' },
+            { num: '10K+', label: 'Outfits Built' },
+          ].map(stat => (
+            <div key={stat.label} className="text-center">
+              <div className="text-[clamp(1.5rem,3vw,2.5rem)] font-black gradient-text font-mono">{stat.num}</div>
+              <div className="text-xs text-gray-500 mt-1 uppercase tracking-widest">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
-  );
+  )
 }

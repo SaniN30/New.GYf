@@ -1,167 +1,45 @@
-"use client";
-
-import { useState } from "react";
+'use client'
+import { motion } from 'framer-motion'
 
 const phases = [
-  {
-    number: "01",
-    title: "The Intelligent Stylist",
-    body: "Personalized, explained outfits from day one. Learns from real user behavior immediately.",
-    status: "now",
-  },
-  {
-    number: "02",
-    title: "The Personal Taste Engine",
-    body: "GYF knows your style deeply. It styles around your real wardrobe and adapts continuously.",
-    status: "soon",
-  },
-  {
-    number: "03",
-    title: "The Shopping Companion",
-    body: "Shops with you across brands and retailers — recommending the smartest additions to your wardrobe.",
-    status: "roadmap",
-  },
-  {
-    number: "04",
-    title: "The Visualisation Layer",
-    body: "See any look realistically on yourself before committing. Inspiration becomes confidence.",
-    status: "roadmap",
-  },
-  {
-    number: "05",
-    title: "The Ambient Stylist",
-    body: "The default way people decide what to wear. A compounding intelligence, present wherever fashion decisions happen.",
-    status: "future",
-  },
-];
-
-const statusColor: Record<string, string> = {
-  now: "var(--accent)",
-  soon: "rgba(255,255,255,0.35)",
-  roadmap: "rgba(255,255,255,0.25)",
-  future: "rgba(255,255,255,0.18)",
-};
+  { num: '01', title: 'The Intelligent Stylist', desc: 'Complete outfit recommendations powered by AI taste modeling.', active: true },
+  { num: '02', title: 'The Perception Layer', desc: 'Upload your photo. GYF sees your body and builds around it.', active: false },
+  { num: '03', title: 'The Shopping Companion', desc: 'Buy what GYF recommends — curated, filtered, size-matched.', active: false },
+  { num: '04', title: 'The Ambient Stylist', desc: 'GYF knows your calendar, weather, and mood — and dresses you accordingly.', active: false },
+  { num: '05', title: 'Style as Infrastructure', desc: 'Your taste model travels everywhere. GYF as a platform.', active: false },
+]
 
 export default function TheArc() {
-  const [hovered, setHovered] = useState<number | null>(null);
-
   return (
-    <section
-      style={{
-        padding: "clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,5rem)",
-        borderTop: "1px solid var(--rule)",
-      }}
-    >
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <p
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: "0.6rem",
-            letterSpacing: "0.22em",
-            textTransform: "uppercase",
-            color: "var(--mid)",
-            marginBottom: "1.5rem",
-          }}
-        >
-          The Arc
-        </p>
-        <h2
-          style={{
-            fontFamily: "var(--font-display), sans-serif",
-            fontSize: "clamp(2rem, 4vw, 3.2rem)",
-            fontWeight: 500,
-            color: "var(--text)",
-            lineHeight: 1.15,
-            letterSpacing: "-0.02em",
-            maxWidth: "480px",
-            marginBottom: "4rem",
-          }}
-        >
-          Where GYF is going.
-        </h2>
-
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          {phases.map(({ number, title, body, status }, i) => (
-            <div
-              key={number}
-              onMouseEnter={() => setHovered(i)}
-              onMouseLeave={() => setHovered(null)}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "4rem 1fr",
-                gap: "2rem",
-                padding: "2rem 0",
-                borderBottom: "1px solid var(--rule)",
-                cursor: "default",
-                opacity: hovered === null ? 1 : hovered === i ? 1 : 0.4,
-                transition: "opacity 0.2s ease",
-              }}
-            >
-              {/* Number */}
-              <span
-                style={{
-                  fontFamily: "var(--font-mono), monospace",
-                  fontSize: "0.7rem",
-                  letterSpacing: "0.18em",
-                  color: statusColor[status],
-                  paddingTop: "4px",
-                  transition: "color 0.2s",
-                }}
-              >
-                {number}
-              </span>
-
-              {/* Content */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
-                  <span
-                    style={{
-                      fontFamily: "var(--font-display), sans-serif",
-                      fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
-                      fontWeight: status === "now" ? 500 : 400,
-                      color: status === "now" ? "var(--text)" : "var(--mid)",
-                      letterSpacing: "-0.01em",
-                      lineHeight: 1.3,
-                      transition: "color 0.2s",
-                    }}
-                  >
-                    {title}
-                  </span>
-                  {status === "now" && (
-                    <span
-                      style={{
-                        fontFamily: "var(--font-mono)",
-                        fontSize: "8px",
-                        letterSpacing: "0.2em",
-                        textTransform: "uppercase",
-                        color: "var(--accent)",
-                        border: "1px solid rgba(200,169,110,0.35)",
-                        padding: "3px 10px",
-                        borderRadius: "2px",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      Now
-                    </span>
-                  )}
+    <section className="py-32 bg-[#08080C]">
+      <div className="max-w-3xl mx-auto px-6">
+        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.7}}
+          className="mb-16">
+          <div className="text-xs font-mono text-purple-400 uppercase tracking-widest mb-4">Roadmap</div>
+          <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-white leading-tight">The Arc</h2>
+        </motion.div>
+        <div className="relative">
+          {/* vertical line */}
+          <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-purple-500/60 via-purple-500/20 to-transparent" />
+          <div className="space-y-0">
+            {phases.map((phase, i) => (
+              <motion.div key={phase.num} initial={{opacity:0,x:-20}} whileInView={{opacity:1,x:0}} viewport={{once:true}} transition={{duration:0.6,delay:i*0.1}}
+                className="flex gap-8 pb-12 pl-16 relative">
+                {/* dot */}
+                <div className={`absolute left-[18px] top-1 w-3 h-3 rounded-full border-2 ${phase.active ? 'border-purple-400 bg-purple-500' : 'border-white/20 bg-transparent'}`} />
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-xs font-mono text-gray-600">{phase.num}</span>
+                    <h3 className={`font-bold ${phase.active ? 'text-white' : 'text-gray-500'}`}>{phase.title}</h3>
+                    {phase.active && <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">LIVE</span>}
+                  </div>
+                  <p className={`text-sm leading-relaxed ${phase.active ? 'text-gray-400' : 'text-gray-600'}`}>{phase.desc}</p>
                 </div>
-                <p
-                  style={{
-                    fontFamily: "var(--font-body), sans-serif",
-                    fontSize: "0.875rem",
-                    color: "var(--mid)",
-                    lineHeight: 1.75,
-                    margin: 0,
-                    maxWidth: "640px",
-                  }}
-                >
-                  {body}
-                </p>
-              </div>
-            </div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
-  );
+  )
 }
