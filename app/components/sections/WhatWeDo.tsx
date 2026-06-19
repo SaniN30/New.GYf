@@ -1,24 +1,30 @@
 'use client'
 import { motion } from 'framer-motion'
 
+const features = [
+  { icon: '👁️', title: 'Sees', body: 'Understands clothing visually — vibe, color harmony, silhouette. Not just tags.' },
+  { icon: '🧠', title: 'Learns', body: 'Builds a model of your personal taste from every interaction, not just onboarding.' },
+  { icon: '✦', title: 'Builds', body: 'Delivers complete outfits — top, bottom, footwear — coordinated as one look with a clear reason.' },
+]
+
 export default function WhatWeDo() {
   return (
-    <section className="py-16 sm:py-24 bg-white border-t border-[#F3F4F6]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <motion.div initial={{opacity:0,y:16}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="text-center mb-14">
-          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#9CA3AF] mb-3">Capabilities</p>
-          <h2 className="text-[clamp(2rem,4vw,3rem)] font-black text-[#0A0A0A] tracking-[-0.02em]">Sees. Learns. Builds.</h2>
+    <section className="py-16 sm:py-32 bg-white border-t border-gray-100">
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.7}}
+          className="mb-16 text-center">
+          <div className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Core</div>
+          <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-gray-900 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>What GYF Does</h2>
         </motion.div>
-        <div className="grid md:grid-cols-3 gap-5">
-          {[
-            { title: 'Sees', body: 'Understands clothing visually — vibe, color harmony, silhouette. Not just tags.' },
-            { title: 'Learns', body: 'Builds a model of your personal taste from every interaction, not just onboarding.' },
-            { title: 'Builds', body: 'Delivers complete outfits — top, bottom, footwear — with a clear stylist explanation.' },
-          ].map((f,i) => (
-            <motion.div key={f.title} initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.5,delay:i*0.08}}
-              className="rounded-3xl border border-[#F3F4F6] bg-[#F9FAFB] p-6 sm:p-8 hover:border-[#E5E7EB] hover:bg-white hover:shadow-sm transition-all duration-300 cursor-default">
-              <h3 className="text-2xl font-black text-[#0A0A0A] mb-3 tracking-tight">{f.title}</h3>
-              <p className="text-[#6B7280] leading-relaxed text-sm">{f.body}</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {features.map((f, i) => (
+            <motion.div key={f.title}
+              initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6,delay:i*0.12}}
+              whileHover={{ y: -4, boxShadow: '0 20px 60px rgba(0,0,0,0.12)' }}
+              className="gradient-border-card rounded-2xl bg-white border border-gray-100 p-6 sm:p-8 shadow-sm transition-colors duration-300 group cursor-default">
+              <div className="text-3xl mb-5">{f.icon}</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors">{f.title}</h3>
+              <p className="text-gray-600 leading-relaxed">{f.body}</p>
             </motion.div>
           ))}
         </div>

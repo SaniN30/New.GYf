@@ -1,27 +1,27 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import Intelligence from '@/components/sections/Intelligence'
+import PerceptionLayer from '@/components/sections/PerceptionLayer'
 import CTABanner from '@/components/sections/CTABanner'
 
 export const metadata = {
-  title: 'Intelligence — GYF',
-  description: 'The AI pillars behind GYF — visual intelligence, personal taste engine, collective learning.',
+  title: 'Perception Layer — GYF',
+  description: 'Upload a photo and let GYF read your body type, skin tone, and style signals. AI-powered body analysis.',
 }
 
-export default function IntelligencePage() {
+export default function PerceptionPage() {
   return (
     <div className="bg-white min-h-screen">
       <Navbar />
       <div className="pt-44 pb-8 max-w-5xl mx-auto px-6">
-        <p className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Intelligence</p>
+        <p className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Perception Layer</p>
         <h1 className="text-[clamp(2.8rem,7vw,6rem)] font-black text-gray-900 leading-tight mb-4" style={{ fontFamily: 'var(--font-display)' }}>
-          The mind behind the fit.
+          See yourself differently.
         </h1>
         <p className="text-gray-600 text-lg max-w-xl leading-relaxed">
-          Four AI pillars work together to give you styling intelligence that actually understands you.
+          GYF reads your proportions, palette, and presence — then builds a complete look designed exactly for your body.
         </p>
       </div>
-      <Intelligence />
+      <PerceptionLayer />
       <CTABanner />
       <Footer />
     </div>

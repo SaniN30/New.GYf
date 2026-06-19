@@ -4,58 +4,62 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 
+const links = [
+  { href: '/how-it-works', label: 'How It Works' },
+  { href: '/perception', label: 'Perception Layer' },
+  { href: '/vision', label: 'Vision' },
+  { href: '/intelligence', label: 'Intelligence' },
+]
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 10)
-    window.addEventListener('scroll', fn, { passive: true })
-    return () => window.removeEventListener('scroll', fn)
+    const handler = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', handler)
+    return () => window.removeEventListener('scroll', handler)
   }, [])
 
   return (
-    <>
-      <nav className={`fixed top-0 inset-x-0 z-50 h-12 flex items-center transition-all duration-200 ${scrolled ? 'bg-white/95 backdrop-blur-sm border-b border-[#F3F4F6]' : 'bg-white'}`}>
-        <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="relative w-9 h-9 flex-shrink-0">
-              <Image src="/assets/logo-new.png" alt="GYF" fill className="object-contain" priority />
-            </div>
-            <span className="font-bold text-[#0A0A0A] text-sm">Get Your Fit</span>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-white/90 backdrop-blur-xl border-b border-gray-100 shadow-sm' : ''}`}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-1 flex items-center justify-between">
+        <motion.div whileHover={{ scale: 1.04 }} transition={{ type: 'spring', stiffness: 400, damping: 20 }}>
+          <Link href="/" className="flex items-center gap-3">
+            <Image src="/assets/logo-new.png" alt="GYF" width={150} height={150} className="h-[150px] w-auto" />
+            <span className="font-bold text-gray-900 text-sm tracking-wider hidden sm:block" style={{ fontFamily: 'var(--font-display)' }}>GET YOUR FIT</span>
           </Link>
+        </motion.div>
 
-          <div className="hidden md:flex items-center gap-8">
-            {[['#stylist','The Stylist'],['#perception','Perception'],['#about','About']].map(([href,label]) => (
-              <a key={href} href={href} className="text-sm text-[#6B7280] hover:text-[#0A0A0A] transition-colors">{label}</a>
-            ))}
-          </div>
-
-          <a href="#cta" className="hidden md:flex px-5 py-2 rounded-full bg-[#0A0A0A] text-white text-sm font-semibold hover:bg-[#262626] transition-colors">
+        <div className="hidden md:flex items-center gap-8">
+          {links.slice(0, 3).map(l => (
+            <Link key={l.href} href={l.href} className="relative text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium group py-1">
+              {l.label}
+              <span className="absolute bottom-0 left-0 w-full h-px bg-gray-900 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            </Link>
+          ))}
+          <Link href="#cta" className="btn-3d px-5 py-2.5 text-sm font-semibold text-white bg-gray-900 hover:bg-gray-800 transition-all duration-300">
             Get Early Access
-          </a>
-
-          <button onClick={() => setOpen(o => !o)} className="md:hidden p-2 text-[#0A0A0A]">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-              {open
-                ? <path fillRule="evenodd" clipRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" />
-                : <path fillRule="evenodd" clipRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" />}
-            </svg>
-          </button>
+          </Link>
         </div>
-      </nav>
+
+        <button onClick={() => setOpen(!open)} className="md:hidden text-gray-700 hover:text-gray-900 p-2">
+          <div className={`w-5 h-0.5 bg-current mb-1.5 transition-all ${open ? 'rotate-45 translate-y-2' : ''}`} />
+          <div className={`w-5 h-0.5 bg-current mb-1.5 transition-all ${open ? 'opacity-0' : ''}`} />
+          <div className={`w-5 h-0.5 bg-current transition-all ${open ? '-rotate-45 -translate-y-2' : ''}`} />
+        </button>
+      </div>
 
       <AnimatePresence>
         {open && (
-          <motion.div initial={{opacity:0,y:-8}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-8}}
-            className="fixed top-12 inset-x-0 z-40 bg-white border-b border-[#F3F4F6] px-6 py-5 flex flex-col gap-4 md:hidden shadow-lg">
-            {[['#stylist','The Stylist'],['#perception','Perception'],['#about','About']].map(([href,label]) => (
-              <a key={href} href={href} onClick={()=>setOpen(false)} className="text-[#0A0A0A] font-medium py-1">{label}</a>
+          <motion.div initial={{opacity:0,height:0}} animate={{opacity:1,height:'auto'}} exit={{opacity:0,height:0}}
+            className="md:hidden bg-white border-t border-gray-100 px-6 py-6 flex flex-col gap-4">
+            {links.map(l => (
+              <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-gray-700 hover:text-gray-900 transition-colors font-medium py-2">{l.label}</Link>
             ))}
-            <a href="#cta" onClick={()=>setOpen(false)} className="mt-2 px-5 py-3 rounded-full bg-[#0A0A0A] text-white font-semibold text-sm text-center">Get Early Access</a>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </nav>
   )
 }
