@@ -61,9 +61,10 @@ export default function Intro() {
               <Image
                 src="/assets/logo-new.png"
                 alt="GYF"
-                width={160}
-                height={160}
-                className="relative z-10 drop-shadow-[0_0_40px_rgba(124,58,237,0.35)]"
+                width={400}
+                height={400}
+                className="relative z-10 drop-shadow-[0_0_60px_rgba(124,58,237,0.3)]"
+                style={{ width: '40vw', height: 'auto', minWidth: 240, maxWidth: 500 }}
                 priority
               />
             </div>

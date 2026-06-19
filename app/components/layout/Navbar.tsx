@@ -24,7 +24,7 @@ export default function Navbar() {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-white/80 backdrop-blur-xl border-b border-gray-100' : ''}`}>
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
-          <Image src="/assets/logo-new.png" alt="GYF" width={56} height={56} className="h-14 w-auto" />
+          <Image src="/assets/logo-new.png" alt="GYF" width={80} height={80} className="h-20 w-auto" />
           <span className="font-bold text-gray-900 text-sm tracking-wider hidden sm:block" style={{ fontFamily: 'var(--font-display)' }}>GET YOUR FIT</span>
         </Link>
 
