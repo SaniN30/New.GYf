@@ -4,72 +4,55 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const NAV_LINKS = [
-  { href: '#stylist', label: 'The Stylist' },
-  { href: '#perception', label: 'Perception Layer' },
-  { href: '#about', label: 'About' },
-]
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 20)
+    const fn = () => setScrolled(window.scrollY > 10)
     window.addEventListener('scroll', fn, { passive: true })
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${scrolled ? 'bg-white border-b border-gray-100 shadow-sm' : 'bg-white'}`}>
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
-            <div className="relative w-9 h-9">
+      <nav className={`fixed top-0 inset-x-0 z-50 h-12 flex items-center transition-all duration-200 ${scrolled ? 'bg-white/95 backdrop-blur-sm border-b border-[#F3F4F6]' : 'bg-white'}`}>
+        <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2.5">
+            <div className="relative w-9 h-9 flex-shrink-0">
               <Image src="/assets/logo-new.png" alt="GYF" fill className="object-contain" priority />
             </div>
-            <span className="font-bold text-[#0A0A0A] text-sm tracking-tight">Get Your Fit</span>
+            <span className="font-bold text-[#0A0A0A] text-sm">Get Your Fit</span>
           </Link>
 
-          {/* Center links — desktop */}
           <div className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.map(l => (
-              <a key={l.href} href={l.href} className="text-sm text-[#6B7280] hover:text-[#0A0A0A] transition-colors font-medium">
-                {l.label}
-              </a>
+            {[['#stylist','The Stylist'],['#perception','Perception'],['#about','About']].map(([href,label]) => (
+              <a key={href} href={href} className="text-sm text-[#6B7280] hover:text-[#0A0A0A] transition-colors">{label}</a>
             ))}
           </div>
 
-          {/* CTA — desktop */}
-          <div className="hidden md:flex items-center gap-3">
-            <a href="#cta" className="px-5 py-2.5 rounded-full bg-[#0A0A0A] text-white text-sm font-semibold hover:bg-[#1a1a1a] transition-colors">
-              Get Early Access
-            </a>
-          </div>
+          <a href="#cta" className="hidden md:flex px-5 py-2 rounded-full bg-[#0A0A0A] text-white text-sm font-semibold hover:bg-[#262626] transition-colors">
+            Get Early Access
+          </a>
 
-          {/* Mobile burger */}
-          <button onClick={() => setOpen(o => !o)} className="md:hidden p-2" aria-label="Toggle menu">
-            <div className={`w-5 h-px bg-[#0A0A0A] mb-1.5 transition-all origin-center ${open ? 'rotate-45 translate-y-[6px]' : ''}`} />
-            <div className={`w-5 h-px bg-[#0A0A0A] mb-1.5 transition-all ${open ? 'opacity-0' : ''}`} />
-            <div className={`w-5 h-px bg-[#0A0A0A] transition-all origin-center ${open ? '-rotate-45 -translate-y-[6px]' : ''}`} />
+          <button onClick={() => setOpen(o => !o)} className="md:hidden p-2 text-[#0A0A0A]">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              {open
+                ? <path fillRule="evenodd" clipRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" />
+                : <path fillRule="evenodd" clipRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" />}
+            </svg>
           </button>
         </div>
       </nav>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-            className="fixed top-16 left-0 right-0 z-40 bg-white border-b border-gray-100 px-6 py-6 flex flex-col gap-5 md:hidden shadow-lg">
-            {NAV_LINKS.map(l => (
-              <a key={l.href} href={l.href} onClick={() => setOpen(false)}
-                className="text-base font-medium text-[#0A0A0A]">{l.label}</a>
+          <motion.div initial={{opacity:0,y:-8}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-8}}
+            className="fixed top-12 inset-x-0 z-40 bg-white border-b border-[#F3F4F6] px-6 py-5 flex flex-col gap-4 md:hidden shadow-lg">
+            {[['#stylist','The Stylist'],['#perception','Perception'],['#about','About']].map(([href,label]) => (
+              <a key={href} href={href} onClick={()=>setOpen(false)} className="text-[#0A0A0A] font-medium py-1">{label}</a>
             ))}
-            <a href="#cta" onClick={() => setOpen(false)}
-              className="px-5 py-3 rounded-full bg-[#0A0A0A] text-white text-sm font-semibold text-center">
-              Get Early Access
-            </a>
+            <a href="#cta" onClick={()=>setOpen(false)} className="mt-2 px-5 py-3 rounded-full bg-[#0A0A0A] text-white font-semibold text-sm text-center">Get Early Access</a>
           </motion.div>
         )}
       </AnimatePresence>
