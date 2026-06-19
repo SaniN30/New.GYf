@@ -10,7 +10,7 @@ const pillars = [
 
 export default function Intelligence() {
   return (
-    <section className="py-32 bg-[#08080C]">
+    <section className="py-32 bg-[#13111F]">
       <div className="max-w-5xl mx-auto px-6">
         <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.7}}
           className="mb-16 text-center">
@@ -20,7 +20,7 @@ export default function Intelligence() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {pillars.map((p, i) => (
             <motion.div key={p.title} initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6,delay:i*0.12}}
-              className="gradient-border-card rounded-2xl bg-[#0F0F18] p-8 hover:bg-[#16162A] transition-colors duration-300 group">
+              className="gradient-border-card rounded-2xl bg-[#1C1A2E] p-8 hover:bg-[#252340] transition-colors duration-300 group">
               <div className="text-3xl mb-5">{p.icon}</div>
               <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">{p.title}</h3>
               <p className="text-gray-400 leading-relaxed">{p.body}</p>

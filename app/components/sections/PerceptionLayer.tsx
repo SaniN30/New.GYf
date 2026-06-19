@@ -74,7 +74,7 @@ export default function PerceptionLayer() {
   const vibeText = useTypewriter(SAMPLE_RESULT.perceivedVibe, state === 'done', 1000)
 
   return (
-    <section id="perception" className="py-32 relative overflow-hidden bg-[#0A0A14]">
+    <section id="perception" className="py-32 relative overflow-hidden bg-[#13111F]">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[800px] h-[800px] rounded-full bg-purple-600/10 blur-[150px]" />
       </div>

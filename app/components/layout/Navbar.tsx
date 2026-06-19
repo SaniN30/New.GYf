@@ -21,10 +21,10 @@ export default function Navbar() {
   }, [])
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-[#0A0A14]/80 backdrop-blur-xl border-b border-white/5' : ''}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-[#13111F]/80 backdrop-blur-xl border-b border-white/5' : ''}`}>
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
-          <Image src="/assets/logo.png" alt="GYF" width={36} height={36} className="h-9 w-auto" />
+          <Image src="/assets/logo-new.png" alt="GYF" width={36} height={36} className="h-9 w-auto" />
           <span className="font-bold text-white text-sm tracking-wider hidden sm:block" style={{ fontFamily: 'var(--font-display)' }}>GET YOUR FIT</span>
         </Link>
 

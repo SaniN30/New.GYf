@@ -13,7 +13,7 @@ import CTABanner from '@/components/sections/CTABanner'
 
 export default function Home() {
   return (
-    <div className="bg-[#0A0A14] min-h-screen">
+    <div className="bg-[#13111F] min-h-screen">
       <Intro />
       <Navbar />
       <Hero />

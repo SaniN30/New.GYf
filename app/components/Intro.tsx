@@ -39,7 +39,7 @@ export default function Intro() {
           exit={{ opacity: 0, scale: 1.04 }}
           transition={{ duration: 0.7 }}
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center"
-          style={{ background: '#0A0A14' }}
+          style={{ background: '#13111F' }}
         >
           {/* Ambient glow */}
           <div className="absolute inset-0 pointer-events-none">
@@ -59,7 +59,7 @@ export default function Intro() {
               {/* Logo glow halo */}
               <div className="absolute inset-0 scale-150 rounded-full bg-purple-500/20 blur-3xl pointer-events-none" />
               <Image
-                src="/assets/logo.png"
+                src="/assets/logo-new.png"
                 alt="GYF"
                 width={96}
                 height={96}

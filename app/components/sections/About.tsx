@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 export default function About() {
   return (
-    <section className="py-32 bg-[#08080C] border-t border-white/5">
+    <section className="py-32 bg-[#13111F] border-t border-white/5">
       <div className="max-w-3xl mx-auto px-6">
         <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.7}}>
           <div className="text-xs font-mono text-purple-400 uppercase tracking-widest mb-8">About</div>

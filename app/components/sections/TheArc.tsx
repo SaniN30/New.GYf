@@ -11,7 +11,7 @@ const phases = [
 
 export default function TheArc() {
   return (
-    <section className="py-32 bg-[#08080C]">
+    <section className="py-32 bg-[#13111F]">
       <div className="max-w-3xl mx-auto px-6">
         <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.7}}
           className="mb-16">

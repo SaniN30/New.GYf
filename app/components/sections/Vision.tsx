@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 export default function Vision() {
   return (
-    <section className="py-40 bg-[#08080C] relative overflow-hidden">
+    <section className="py-40 bg-[#13111F] relative overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[500px] h-[500px] rounded-full bg-purple-600/8 blur-[120px]" />
       </div>

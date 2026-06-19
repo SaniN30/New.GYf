@@ -8,7 +8,7 @@ export default function CTABanner() {
 
   return (
     <section id="cta" className="py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-950/60 via-[#08080C] to-pink-950/40" />
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-[#13111F] to-pink-900/30" />
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[600px] h-[300px] rounded-full bg-purple-600/15 blur-[100px]" />
       </div>

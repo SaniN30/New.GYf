@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0A0A14]">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#13111F]">
       {/* Ambient glow orbs */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-purple-600/15 blur-[120px] pointer-events-none" />
       <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] rounded-full bg-pink-600/10 blur-[100px] pointer-events-none" />
