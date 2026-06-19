@@ -5,9 +5,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const links = [
-  { href: '#how-it-works', label: 'How It Works' },
-  { href: '#perception', label: 'Perception Layer' },
-  { href: '#cta', label: 'Early Access' },
+  { href: '/how-it-works', label: 'How It Works' },
+  { href: '/perception', label: 'Perception Layer' },
+  { href: '/vision', label: 'Vision' },
+  { href: '/intelligence', label: 'Intelligence' },
 ]
 
 export default function Navbar() {
@@ -21,20 +22,25 @@ export default function Navbar() {
   }, [])
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-white/80 backdrop-blur-xl border-b border-gray-100' : ''}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-white/90 backdrop-blur-xl border-b border-gray-100 shadow-sm' : ''}`}>
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
-          <Image src="/assets/logo-new.png" alt="GYF" width={80} height={80} className="h-20 w-auto" />
-          <span className="font-bold text-gray-900 text-sm tracking-wider hidden sm:block" style={{ fontFamily: 'var(--font-display)' }}>GET YOUR FIT</span>
-        </Link>
+        <motion.div whileHover={{ scale: 1.04 }} transition={{ type: 'spring', stiffness: 400, damping: 20 }}>
+          <Link href="/" className="flex items-center gap-3">
+            <Image src="/assets/logo-new.png" alt="GYF" width={80} height={80} className="h-14 w-auto" />
+            <span className="font-bold text-gray-900 text-sm tracking-wider hidden sm:block" style={{ fontFamily: 'var(--font-display)' }}>GET YOUR FIT</span>
+          </Link>
+        </motion.div>
 
         <div className="hidden md:flex items-center gap-8">
-          {links.slice(0, 2).map(l => (
-            <a key={l.href} href={l.href} className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-medium">{l.label}</a>
+          {links.slice(0, 3).map(l => (
+            <Link key={l.href} href={l.href} className="relative text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium group py-1">
+              {l.label}
+              <span className="absolute bottom-0 left-0 w-full h-px bg-gray-900 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            </Link>
           ))}
-          <a href="#cta" className="btn-3d px-5 py-2.5 text-sm font-semibold text-gray-900 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 transition-all duration-300">
+          <Link href="#cta" className="btn-3d px-5 py-2.5 text-sm font-semibold text-white bg-gray-900 hover:bg-gray-800 transition-all duration-300">
             Get Early Access
-          </a>
+          </Link>
         </div>
 
         <button onClick={() => setOpen(!open)} className="md:hidden text-gray-700 hover:text-gray-900 p-2">
@@ -49,7 +55,7 @@ export default function Navbar() {
           <motion.div initial={{opacity:0,height:0}} animate={{opacity:1,height:'auto'}} exit={{opacity:0,height:0}}
             className="md:hidden bg-white border-t border-gray-100 px-6 py-6 flex flex-col gap-4">
             {links.map(l => (
-              <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-gray-700 hover:text-gray-900 transition-colors font-medium py-2">{l.label}</a>
+              <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-gray-700 hover:text-gray-900 transition-colors font-medium py-2">{l.label}</Link>
             ))}
           </motion.div>
         )}

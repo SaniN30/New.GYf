@@ -17,9 +17,9 @@ export default function Home() {
       <Intro />
       <Navbar />
       <Hero />
+      <PerceptionLayer />
       <WhatWeDo />
       <HowItWorks />
-      <PerceptionLayer />
       <Vision />
       <Intelligence />
       <TheArc />

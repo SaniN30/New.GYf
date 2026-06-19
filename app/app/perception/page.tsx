@@ -1,27 +1,27 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import HowItWorks from '@/components/sections/HowItWorks'
+import PerceptionLayer from '@/components/sections/PerceptionLayer'
 import CTABanner from '@/components/sections/CTABanner'
 
 export const metadata = {
-  title: 'How It Works — GYF',
-  description: 'Three steps to a complete, personalised outfit. GYF learns you, styles you, and gets smarter every time.',
+  title: 'Perception Layer — GYF',
+  description: 'Upload a photo and let GYF read your body type, skin tone, and style signals. AI-powered body analysis.',
 }
 
-export default function HowItWorksPage() {
+export default function PerceptionPage() {
   return (
     <div className="bg-white min-h-screen">
       <Navbar />
       <div className="pt-28 pb-8 max-w-5xl mx-auto px-6">
-        <p className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">How It Works</p>
+        <p className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Perception Layer</p>
         <h1 className="text-[clamp(2.8rem,7vw,6rem)] font-black text-gray-900 leading-tight mb-4" style={{ fontFamily: 'var(--font-display)' }}>
-          Dressed in three steps.
+          See yourself differently.
         </h1>
         <p className="text-gray-600 text-lg max-w-xl leading-relaxed">
-          From your first visit to your best-dressed day — GYF builds complete, explained outfits and gets smarter with every interaction.
+          GYF reads your proportions, palette, and presence — then builds a complete look designed exactly for your body.
         </p>
       </div>
-      <HowItWorks />
+      <PerceptionLayer />
       <CTABanner />
       <Footer />
     </div>
