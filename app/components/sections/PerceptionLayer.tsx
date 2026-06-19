@@ -74,7 +74,7 @@ export default function PerceptionLayer() {
   const vibeText = useTypewriter(SAMPLE_RESULT.perceivedVibe, state === 'done', 1000)
 
   return (
-    <section id="perception" className="py-32 relative overflow-hidden bg-[#13111F]">
+    <section id="perception" className="py-32 relative overflow-hidden bg-white">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[800px] h-[800px] rounded-full bg-purple-600/10 blur-[150px]" />
       </div>
@@ -85,10 +85,10 @@ export default function PerceptionLayer() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-pink-500/30 bg-pink-500/10 text-pink-300 text-xs font-mono mb-6">
             ✦ New Feature
           </div>
-          <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-white mb-4 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
+          <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-gray-900 mb-4 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
             See Yourself <span className="shimmer-text">Differently.</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-700 text-lg max-w-2xl mx-auto">
             Upload a photo. GYF&apos;s Perception Layer reads your proportions, palette, and presence — then builds a look designed exactly for your body.
           </p>
         </motion.div>
@@ -99,18 +99,18 @@ export default function PerceptionLayer() {
           <div className="grid md:grid-cols-2 gap-8">
             {/* LEFT: Input panel */}
             <div>
-              <div className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Input</div>
+              <div className="text-xs font-mono text-gray-700 uppercase tracking-widest mb-4">Input</div>
               {state === 'idle' && (
                 <div
                   onDrop={handleDrop}
                   onDragOver={(e) => e.preventDefault()}
                   onClick={() => inputRef.current?.click()}
-                  className="border-2 border-dashed border-white/10 hover:border-purple-500/40 rounded-2xl p-8 text-center cursor-pointer transition-colors duration-300 min-h-[200px] flex flex-col items-center justify-center gap-4">
+                  className="border-2 border-dashed border-gray-200 hover:border-purple-500/40 rounded-2xl p-8 text-center cursor-pointer transition-colors duration-300 min-h-[200px] flex flex-col items-center justify-center gap-4">
                   <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={e => { const f = e.target.files?.[0]; if (f) handleFile(f) }} />
                   <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-2xl">📸</div>
                   <div>
-                    <p className="text-white font-semibold mb-1">Drop your photo here</p>
-                    <p className="text-gray-500 text-sm">or click to browse</p>
+                    <p className="text-gray-900 font-semibold mb-1">Drop your photo here</p>
+                    <p className="text-gray-700 text-sm">or click to browse</p>
                   </div>
                   <button onClick={(e) => { e.stopPropagation(); useSample() }}
                     className="text-xs text-purple-400 hover:text-purple-300 border border-purple-500/30 px-4 py-2 rounded-full transition-colors">
@@ -120,12 +120,12 @@ export default function PerceptionLayer() {
               )}
 
               {(state === 'scanning' || state === 'done') && (
-                <div className="rounded-2xl overflow-hidden bg-white/5 border border-white/10 min-h-[200px] flex items-center justify-center relative">
+                <div className="rounded-2xl overflow-hidden bg-gray-50 border border-gray-200 min-h-[200px] flex items-center justify-center relative">
                   {preview ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={preview} alt="Your photo" className="w-full h-full object-cover rounded-2xl max-h-64" />
                   ) : (
-                    <div className="text-center text-gray-500 py-12">
+                    <div className="text-center text-gray-700 py-12">
                       <div className="text-4xl mb-2">🧍</div>
                       <div className="text-sm font-mono">sample_user.jpg</div>
                     </div>
@@ -167,11 +167,11 @@ export default function PerceptionLayer() {
 
             {/* RIGHT: Analysis panel */}
             <div>
-              <div className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Analysis</div>
+              <div className="text-xs font-mono text-gray-700 uppercase tracking-widest mb-4">Analysis</div>
               <AnimatePresence mode="wait">
                 {state !== 'done' ? (
-                  <motion.div key="empty" className="min-h-[200px] flex items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-                    <p className="text-gray-600 text-sm font-mono">Awaiting input...</p>
+                  <motion.div key="empty" className="min-h-[200px] flex items-center justify-center rounded-2xl border border-gray-200 bg-gray-50">
+                    <p className="text-gray-700 text-sm font-mono">Awaiting input...</p>
                   </motion.div>
                 ) : (
                   <motion.div key="result" initial={{opacity:0,scale:0.97}} animate={{opacity:1,scale:1}} transition={{duration:0.5}}
@@ -182,15 +182,15 @@ export default function PerceptionLayer() {
                       { label: 'Style Vibe', value: vibeText },
                     ].map((item) => (
                       <div key={item.label}>
-                        <div className="text-xs text-gray-500 font-mono mb-1">{item.label}</div>
-                        <div className="text-white font-semibold min-h-[1.5rem]">
+                        <div className="text-xs text-gray-700 font-mono mb-1">{item.label}</div>
+                        <div className="text-gray-900 font-semibold min-h-[1.5rem]">
                           {item.value}
                           <span className="inline-block w-0.5 h-4 bg-purple-400 ml-0.5 animate-pulse align-middle" />
                         </div>
                       </div>
                     ))}
                     <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.4}}>
-                      <div className="text-xs text-gray-500 font-mono mb-2">Recommended Palette</div>
+                      <div className="text-xs text-gray-700 font-mono mb-2">Recommended Palette</div>
                       <div className="flex gap-2 flex-wrap">
                         {SAMPLE_RESULT.recommendedPalette.map((c, i) => (
                           <motion.span
@@ -198,16 +198,16 @@ export default function PerceptionLayer() {
                             initial={{ opacity: 0, y: 6 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 1.4 + i * 0.1 }}
-                            className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-gray-300"
+                            className="px-3 py-1 rounded-full text-xs bg-gray-50 border border-gray-200 text-gray-300"
                           >{c}</motion.span>
                         ))}
                       </div>
                     </motion.div>
                     <motion.a initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.6}}
-                      href="#cta" className="btn-3d block w-full text-center py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-sm hover:opacity-90 transition-opacity">
+                      href="#cta" className="btn-3d block w-full text-center py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-gray-900 font-semibold text-sm hover:opacity-90 transition-opacity">
                       View Your Outfits →
                     </motion.a>
-                    <button onClick={reset} className="block w-full text-center text-xs text-gray-600 hover:text-gray-400 transition-colors py-1">
+                    <button onClick={reset} className="block w-full text-center text-xs text-gray-700 hover:text-gray-700 transition-colors py-1">
                       Try another photo
                     </button>
                   </motion.div>
@@ -216,9 +216,9 @@ export default function PerceptionLayer() {
             </div>
           </div>
 
-          <div className="mt-6 pt-6 border-t border-white/5 flex flex-wrap gap-4 justify-center">
+          <div className="mt-6 pt-6 border-t border-gray-100 flex flex-wrap gap-4 justify-center">
             {['🔒 Photo never stored', '⚡ Instant analysis', '🛡️ Private by design'].map(badge => (
-              <span key={badge} className="text-xs text-gray-500 font-mono">{badge}</span>
+              <span key={badge} className="text-xs text-gray-700 font-mono">{badge}</span>
             ))}
           </div>
         </motion.div>

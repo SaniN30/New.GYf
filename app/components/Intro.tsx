@@ -39,7 +39,7 @@ export default function Intro() {
           exit={{ opacity: 0, scale: 1.04 }}
           transition={{ duration: 0.7 }}
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center"
-          style={{ background: '#13111F' }}
+          style={{ background: "#FFFFFF" }}
         >
           {/* Ambient glow */}
           <div className="absolute inset-0 pointer-events-none">
@@ -61,9 +61,9 @@ export default function Intro() {
               <Image
                 src="/assets/logo-new.png"
                 alt="GYF"
-                width={96}
-                height={96}
-                className="relative z-10 drop-shadow-[0_0_32px_rgba(168,85,247,0.6)]"
+                width={160}
+                height={160}
+                className="relative z-10 drop-shadow-[0_0_40px_rgba(124,58,237,0.35)]"
                 priority
               />
             </div>
@@ -74,10 +74,10 @@ export default function Intro() {
               transition={{ delay: 0.4, duration: 0.6 }}
               className="text-center"
             >
-              <div className="text-3xl font-black tracking-tight text-white" style={{ fontFamily: 'var(--font-display)' }}>
+              <div className="text-3xl font-black tracking-tight text-gray-900" style={{ fontFamily: 'var(--font-display)' }}>
                 GET YOUR FIT
               </div>
-              <div className="text-sm text-purple-300/70 font-mono mt-1 tracking-widest uppercase">
+              <div className="text-sm text-violet-500 font-mono mt-1 tracking-widest uppercase">
                 AI Personal Stylist
               </div>
             </motion.div>
@@ -90,7 +90,7 @@ export default function Intro() {
             transition={{ delay: 0.7 }}
             className="absolute bottom-16 w-48"
           >
-            <div className="h-0.5 w-full bg-white/10 rounded-full overflow-hidden">
+            <div className="h-0.5 w-full bg-gray-100 rounded-full overflow-hidden">
               <motion.div
                 initial={{ width: '0%' }}
                 animate={{ width: '100%' }}
