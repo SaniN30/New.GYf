@@ -22,7 +22,7 @@ export default function Intro() {
         }
         return next
       })
-    }, 380)
+    }, 650)
     return () => clearInterval(interval)
   }, [])
 
