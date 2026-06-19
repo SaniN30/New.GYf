@@ -1,4 +1,11 @@
-import { Space_Grotesk, DM_Sans, DM_Mono } from "next/font/google";
+import { Inter, Space_Grotesk, DM_Sans, DM_Mono } from "next/font/google";
+
+export const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
