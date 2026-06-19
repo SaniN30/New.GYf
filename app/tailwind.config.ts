@@ -2,28 +2,28 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    './app/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
-      colors: {
-        gyf: {
-          purple: '#7C3AED',
-          'purple-light': '#8B5CF6',
-          'purple-pale': '#F5F3FF',
-          pink: '#EC4899',
-          bg: '#FFFFFF',
-          surface: '#F5F3FF',
-          text: '#0F0A1E',
-          muted: '#6B7280',
-        }
-      },
       fontFamily: {
         body: ['var(--font-body)', 'sans-serif'],
         mono: ['var(--font-mono)', 'monospace'],
       },
-    }
+      colors: {
+        ink: '#0A0A0A',
+        'ink-soft': '#3D3D3D',
+        'ink-muted': '#6B7280',
+        'ink-faint': '#9CA3AF',
+        'surface': '#F9FAFB',
+        'purple-brand': '#7C3AED',
+        'pink-brand': '#EC4899',
+      },
+      borderRadius: {
+        '4xl': '2rem',
+      },
+    },
   },
   plugins: [],
 }

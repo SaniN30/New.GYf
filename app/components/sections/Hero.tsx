@@ -1,138 +1,115 @@
 'use client'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 export default function Hero() {
-  const ref = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-
   return (
-    <section ref={ref} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-white">
-      {/* Subtle purple bg blobs */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-purple-100/60 blur-[120px] -translate-y-1/4 translate-x-1/4 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-pink-100/60 blur-[100px] translate-y-1/4 -translate-x-1/4 pointer-events-none" />
+    <section className="relative bg-white pt-32 pb-0 overflow-hidden">
+      {/* Very subtle background grain / gradient */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(124,58,237,0.06),transparent)] pointer-events-none" />
 
-      <motion.div style={{ y, opacity }} className="relative z-10 text-center max-w-5xl mx-auto px-6 pt-36 pb-16">
-        {/* Logo mark */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          className="flex justify-center mb-8">
-          <div className="relative w-[80px] h-[80px]">
-            <Image src="/assets/logo-new.png" alt="GYF" fill className="object-contain" priority />
-          </div>
+      <div className="relative max-w-6xl mx-auto px-6 text-center">
+        {/* Eyebrow badge */}
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-200 text-xs font-medium text-[#6B7280] mb-8">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+          Now in Early Access
         </motion.div>
 
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-50 border border-purple-200 text-[#7C3AED] text-sm font-medium mb-8">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500" />
-          </span>
-          AI Personal Stylist — Now in Early Access
-        </motion.div>
-
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-[clamp(3rem,8vw,7rem)] font-black leading-[0.92] tracking-tight text-[#0F0A1E] mb-6">
-          Your Style.<br />
-          <span className="shimmer-text">Finally Intelligent.</span>
+        {/* Main headline — Cluely scale */}
+        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }}
+          className="text-[clamp(2.8rem,7vw,6rem)] font-black text-[#0A0A0A] leading-[1.0] tracking-[-0.03em] mb-6 max-w-4xl mx-auto">
+          #1 AI Personal Stylist<br />
+          <span className="shimmer-text">Built for Your Body</span>
         </motion.h1>
 
-        {/* Sub */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.35 }}
-          className="text-[clamp(1rem,2vw,1.25rem)] text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          GYF reads your body, learns your taste, and builds complete outfits in seconds — no stylist, no guesswork, no effort.
+        {/* Subheadline */}
+        <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
+          className="text-[clamp(1rem,2vw,1.2rem)] text-[#6B7280] max-w-xl mx-auto mb-10 leading-relaxed font-medium">
+          GYF reads your body, learns your taste, and builds complete outfits in real time. No stylist. No guesswork.
         </motion.p>
 
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
-          className="flex flex-wrap items-center justify-center gap-4 mb-16">
+        {/* CTAs — Cluely style: dark pill primary, outlined secondary */}
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }}
+          className="flex flex-wrap items-center justify-center gap-3 mb-16">
           <a href="#perception"
-            className="group px-8 py-4 rounded-full font-bold text-white bg-gradient-to-r from-[#7C3AED] to-[#EC4899] hover:opacity-90 transition-all duration-300 shadow-xl shadow-purple-200 hover:shadow-purple-300 hover:scale-105 text-base">
-            Try Perception Layer →
+            className="px-7 py-3.5 rounded-full bg-[#0A0A0A] text-white font-semibold text-sm hover:bg-[#1F1F1F] transition-colors shadow-sm">
+            Try Perception Layer
           </a>
-          <a href="#how-it-works"
-            className="px-8 py-4 rounded-full font-semibold text-gray-700 border-2 border-gray-200 hover:border-purple-300 hover:text-[#7C3AED] transition-all duration-300 text-base bg-white">
-            See How It Works
+          <a href="#stylist"
+            className="px-7 py-3.5 rounded-full border border-gray-200 text-[#0A0A0A] font-semibold text-sm hover:border-gray-400 hover:bg-gray-50 transition-all">
+            See the Stylist
           </a>
         </motion.div>
 
-        {/* Floating product mockup */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.7 }}
-          className="float-anim relative mx-auto max-w-xl">
-          <div className="rounded-3xl bg-white border border-gray-200 shadow-2xl shadow-purple-100/50 overflow-hidden purple-glow">
-            {/* Window chrome */}
-            <div className="flex items-center gap-2 px-5 py-4 border-b border-gray-100 bg-gray-50">
-              <div className="w-3 h-3 rounded-full bg-red-400" />
-              <div className="w-3 h-3 rounded-full bg-yellow-400" />
-              <div className="w-3 h-3 rounded-full bg-green-400" />
-              <span className="ml-3 text-xs text-gray-400 font-mono">GYF Stylist — Your Daily Look</span>
+        {/* Product mockup — large, floating, Cluely-style */}
+        <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }}
+          className="float-anim relative mx-auto max-w-3xl">
+          {/* Glow behind card */}
+          <div className="absolute -inset-4 bg-gradient-to-b from-purple-100/40 to-transparent rounded-3xl blur-2xl pointer-events-none" />
+          <div className="relative rounded-3xl bg-[#0A0A0A] border border-white/10 shadow-2xl overflow-hidden">
+            {/* Chrome bar */}
+            <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/10 bg-[#161616]">
+              <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
+              <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
+              <div className="w-3 h-3 rounded-full bg-[#28C840]" />
+              <span className="ml-4 text-xs text-white/40 font-mono">GYF Stylist — Active</span>
+              <span className="ml-auto flex items-center gap-1.5 text-xs text-white/30 font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                Live
+              </span>
             </div>
+            {/* App content */}
             <div className="p-6">
+              {/* User profile strip */}
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/[0.08]">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-xs font-bold">S</div>
+                <div>
+                  <div className="text-xs font-semibold text-white">Sanidhya</div>
+                  <div className="text-[10px] text-white/40 font-mono">Inverted Triangle · Warm Medium · Classic</div>
+                </div>
+                <div className="ml-auto flex items-center gap-1.5 text-[10px] text-white/30 border border-white/10 rounded-full px-2.5 py-1">
+                  <span className="w-1 h-1 rounded-full bg-purple-400" />
+                  Taste model active
+                </div>
+              </div>
               {/* Outfit cards */}
               <div className="grid grid-cols-3 gap-3 mb-4">
                 {[
-                  { emoji: '👕', label: 'Navy Oxford', sub: 'Top' },
-                  { emoji: '👖', label: 'Slim Chino', sub: 'Bottom' },
-                  { emoji: '👟', label: 'White Leather', sub: 'Footwear' },
-                ].map((item) => (
-                  <div key={item.sub} className="rounded-2xl bg-purple-50 border border-purple-100 p-3 text-center card-hover cursor-pointer group">
+                  { emoji: '👕', name: 'Navy Oxford', tag: 'Top', color: 'from-blue-900/40 to-blue-800/20' },
+                  { emoji: '👖', name: 'Slim Chino', tag: 'Bottom', color: 'from-amber-900/40 to-amber-800/20' },
+                  { emoji: '👟', name: 'White Leather', tag: 'Footwear', color: 'from-gray-700/40 to-gray-600/20' },
+                ].map(item => (
+                  <div key={item.tag} className={`rounded-2xl bg-gradient-to-br ${item.color} border border-white/10 p-4 text-center group hover:border-purple-500/40 transition-colors cursor-pointer`}>
                     <div className="text-3xl mb-2">{item.emoji}</div>
-                    <div className="text-xs font-semibold text-gray-800">{item.label}</div>
-                    <div className="text-[10px] text-purple-500 mt-0.5">{item.sub}</div>
+                    <div className="text-xs font-semibold text-white/90">{item.name}</div>
+                    <div className="text-[10px] text-white/40 mt-0.5">{item.tag}</div>
                   </div>
                 ))}
               </div>
-              {/* AI reasoning */}
-              <div className="rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-100 p-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-5 h-5 rounded-full bg-gradient-to-br from-[#7C3AED] to-[#EC4899] flex items-center justify-center text-white text-[10px] font-bold">G</div>
-                  <span className="text-xs font-semibold text-gray-700">GYF Stylist</span>
-                  <span className="ml-auto text-[10px] text-purple-400 bg-purple-100 px-2 py-0.5 rounded-full">Matched for you</span>
+              {/* AI response card */}
+              <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-5 h-5 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-[9px] font-bold text-white">G</div>
+                  <span className="text-xs font-semibold text-white/80">GYF Stylist</span>
+                  <div className="ml-auto flex items-center gap-1 text-[10px] text-white/30 font-mono">
+                    <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-white/40 text-[10px]">⌘</kbd>
+                    <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-white/40 text-[10px]">↵</kbd>
+                  </div>
                 </div>
-                <p className="text-xs text-gray-600 leading-relaxed">&quot;Structured silhouette for your build. Navy + white is your strongest palette. Clean, confident, effortless.&quot;</p>
+                <p className="text-xs text-white/60 leading-relaxed">&quot;Structured shoulders balance your build. Navy anchors the palette — Camel or White accessories will complete the look.&quot;</p>
+                <div className="mt-3 flex gap-2">
+                  <button className="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-[10px] text-white/60 transition-colors">Save look</button>
+                  <button className="px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-[10px] text-white font-medium">Next outfit →</button>
+                </div>
               </div>
             </div>
           </div>
         </motion.div>
-      </motion.div>
-
-      {/* Stats strip */}
-      <div className="relative z-10 w-full border-t border-gray-100 bg-white/80 backdrop-blur-sm py-8">
-        <div className="max-w-3xl mx-auto px-6 grid grid-cols-3 gap-6">
-          {[
-            { num: '<400ms', label: 'Response Time' },
-            { num: '98%', label: 'Fit Accuracy' },
-            { num: '10K+', label: 'Looks Built' },
-          ].map(stat => (
-            <div key={stat.label} className="text-center group cursor-default">
-              <div className="text-[clamp(1.5rem,3vw,2.5rem)] font-black gradient-text">{stat.num}</div>
-              <div className="text-xs text-gray-400 mt-1 uppercase tracking-widest font-medium">{stat.label}</div>
-            </div>
-          ))}
-        </div>
       </div>
+
+      {/* Bottom fade to next section */}
+      <div className="h-24 bg-gradient-to-b from-transparent to-[#F9FAFB]" />
     </section>
   )
 }
