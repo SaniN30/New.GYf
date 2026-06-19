@@ -4,31 +4,35 @@ import { useState } from 'react'
 
 export default function CTABanner() {
   const [email, setEmail] = useState('')
-  const [done, setDone] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   return (
-    <section id="cta" className="py-32 bg-[#0A0A0A] border-t border-white/10">
-      <div className="max-w-2xl mx-auto px-6 text-center">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black text-white leading-[0.95] tracking-tight mb-6">
-            Be dressed by<br />intelligence.
+    <section id="cta" className="py-32 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-950/60 via-[#08080C] to-pink-950/40" />
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-[600px] h-[300px] rounded-full bg-purple-600/15 blur-[100px]" />
+      </div>
+      <div className="relative z-10 max-w-2xl mx-auto px-6 text-center">
+        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.7}}>
+          <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black text-white leading-tight mb-6">
+            Be dressed by <span className="shimmer-text">intelligence.</span>
           </h2>
-          <p className="text-white/40 text-lg mb-10">Join thousands building their AI wardrobe.</p>
-          {!done ? (
-            <form onSubmit={e => { e.preventDefault(); if (email) setDone(true) }}
+          <p className="text-gray-400 text-lg mb-10">Join thousands building their AI wardrobe.</p>
+          {!submitted ? (
+            <form onSubmit={(e) => { e.preventDefault(); if (email) setSubmitted(true) }}
               className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <input type="email" value={email} onChange={e => setEmail(e.target.value)}
                 placeholder="your@email.com" required
-                className="flex-1 px-5 py-3.5 rounded-full bg-white/[0.08] border border-white/15 text-white placeholder-white/25 outline-none focus:border-white/30 transition-colors text-sm" />
+                className="flex-1 px-5 py-4 rounded-full bg-white/5 border border-white/10 text-white placeholder-gray-600 outline-none focus:border-purple-500/50 transition-colors" />
               <button type="submit"
-                className="px-7 py-3.5 rounded-full bg-white text-[#0A0A0A] font-bold text-sm hover:bg-gray-100 transition-colors whitespace-nowrap">
-                Get Early Access
+                className="px-8 py-4 rounded-full font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 transition-all duration-300 whitespace-nowrap hover:scale-105">
+                Get Early Access →
               </button>
             </form>
           ) : (
-            <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
-              className="px-8 py-4 rounded-2xl bg-white/[0.08] border border-white/15 text-white/70 text-sm font-mono">
-              ✓ You&apos;re on the list.
+            <motion.div initial={{opacity:0,scale:0.95}} animate={{opacity:1,scale:1}} transition={{duration:0.4}}
+              className="px-8 py-5 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-300 font-mono">
+              ✓ You&apos;re on the list. We&apos;ll be in touch.
             </motion.div>
           )}
         </motion.div>
