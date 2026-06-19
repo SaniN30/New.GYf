@@ -8,7 +8,7 @@ export default function StylistFeature() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left — copy */}
           <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <div className="text-xs font-mono font-semibold text-purple-400 uppercase tracking-widest mb-4">The Stylist</div>
+            <div className="text-xs font-mono font-semibold text-gray-400 uppercase tracking-widest mb-4">The Stylist</div>
             <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-black text-white leading-tight tracking-tight mb-6">
               Complete outfits.<br />Built for you.<br />
               <span className="text-white/30">In seconds.</span>
@@ -23,7 +23,7 @@ export default function StylistFeature() {
                 { icon: '✦', text: 'Explains every choice like a real stylist would' },
               ].map(item => (
                 <li key={item.text} className="flex items-start gap-3 text-white/60 text-sm">
-                  <span className="text-purple-400 mt-0.5 flex-shrink-0">{item.icon}</span>
+                  <span className="text-gray-400 mt-0.5 flex-shrink-0">{item.icon}</span>
                   {item.text}
                 </li>
               ))}
@@ -34,10 +34,10 @@ export default function StylistFeature() {
           <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
             className="grid grid-cols-2 gap-4">
             {[
-              { bg: 'bg-purple-600', icon: '👁️', title: 'Visual AI', body: 'Reads vibe, color, silhouette — the way a stylist sees clothing.' },
-              { bg: 'bg-pink-600', icon: '🧠', title: 'Taste Engine', body: 'Learns from every like, skip, and save. Gets sharper over time.' },
-              { bg: 'bg-violet-500', icon: '✦', title: 'Full Outfits', body: 'Never just one piece — always a coordinated look.' },
-              { bg: 'bg-fuchsia-600', icon: '💬', title: 'Reasoning', body: 'Every pick explained. You know why it works.' },
+              { bg: 'bg-gray-800', icon: '👁️', title: 'Visual AI', body: 'Reads vibe, color, silhouette — the way a stylist sees clothing.' },
+              { bg: 'bg-gray-700', icon: '🧠', title: 'Taste Engine', body: 'Learns from every like, skip, and save. Gets sharper over time.' },
+              { bg: 'bg-gray-900', icon: '✦', title: 'Full Outfits', body: 'Never just one piece — always a coordinated look.' },
+              { bg: 'bg-gray-600', icon: '💬', title: 'Reasoning', body: 'Every pick explained. You know why it works.' },
             ].map((card, i) => (
               <motion.div key={card.title}
                 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.08 }}

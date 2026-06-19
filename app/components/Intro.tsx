@@ -43,8 +43,8 @@ export default function Intro() {
         >
           {/* Ambient glow */}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-purple-600/15 blur-[160px]" />
-            <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] rounded-full bg-pink-600/10 blur-[120px]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-gray-200/60 blur-[160px]" />
+            <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] rounded-full bg-gray-100/60 blur-[120px]" />
           </div>
 
           {/* 3D logo card */}
@@ -57,13 +57,13 @@ export default function Intro() {
           >
             <div className="relative">
               {/* Logo glow halo */}
-              <div className="absolute inset-0 scale-150 rounded-full bg-purple-500/20 blur-3xl pointer-events-none" />
+              <div className="absolute inset-0 scale-150 rounded-full bg-gray-200/40 blur-3xl pointer-events-none" />
               <Image
                 src="/assets/logo-new.png"
                 alt="GYF"
                 width={400}
                 height={400}
-                className="relative z-10 drop-shadow-[0_0_60px_rgba(124,58,237,0.3)]"
+                className="relative z-10 drop-shadow-[0_0_60px_rgba(0,0,0,0.12)]"
                 style={{ width: '40vw', height: 'auto', minWidth: 240, maxWidth: 500 }}
                 priority
               />
@@ -78,7 +78,7 @@ export default function Intro() {
               <div className="text-3xl font-black tracking-tight text-gray-900" style={{ fontFamily: 'var(--font-display)' }}>
                 GET YOUR FIT
               </div>
-              <div className="text-sm text-violet-500 font-mono mt-1 tracking-widest uppercase">
+              <div className="text-sm text-gray-500 font-mono mt-1 tracking-widest uppercase">
                 AI Personal Stylist
               </div>
             </motion.div>
@@ -96,7 +96,7 @@ export default function Intro() {
                 initial={{ width: '0%' }}
                 animate={{ width: '100%' }}
                 transition={{ duration: 1.8, delay: 0.8, ease: 'easeInOut' }}
-                className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
+                className="h-full bg-gradient-to-r from-gray-900 to-gray-600 rounded-full"
               />
             </div>
           </motion.div>

@@ -15,7 +15,7 @@ export default function Footer() {
             <a href="#cta" className="hover:text-gray-900 transition-colors">Early Access</a>
           </div>
           <div className="flex items-center gap-4">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-400 transition-colors text-xl">📸</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-gray-900 transition-colors text-xl">📸</a>
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-400 transition-colors text-xl">💼</a>
           </div>
         </div>
