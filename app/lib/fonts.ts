@@ -1,30 +1,22 @@
-import { Inter, Space_Grotesk, DM_Sans, DM_Mono } from "next/font/google";
+import { Inter, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 
 export const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-export const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-export const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500"],
   variable: "--font-body",
   display: "swap",
 });
 
-export const dmMono = DM_Mono({
+export const bricolageGrotesque = Bricolage_Grotesque({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+export const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400"],
-  style: ["normal"],
   variable: "--font-mono",
   display: "swap",
 });
