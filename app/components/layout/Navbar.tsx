@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const links = [
-  { href: '#how-it-works', label: 'How It Works' },
+const NAV_LINKS = [
+  { href: '#stylist', label: 'The Stylist' },
   { href: '#perception', label: 'Perception Layer' },
-  { href: '#cta', label: 'Early Access' },
+  { href: '#about', label: 'About' },
 ]
 
 export default function Navbar() {
@@ -15,45 +15,64 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 50)
-    window.addEventListener('scroll', handler)
-    return () => window.removeEventListener('scroll', handler)
+    const fn = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', fn, { passive: true })
+    return () => window.removeEventListener('scroll', fn)
   }, [])
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-[#08080C]/80 backdrop-blur-xl border-b border-white/5' : ''}`}>
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
-          <Image src="/assets/logo.png" alt="GYF" width={36} height={36} className="brightness-0 invert" />
-          <span className="font-bold text-white text-sm tracking-wider hidden sm:block">GET YOUR FIT</span>
-        </Link>
+    <>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${scrolled ? 'bg-white border-b border-gray-100 shadow-sm' : 'bg-white'}`}>
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
+            <div className="relative w-9 h-9">
+              <Image src="/assets/logo-new.png" alt="GYF" fill className="object-contain" priority />
+            </div>
+            <span className="font-bold text-[#0A0A0A] text-sm tracking-tight">Get Your Fit</span>
+          </Link>
 
-        <div className="hidden md:flex items-center gap-8">
-          {links.slice(0, 2).map(l => (
-            <a key={l.href} href={l.href} className="text-sm text-gray-400 hover:text-white transition-colors font-medium">{l.label}</a>
-          ))}
-          <a href="#cta" className="px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 transition-all duration-300 hover:scale-105">
-            Get Early Access
-          </a>
+          {/* Center links — desktop */}
+          <div className="hidden md:flex items-center gap-8">
+            {NAV_LINKS.map(l => (
+              <a key={l.href} href={l.href} className="text-sm text-[#6B7280] hover:text-[#0A0A0A] transition-colors font-medium">
+                {l.label}
+              </a>
+            ))}
+          </div>
+
+          {/* CTA — desktop */}
+          <div className="hidden md:flex items-center gap-3">
+            <a href="#cta" className="px-5 py-2.5 rounded-full bg-[#0A0A0A] text-white text-sm font-semibold hover:bg-[#1a1a1a] transition-colors">
+              Get Early Access
+            </a>
+          </div>
+
+          {/* Mobile burger */}
+          <button onClick={() => setOpen(o => !o)} className="md:hidden p-2" aria-label="Toggle menu">
+            <div className={`w-5 h-px bg-[#0A0A0A] mb-1.5 transition-all origin-center ${open ? 'rotate-45 translate-y-[6px]' : ''}`} />
+            <div className={`w-5 h-px bg-[#0A0A0A] mb-1.5 transition-all ${open ? 'opacity-0' : ''}`} />
+            <div className={`w-5 h-px bg-[#0A0A0A] transition-all origin-center ${open ? '-rotate-45 -translate-y-[6px]' : ''}`} />
+          </button>
         </div>
+      </nav>
 
-        <button onClick={() => setOpen(!open)} className="md:hidden text-gray-400 hover:text-white p-2">
-          <div className={`w-5 h-0.5 bg-current mb-1.5 transition-all ${open ? 'rotate-45 translate-y-2' : ''}`} />
-          <div className={`w-5 h-0.5 bg-current mb-1.5 transition-all ${open ? 'opacity-0' : ''}`} />
-          <div className={`w-5 h-0.5 bg-current transition-all ${open ? '-rotate-45 -translate-y-2' : ''}`} />
-        </button>
-      </div>
-
+      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
-          <motion.div initial={{opacity:0,height:0}} animate={{opacity:1,height:'auto'}} exit={{opacity:0,height:0}}
-            className="md:hidden bg-[#0F0F18] border-t border-white/5 px-6 py-6 flex flex-col gap-4">
-            {links.map(l => (
-              <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-gray-300 hover:text-white transition-colors font-medium py-2">{l.label}</a>
+          <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+            className="fixed top-16 left-0 right-0 z-40 bg-white border-b border-gray-100 px-6 py-6 flex flex-col gap-5 md:hidden shadow-lg">
+            {NAV_LINKS.map(l => (
+              <a key={l.href} href={l.href} onClick={() => setOpen(false)}
+                className="text-base font-medium text-[#0A0A0A]">{l.label}</a>
             ))}
+            <a href="#cta" onClick={() => setOpen(false)}
+              className="px-5 py-3 rounded-full bg-[#0A0A0A] text-white text-sm font-semibold text-center">
+              Get Early Access
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   )
 }

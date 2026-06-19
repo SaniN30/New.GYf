@@ -1,79 +1,48 @@
 @import "tailwindcss";
 
-:root {
-  --color-bg:           #08080C;
-  --color-surface:      #0F0F18;
-  --color-surface-2:    #16162A;
-  --color-border:       rgba(255,255,255,0.08);
-  --color-text-primary: #F8F8FF;
-  --color-text-muted:   #9CA3AF;
-  --color-accent:       #A855F7;
-  --color-accent-pink:  #EC4899;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background-color: #08080C;
-  color: #F8F8FF;
-  font-family: var(--font-body), sans-serif;
+  background: #FFFFFF;
+  color: #0A0A0A;
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Gradient text — purple to pink */
 .gradient-text {
-  background: linear-gradient(135deg, #A855F7, #EC4899);
+  background: linear-gradient(135deg, #7C3AED, #EC4899);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.gradient-border-card {
-  border: 1px solid transparent;
-  background-clip: padding-box;
-  position: relative;
-}
-
-.gradient-border-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(168,85,247,0.4), rgba(236,72,153,0.4));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-.glow-purple {
-  box-shadow: 0 0 60px rgba(168,85,247,0.15), 0 0 120px rgba(168,85,247,0.07);
-}
-
+/* Shimmer animated gradient text */
 @keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
 }
-
 .shimmer-text {
-  background: linear-gradient(90deg, #A855F7, #EC4899, #A855F7, #EC4899);
+  background: linear-gradient(90deg, #7C3AED, #EC4899, #7C3AED);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer 4s linear infinite;
+  animation: shimmer 3s linear infinite;
 }
 
+/* Float animation for mockup */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
-
 .float-anim { animation: float 4s ease-in-out infinite; }
+
+/* Scanning line animation */
+@keyframes scan {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}

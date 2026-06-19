@@ -2,27 +2,27 @@
 import { motion } from 'framer-motion'
 
 const features = [
-  { icon: '👁️', title: 'Sees', body: 'Understands clothing visually — vibe, color harmony, silhouette. Not just tags.' },
-  { icon: '🧠', title: 'Learns', body: 'Builds a model of your personal taste from every interaction, not just onboarding.' },
-  { icon: '✦', title: 'Builds', body: 'Delivers complete outfits — top, bottom, footwear — coordinated as one look with a clear reason.' },
+  { icon: '👁️', title: 'Sees', body: 'Understands vibe, color harmony, silhouette — not just tags.' },
+  { icon: '🧠', title: 'Learns', body: 'Builds your personal taste model from every interaction.' },
+  { icon: '✦', title: 'Builds', body: 'Delivers full looks — top, bottom, footwear — with reasoning.' },
 ]
 
 export default function WhatWeDo() {
   return (
-    <section className="py-32 bg-[#08080C] border-t border-white/5">
-      <div className="max-w-5xl mx-auto px-6">
-        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.7}}
-          className="mb-16 text-center">
-          <div className="text-xs font-mono text-purple-400 uppercase tracking-widest mb-4">Core</div>
-          <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-white leading-tight">What GYF Does</h2>
+    <section className="py-24 bg-white border-t border-gray-100">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+          className="text-center mb-14">
+          <div className="text-xs font-mono font-semibold text-[#6B7280] uppercase tracking-widest mb-3">How It Works</div>
+          <h2 className="text-[clamp(2rem,4vw,3rem)] font-black text-[#0A0A0A] tracking-tight">Sees. Learns. Builds.</h2>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-5">
           {features.map((f, i) => (
-            <motion.div key={f.title} initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6,delay:i*0.12}}
-              className="gradient-border-card rounded-2xl bg-[#0F0F18] p-8 hover:bg-[#16162A] transition-colors duration-300 group">
+            <motion.div key={f.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="group rounded-3xl border border-gray-100 bg-[#F9FAFB] p-8 hover:border-gray-200 hover:bg-white hover:shadow-md transition-all duration-300 cursor-default">
               <div className="text-3xl mb-5">{f.icon}</div>
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">{f.title}</h3>
-              <p className="text-gray-400 leading-relaxed">{f.body}</p>
+              <h3 className="text-xl font-black text-[#0A0A0A] mb-3 tracking-tight">{f.title}</h3>
+              <p className="text-[#6B7280] leading-relaxed text-sm">{f.body}</p>
             </motion.div>
           ))}
         </div>

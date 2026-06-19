@@ -1,31 +1,30 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
-      colors: {
-        bg: "#0A0A0A",
-        surface: "#111111",
-        "surface-2": "#1A1A1A",
-        border: "#222222",
-        "text-primary": "#EFEFEF",
-        "text-muted": "#666666",
-        accent: "#BFBFBF",
-        "accent-warm": "#C8A96E",
-      },
       fontFamily: {
-        display: ["var(--font-display)", "system-ui", "sans-serif"],
-        body: ["var(--font-inter)", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "monospace"],
+        body: ['var(--font-body)', 'sans-serif'],
+        mono: ['var(--font-mono)', 'monospace'],
+      },
+      colors: {
+        ink: '#0A0A0A',
+        'ink-soft': '#3D3D3D',
+        'ink-muted': '#6B7280',
+        'ink-faint': '#9CA3AF',
+        'surface': '#F9FAFB',
+        'purple-brand': '#7C3AED',
+        'pink-brand': '#EC4899',
+      },
+      borderRadius: {
+        '4xl': '2rem',
       },
     },
   },
   plugins: [],
-};
-
-export default config;
+}
+export default config
