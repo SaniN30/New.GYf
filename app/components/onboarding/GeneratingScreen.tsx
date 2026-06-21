@@ -9,13 +9,14 @@ interface GeneratingScreenProps {
   onComplete: () => void;
 }
 
-type CopyPhase = "reading" | "matching" | "stitching" | "moment";
+type CopyPhase = "reading" | "matching" | "stitching" | "moment" | "error";
 
 const COPY: Record<CopyPhase, string> = {
-  reading:  "Reading your tone",
-  matching: "Matching silhouettes",
-  stitching:"Stitching the look",
-  moment:   "This one's taking a moment — nearly there",
+  reading:   "Reading your tone",
+  matching:  "Matching silhouettes",
+  stitching: "Stitching the look",
+  moment:    "This one's taking a moment — nearly there",
+  error:     "Something went wrong — tap to try again",
 };
 
 export function GeneratingScreen({ onComplete }: GeneratingScreenProps) {
@@ -65,14 +66,14 @@ export function GeneratingScreen({ onComplete }: GeneratingScreenProps) {
           initial="hidden"
           animate="visible"
         />
-        {/* Needle dot */}
+        {/* Needle dot — appears after path draws; instant on reduced-motion */}
         <motion.circle
           cx="80"
           cy="20"
           r="4"
           fill="var(--accent-primary)"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { delay: 0.6 } }}
+          animate={{ opacity: 1, transition: prefersReduced ? { duration: 0 } : { delay: 0.6 } }}
         />
       </motion.svg>
 

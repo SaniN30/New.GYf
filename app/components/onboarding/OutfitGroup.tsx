@@ -50,10 +50,10 @@ export function OutfitGroup({ group }: OutfitGroupProps) {
           ))}
       </div>
       <p
-        className="px-4 text-xs opacity-50"
+        className="px-4 text-xs opacity-40"
         style={{ fontFamily: "var(--font-body, 'General Sans', sans-serif)", color: "var(--ink)" }}
       >
-        Tap card to see next alternative
+        Tap to swap this piece
       </p>
     </div>
   );

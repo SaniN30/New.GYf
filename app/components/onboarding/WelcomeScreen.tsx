@@ -3,6 +3,7 @@
 import { useMotionValue, useTransform, motion, useReducedMotion } from "framer-motion";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import { PathChoiceCard } from "./PathChoiceCard";
+import { ambientPulse, ambientPulseReduced } from "@/lib/motion";
 import type { OnboardingPath } from "@/lib/onboarding-state";
 
 interface WelcomeScreenProps {
@@ -11,27 +12,31 @@ interface WelcomeScreenProps {
 
 // Mock look card data for the collage
 const COLLAGE_CARDS = [
-  { id: "c1", color: "#C4A882", label: "Linen Kurta",         rotate: -3, x: -30, y: 0,    z: 10 },
-  { id: "c2", color: "#6B8E7F", label: "Slim Chinos",         rotate:  4, x:  60, y: 20,   z: 20 },
-  { id: "c3", color: "#B87333", label: "Floral Midi",         rotate: -2, x:  10, y: 60,   z: 5  },
-  { id: "c4", color: "#4A6741", label: "Block-Print Shirt",   rotate:  3, x: -60, y: 40,   z: 15 },
-  { id: "c5", color: "#8B6F5E", label: "Straight Trousers",   rotate: -4, x:  40, y: -20,  z: 8  },
+  { id: "c1", color: "#C4A882", label: "Linen Kurta",         confidence: 87, rotate: -3, x: -30, y: 0,    z: 10 },
+  { id: "c2", color: "#6B8E7F", label: "Slim Chinos",         confidence: 91, rotate:  4, x:  60, y: 20,   z: 20 },
+  { id: "c3", color: "#B87333", label: "Floral Midi",         confidence: 76, rotate: -2, x:  10, y: 60,   z: 5  },
+  { id: "c4", color: "#4A6741", label: "Block-Print Shirt",   confidence: 83, rotate:  3, x: -60, y: 40,   z: 15 },
+  { id: "c5", color: "#8B6F5E", label: "Straight Trousers",   confidence: 79, rotate: -4, x:  40, y: -20,  z: 8  },
 ];
 
 function CollageLookCard({
   color,
   label,
+  confidence,
   rotate,
   x,
   y,
   z,
+  prefersReduced,
 }: {
   color: string;
   label: string;
+  confidence: number;
   rotate: number;
   x: number;
   y: number;
   z: number;
+  prefersReduced: boolean | null;
 }) {
   return (
     <div
@@ -71,6 +76,21 @@ function CollageLookCard({
           borderColor: `transparent var(--canvas) transparent transparent`,
         }}
       />
+      {/* Tier 3 Ambient — confidence badge pulses pre-reveal */}
+      <motion.span
+        variants={prefersReduced ? ambientPulseReduced : ambientPulse}
+        animate="idle"
+        className="absolute bottom-2 left-2 inline-flex items-center px-1.5 py-0.5 rounded-full"
+        style={{
+          background: "var(--accent-primary)",
+          fontFamily: "var(--font-mono, 'Fragment Mono', monospace)",
+          fontVariantNumeric: "tabular-nums",
+          fontSize: "0.65rem",
+          color: "#fff",
+        }}
+      >
+        {confidence}%
+      </motion.span>
     </div>
   );
 }
@@ -108,7 +128,7 @@ export function WelcomeScreen({ onSelectPath }: WelcomeScreenProps) {
           style={{ rotateX, rotateY, perspective: 600, transformStyle: "preserve-3d" }}
         >
           {COLLAGE_CARDS.map((card) => (
-            <CollageLookCard key={card.id} {...card} />
+            <CollageLookCard key={card.id} {...card} prefersReduced={prefersReduced} />
           ))}
         </motion.div>
         {/* Gradient scrim to blend into canvas */}

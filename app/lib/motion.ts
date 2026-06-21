@@ -70,3 +70,12 @@ export const stitchLineVariantsReduced: Variants = {
   hidden:  { pathLength: 1, opacity: 0 },
   visible: { pathLength: 1, opacity: 1, transition: { duration: 0 } },
 };
+
+/**
+ * Screen-level enter transition — Tier 2 ceiling for full-screen reveals.
+ * Slightly longer than element crossfades (220ms vs 180ms) but still Tier 2.
+ */
+export const screenEnterTransition = {
+  duration: 0.22,
+  ease: [0.2, 0, 0, 1],
+} as const;

@@ -8,7 +8,7 @@ import { ActionRow } from "./ActionRow";
 import { QuickEditSheet } from "./QuickEditSheet";
 import { GuestConvertSheet } from "./GuestConvertSheet";
 import { OUTFIT_GROUPS, OCCASION_OPTIONS } from "@/lib/mock-data";
-import { responsiveTransition } from "@/lib/motion";
+import { screenEnterTransition } from "@/lib/motion";
 import { track } from "@/lib/analytics";
 
 interface RevealScreenProps {
@@ -43,7 +43,7 @@ export function RevealScreen({ occasion, onOccasionChange, onRegenerate }: Revea
     <>
       <motion.div
         initial={{ opacity: 0, y: prefersReduced ? 0 : 24 }}
-        animate={{ opacity: 1, y: 0, transition: { ...responsiveTransition, duration: 0.4 } }}
+        animate={{ opacity: 1, y: 0, transition: screenEnterTransition }}
         className="flex flex-col min-h-[100dvh] w-full max-w-sm mx-auto pb-6 gap-6 overflow-y-auto"
         style={{ background: "var(--canvas)" }}
       >
