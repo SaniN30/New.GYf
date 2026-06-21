@@ -26,7 +26,7 @@ const config: Config = {
     },
     fontFamily: {
       display: ["var(--font-display)", "Fraunces", "Georgia", "serif"],
-      body:    ["General Sans", "system-ui", "sans-serif"],
+      body:    ["var(--font-body)", "Plus Jakarta Sans", "system-ui", "sans-serif"],
       mono:    ["var(--font-mono)", "Fragment Mono", "monospace"],
     },
     extend: {},

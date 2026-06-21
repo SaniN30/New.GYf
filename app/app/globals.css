@@ -1,42 +1,40 @@
-/* General Sans via Bunny Fonts CDN — not on Google Fonts */
-@import url("https://fonts.bunny.net/css?family=general-sans:400,500,600&display=swap");
-
 @import "tailwindcss";
 
 /* ─── Tailor's Bench Design Token System ────────────────────── */
-/* All values mirror tokens.ts — this file must stay in sync.   */
-/* Never hardcode a hex or duration here — reference a variable. */
 
 :root {
   /* Color tokens */
-  --canvas:              #E3E0D8;
-  --ink:                 #1B2233;
+  --canvas:              #F4F3F0;
+  --ink:                 #111318;
   --accent-primary:      #C2185B;
   --accent-warm:         #D98E04;
   --positive:            #5B7339;
-  --hairline:            #BCB2A0;
+  --hairline:            #D4CFC6;
 
   /* Interaction-state tokens */
   --accent-primary-press: #9E1149;
-  --accent-warm-glow:     rgba(217, 142, 4, 0.35);
-  --surface-elevated:     #EDEAE2;
-  --scrim:                rgba(27, 34, 51, 0.45);
-  --shimmer-base:         #D8D4CA;
-  --shimmer-sweep:        #F0EDE5;
+  --accent-warm-glow:     rgba(217, 142, 4, 0.25);
+  --surface-elevated:     #FAFAF8;
+  --surface-card:         rgba(255,255,255,0.72);
+  --scrim:                rgba(17, 19, 24, 0.48);
+  --shimmer-base:         #E8E4DD;
+  --shimmer-sweep:        #F6F4EF;
 
   /* Type scale */
-  --text-display-l: clamp(2.25rem, 6vw, 3.5rem);
-  --text-display-s: clamp(1.5rem, 4vw, 2rem);
+  --text-display-l: clamp(2.5rem, 6.5vw, 4rem);
+  --text-display-s: clamp(1.6rem, 4vw, 2.25rem);
   --text-body-l:    1.125rem;
   --text-body:      1rem;
-  --text-caption:   0.875rem;
-  --text-mono:      0.9375rem;
+  --text-caption:   0.8125rem;
+  --text-mono:      0.875rem;
 
   /* Motion tier durations */
-  --dur-settle:     120ms;
-  --dur-responsive: 180ms;
-  --dur-ambient:    2000ms;
-  --dur-signature:  750ms;
+  --dur-settle:     100ms;
+  --dur-responsive: 160ms;
+  --dur-ambient:    2400ms;
+  --dur-signature:  680ms;
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ─── Base ───────────────────────────────────────────────────── */
@@ -52,55 +50,192 @@ html {
 body {
   background-color: var(--canvas);
   color: var(--ink);
-  font-family: "General Sans", system-ui, sans-serif;
+  font-family: var(--font-body), "Plus Jakarta Sans", system-ui, sans-serif;
   font-size: var(--text-body);
-  line-height: 1.5;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern" 1, "liga" 1;
 }
 
-/* ─── Typography utilities ───────────────────────────────────── */
+/* ─── Typography ─────────────────────────────────────────────── */
 
 .text-display-l {
   font-family: var(--font-display), Georgia, serif;
   font-size: var(--text-display-l);
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  font-weight: 900;
 }
 
 .text-display-s {
   font-family: var(--font-display), Georgia, serif;
   font-size: var(--text-display-s);
-  letter-spacing: -0.01em;
-  line-height: 1.15;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .text-body-l {
   font-size: var(--text-body-l);
-  line-height: 1.5;
+  line-height: 1.65;
+  font-weight: 400;
+  color: #5a5a65;
 }
 
 .text-caption {
   font-size: var(--text-caption);
   line-height: 1.4;
+  letter-spacing: 0.01em;
 }
 
 .text-mono {
   font-family: var(--font-mono), monospace;
   font-size: var(--text-mono);
   font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 
-/* ─── Focus ring ─────────────────────────────────────────────── */
-/* Haldi Gold glow — never a hard 2px outline */
+/* ─── Focus ──────────────────────────────────────────────────── */
 
 :focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--accent-warm-glow), 0 0 0 1px var(--accent-warm);
+  box-shadow: 0 0 0 3px var(--accent-warm-glow), 0 0 0 1.5px var(--accent-warm);
+}
+
+/* ─── Shimmer gradient text ──────────────────────────────────── */
+
+@keyframes shimmer-text-move {
+  0%   { background-position: 0% center; }
+  100% { background-position: -200% center; }
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    110deg,
+    #111318 35%,
+    #8B7355 50%,
+    #C4956A 58%,
+    #111318 70%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-text-move 4s linear infinite;
+}
+
+/* ─── Gradient text utility ──────────────────────────────────── */
+
+.gradient-text {
+  background: linear-gradient(135deg, #111318 0%, #6B6B78 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Glass card ─────────────────────────────────────────────── */
+
+.glass-card {
+  background: var(--surface-card);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.55);
+  box-shadow: 0 4px 32px rgba(17,19,24,0.06), 0 1px 0 rgba(255,255,255,0.9) inset;
+}
+
+/* ─── Premium card border ────────────────────────────────────── */
+
+.gradient-border-card {
+  border-radius: 20px;
+  position: relative;
+}
+
+.gradient-border-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(200,195,185,0.3) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ─── Glow ───────────────────────────────────────────────────── */
+
+.glow-subtle {
+  box-shadow:
+    0 0 0 1px rgba(200,185,165,0.2),
+    0 8px 40px rgba(17,19,24,0.08),
+    0 2px 8px rgba(17,19,24,0.04);
+}
+
+/* ─── 3D button ──────────────────────────────────────────────── */
+
+.btn-3d {
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transform: translateY(0);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.12) inset,
+    0 4px 0 rgba(0,0,0,0.25),
+    0 6px 16px rgba(17,19,24,0.18);
+  transition: transform var(--dur-responsive) var(--ease-out-expo),
+              box-shadow var(--dur-responsive) var(--ease-out-expo);
+}
+
+.btn-3d:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.12) inset,
+    0 6px 0 rgba(0,0,0,0.25),
+    0 10px 24px rgba(17,19,24,0.22);
+}
+
+.btn-3d:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.12) inset,
+    0 1px 0 rgba(0,0,0,0.3),
+    0 2px 6px rgba(17,19,24,0.12);
+}
+
+/* ─── Bezel inset button ─────────────────────────────────────── */
+
+.bezel {
+  box-shadow:
+    0 0 0 1px rgba(200,185,165,0.35),
+    0 1px 2px rgba(17,19,24,0.05),
+    0 1px 0 rgba(255,255,255,0.7) inset;
+  transition: box-shadow var(--dur-responsive) ease,
+              background var(--dur-responsive) ease;
+}
+
+.bezel:hover {
+  box-shadow:
+    0 0 0 1.5px rgba(17,19,24,0.25),
+    0 4px 12px rgba(17,19,24,0.08),
+    0 1px 0 rgba(255,255,255,0.7) inset;
+}
+
+/* ─── Float animation ────────────────────────────────────────── */
+
+@keyframes float-anim {
+  0%, 100% { transform: translateY(0px);   }
+  50%       { transform: translateY(-8px);  }
+}
+
+.float-anim {
+  animation: float-anim 5s ease-in-out infinite;
 }
 
 /* ─── Skeleton shimmer ───────────────────────────────────────── */
-/* Warm, on-canvas shimmer — not generic grey */
 
 @keyframes shimmer-sweep {
   0%   { background-position: -200% center; }
@@ -118,16 +253,51 @@ body {
   animation: shimmer-sweep 1.6s ease-in-out infinite;
 }
 
-/* ─── Tape corner-fold ───────────────────────────────────────── */
-/* Signature GYF structural detail on LookCard */
+/* ─── Scan line animation (Perception Layer) ─────────────────── */
+
+@keyframes scan {
+  0%   { top: -4px; opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9) 40%, rgba(200,230,255,0.8) 60%, transparent);
+  box-shadow: 0 0 16px 4px rgba(180,220,255,0.5);
+  animation: scan 2.4s ease-in-out forwards;
+  z-index: 10;
+}
+
+/* ─── Early Access pill animation ────────────────────────────── */
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  70%  { transform: scale(2.2); opacity: 0;   }
+  100% { transform: scale(2.2); opacity: 0;   }
+}
+
+.pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+
+/* ─── Corner fold detail ─────────────────────────────────────── */
 
 .corner-fold::after {
   content: '';
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background: linear-gradient(
     135deg,
     transparent 50%,
@@ -135,9 +305,7 @@ body {
   );
 }
 
-/* ─── Ink surface (dark exception) ──────────────────────────── */
-/* Used ONLY on the guest→account conversion screen (UC7).       */
-/* Never use as a default background. */
+/* ─── Ink surface ────────────────────────────────────────────── */
 
 .surface-ink {
   background-color: var(--ink);
@@ -147,8 +315,9 @@ body {
 /* ─── Reduced motion ─────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  .skeleton {
-    animation: none;
-    background: var(--shimmer-base);
-  }
+  .skeleton       { animation: none; background: var(--shimmer-base); }
+  .scan-line      { animation: none; }
+  .float-anim     { animation: none; }
+  .shimmer-text   { animation: none; }
+  .pulse-ring::before { animation: none; }
 }
