@@ -246,10 +246,19 @@ export default function PerceptionLayer() {
         {/* Section header */}
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.1] bg-white/[0.04] text-white/45 text-[0.72rem] font-mono tracking-wide mb-6 backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#C4956A]" />
-            Perception Layer
+          {/* Layer index badge */}
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.1] bg-white/[0.04] text-white/45 text-[0.72rem] font-mono tracking-wide backdrop-blur-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C4956A]" />
+              Layer 01 of 06 — Perception
+            </div>
+            <div className="hidden sm:flex items-center gap-1">
+              {[1,2,3,4,5,6].map(n => (
+                <div key={n} className={`h-px w-5 rounded-full transition-all ${n === 1 ? 'bg-[#C4956A] w-8' : 'bg-white/15'}`} />
+              ))}
+            </div>
           </div>
+
           <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-white mb-4 leading-[1.02] tracking-tight">
             See Yourself{' '}
             <span className="bg-gradient-to-r from-[#C4956A] via-[#E8C49A] to-[#C4956A] bg-clip-text text-transparent"
@@ -260,6 +269,20 @@ export default function PerceptionLayer() {
           <p className="text-white/40 text-base max-w-lg mx-auto leading-[1.75] font-[350]">
             Upload a photo — GYF reads your proportions, palette, and presence, then builds a look designed for your exact body.
           </p>
+
+          {/* Beta callout */}
+          <div className="mt-8 inline-flex items-center gap-3 px-5 py-3 rounded-2xl border border-white/[0.07] bg-white/[0.03] backdrop-blur-sm">
+            <div className="flex items-center gap-2">
+              <motion.span
+                className="w-1.5 h-1.5 rounded-full bg-[#28C840]"
+                animate={{ opacity: [1, 0.4, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              <span className="text-[0.72rem] font-mono text-white/40 tracking-wide">Beta open to everyone</span>
+            </div>
+            <div className="w-px h-3.5 bg-white/10" />
+            <span className="text-[0.72rem] font-mono text-white/25 tracking-wide">5 more layers shipping through 2025</span>
+          </div>
         </motion.div>
 
         {/* macOS window */}
