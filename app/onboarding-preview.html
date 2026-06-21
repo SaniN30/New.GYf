@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GYF Onboarding — Screen Preview (Phases 1–3)</title>
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=general-sans:400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,300;1,9..144,400&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+/* ── Tailor's Bench Tokens ─────────────────────────────── */
+:root {
+  --canvas:              #E3E0D8;
+  --ink:                 #1B2233;
+  --accent-primary:      #C2185B;
+  --accent-warm:         #D98E04;
+  --positive:            #5B7339;
+  --hairline:            #BCB2A0;
+  --accent-primary-press:#9E1149;
+  --accent-warm-glow:    rgba(217,142,4,0.35);
+  --surface-elevated:    #EDEAE2;
+  --scrim:               rgba(27,34,51,0.45);
+  --shimmer-base:        #D8D4CA;
+  --shimmer-sweep:       #F0EDE5;
+  --ff-display: 'Fraunces', Georgia, serif;
+  --ff-body:    'General Sans', system-ui, sans-serif;
+  --ff-mono:    'Fragment Mono', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#2A2A2A;font-family:var(--ff-body);color:var(--ink);-webkit-font-smoothing:antialiased}
+h1{font-family:var(--ff-display);font-size:2rem;color:var(--canvas);text-align:center;padding:32px 16px 8px;font-weight:400}
+.subtitle{color:rgba(227,224,216,0.6);text-align:center;padding-bottom:32px;font-size:.9rem}
+/* Phone frame */
+.screens{display:flex;flex-wrap:wrap;gap:32px;padding:32px;justify-content:center}
+.frame{width:375px;border-radius:40px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.6);flex-shrink:0}
+.frame-label{color:rgba(227,224,216,0.5);font-size:.75rem;text-align:center;margin-bottom:8px;font-family:var(--ff-mono);letter-spacing:.05em;text-transform:uppercase}
+.screen{background:var(--canvas);min-height:750px;position:relative;display:flex;flex-direction:column}
+/* ── Skeleton ───────────────────────────────────────────── */
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+.skeleton{background:linear-gradient(90deg,var(--shimmer-base) 25%,var(--shimmer-sweep) 50%,var(--shimmer-base) 75%);background-size:200% 100%;animation:shimmer 1.6s ease-in-out infinite;border-radius:12px}
+/* ── Chip ───────────────────────────────────────────────── */
+.chip{display:inline-flex;align-items:center;padding:8px 16px;border-radius:99px;font-size:.85rem;font-family:var(--ff-body);border:1.5px solid var(--hairline);background:var(--surface-elevated);color:var(--ink);font-weight:500}
+.chip.active{background:var(--accent-primary);border-color:var(--accent-primary);color:#fff}
+/* ── Button ─────────────────────────────────────────────── */
+.btn{width:100%;padding:14px;border-radius:14px;border:none;font-family:var(--ff-body);font-size:.95rem;font-weight:600;cursor:pointer;letter-spacing:.01em}
+.btn-primary{background:var(--accent-primary);color:#fff}
+.btn-positive{background:var(--positive);color:#fff}
+/* ── ConfidenceBadge ────────────────────────────────────── */
+.badge{display:inline-flex;align-items:center;padding:4px 8px;border-radius:99px;background:var(--accent-primary);color:#fff;font-family:var(--ff-mono);font-size:.75rem;font-variant-numeric:tabular-nums;font-weight:400}
+/* ── LookCard ───────────────────────────────────────────── */
+.look-card{width:150px;height:200px;border-radius:16px;position:relative;flex-shrink:0;overflow:hidden}
+.look-card::after{content:'';position:absolute;bottom:0;right:0;width:0;height:0;border-style:solid;border-width:0 20px 20px 0;border-color:transparent var(--canvas) transparent transparent}
+.look-card-label{position:absolute;bottom:28px;left:10px;right:10px;font-size:.7rem;color:#fff;font-family:var(--ff-body);font-weight:500;text-shadow:0 1px 4px rgba(0,0,0,0.4)}
+/* ── TapeProgress ───────────────────────────────────────── */
+.tape-progress{display:flex;gap:4px;align-items:center}
+.tape-seg{height:3px;flex:1;border-radius:99px;background:var(--hairline)}
+.tape-seg.done{background:var(--accent-primary)}
+.tape-seg.current{background:var(--accent-primary);box-shadow:0 0 6px 1px var(--accent-warm-glow)}
+/* ── Collage ────────────────────────────────────────────── */
+.collage{position:relative;height:300px;overflow:hidden}
+.collage-card{position:absolute;width:120px;height:165px;border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.12)}
+.collage-card::after{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 18px 18px 0;border-color:transparent var(--canvas) transparent transparent}
+/* ── PathChoiceCard ─────────────────────────────────────── */
+.path-card{flex:1;padding:16px;border-radius:18px;background:var(--surface-elevated);border:1.5px solid var(--hairline);text-align:center;cursor:pointer}
+.path-card.selected{border-color:var(--accent-primary)}
+.path-card-icon{font-size:1.8rem;margin-bottom:8px}
+.path-card-title{font-size:.9rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+.path-card-desc{font-size:.75rem;color:var(--ink);opacity:.55;line-height:1.3}
+/* ── Sheet ──────────────────────────────────────────────── */
+.sheet-backdrop{background:var(--scrim);position:absolute;inset:0;display:flex;align-items:flex-end}
+.sheet{background:var(--canvas);border-radius:24px 24px 0 0;width:100%;padding:20px;max-height:85%}
+.sheet-handle{width:40px;height:4px;background:var(--hairline);border-radius:99px;margin:0 auto 16px}
+/* ── Ink surface (dark) ─────────────────────────────────── */
+.surface-ink{background:var(--ink);color:var(--canvas)}
+/* ── StitchLine SVG ─────────────────────────────────────── */
+@keyframes stitch{from{stroke-dashoffset:300}to{stroke-dashoffset:0}}
+.stitch-path{stroke-dasharray:300;animation:stitch 0.75s cubic-bezier(0.25,0.1,0,1) forwards}
+/* ── Misc ───────────────────────────────────────────────── */
+.mono{font-family:var(--ff-mono);font-variant-numeric:tabular-nums}
+.display-l{font-family:var(--ff-display);font-size:clamp(2rem,5vw,2.8rem);font-weight:300;letter-spacing:-.02em;line-height:1.1}
+.display-s{font-family:var(--ff-display);font-size:1.6rem;font-weight:300;letter-spacing:-.01em;line-height:1.15}
+.px-6{padding-left:24px;padding-right:24px}
+.action-row{display:flex;gap:10px;padding:16px 20px}
+.skin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.swatch-btn{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:none;cursor:pointer}
+.swatch{width:44px;height:44px;border-radius:99px;border:2px solid var(--hairline)}
+.swatch.active{border:3px solid var(--accent-primary);box-shadow:0 0 0 2px var(--canvas),0 0 0 4px var(--accent-primary)}
+.swatch-label{font-size:.65rem;font-family:var(--ff-body);color:var(--ink);opacity:.6}
+.range-wrap{position:relative;height:24px;display:flex;align-items:center;margin-top:8px}
+.range-track{position:absolute;inset-x:0;height:6px;border-radius:99px;background:var(--hairline);overflow:hidden}
+.range-fill{height:100%;border-radius:99px;background:linear-gradient(to right,var(--accent-warm),var(--accent-primary))}
+.otp-row{display:flex;gap:8px;justify-content:center}
+.otp-cell{width:44px;height:54px;border-radius:12px;background:rgba(227,224,216,.1);border:1.5px solid rgba(227,224,216,.25);display:flex;align-items:center;justify-content:center;font-family:var(--ff-mono);font-size:1.25rem;color:var(--canvas)}
+.otp-cell.filled{border-color:var(--canvas);border-width:2px}
+.preview-rail{display:flex;gap:12px;padding:12px;background:var(--surface-elevated);border-radius:14px;margin-top:8px}
+.rail-thumb{width:64px;height:80px;border-radius:10px;position:relative;overflow:hidden}
+.rail-label{position:absolute;inset:0;display:flex;align-items:flex-end;padding:4px;font-size:.55rem;color:#fff;font-family:var(--ff-body);text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.stylist-note{font-family:var(--ff-display);font-style:italic;font-size:1rem;line-height:1.5;color:var(--ink);opacity:.8;padding:20px 24px;border-left:2px solid var(--accent-warm)}
+.photo-zone{border:2px dashed var(--hairline);border-radius:20px;height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer}
+.swatch-circle{width:48px;height:48px;border-radius:99px;display:inline-block}
+.refine-slider{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.refine-label{display:flex;justify-content:space-between;font-size:.8rem;opacity:.7}
+.toast{position:absolute;bottom:100px;left:20px;right:20px;background:var(--ink);color:var(--canvas);border-radius:14px;padding:14px 18px;font-size:.85rem;display:flex;align-items:center;justify-content:space-between;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+</style>
+</head>
+<body>
+
+<h1>GYF Onboarding — Screen Preview</h1>
+<p class="subtitle">Phases 1–3 · All screens · Tailor's Bench design system</p>
+
+<div class="screens">
+
+<!-- ── SCREEN 1: Welcome ──────────────────────────────────── -->
+<div>
+  <p class="frame-label">Phase 1.1 — Welcome</p>
+  <div class="frame">
+  <div class="screen">
+    <!-- Collage -->
+    <div class="collage">
+      <div class="collage-card" style="background:#C4A882;top:60px;left:50%;margin-left:-90px;transform:rotate(-3deg);z-index:10">
+        <div class="look-card-label" style="color:var(--ink)">Linen Kurta</div>
+      </div>
+      <div class="collage-card" style="background:#6B8E7F;top:80px;left:55%;transform:rotate(4deg);z-index:20">
+        <div class="look-card-label" style="color:#fff">Slim Chinos</div>
+      </div>
+      <div class="collage-card" style="background:#B87333;top:110px;left:30%;transform:rotate(-2deg);z-index:5">
+        <div class="look-card-label" style="color:#fff">Floral Midi</div>
+      </div>
+      <div class="collage-card" style="background:#4A6741;top:50px;left:15%;transform:rotate(3deg);z-index:15">
+        <div class="look-card-label" style="color:#fff">Block Print</div>
+      </div>
+      <div class="collage-card" style="background:#8B6F5E;top:90px;left:65%;transform:rotate(-4deg);z-index:8">
+        <div class="look-card-label" style="color:#fff">Trousers</div>
+      </div>
+      <!-- Gradient fade -->
+      <div style="position:absolute;bottom:0;inset-x:0;height:100px;background:linear-gradient(to bottom,transparent,var(--canvas));pointer-events:none"></div>
+    </div>
+    <!-- Text + CTAs -->
+    <div style="padding:0 24px 32px;display:flex;flex-direction:column;gap:20px;flex:1;justify-content:flex-end">
+      <div>
+        <h2 class="display-l" style="color:var(--ink)">Outfits that<br>know you.</h2>
+        <p style="margin-top:10px;font-size:.95rem;color:var(--ink);opacity:.65;line-height:1.5">Your first look is ready before you even start.</p>
+      </div>
+      <div style="display:flex;gap:12px">
+        <div class="path-card">
+          <div class="path-card-icon">📸</div>
+          <div class="path-card-title">Use a photo</div>
+          <div class="path-card-desc">We'll read your tones automatically</div>
+        </div>
+        <div class="path-card selected">
+          <div class="path-card-icon">✏️</div>
+          <div class="path-card-title">Tell us directly</div>
+          <div class="path-card-desc">Pick your attributes in 5 steps</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ── SCREEN 2: Manual Sheet — Step 1: Skin Tone ─────────── -->
+<div>
+  <p class="frame-label">Phase 1.2 — Step 1 · Skin Tone</p>
+  <div class="frame">
+  <div class="screen">
+    <div style="background:var(--canvas);flex:1;opacity:.3;min-height:200px"></div>
+    <div class="sheet-backdrop">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="tape-progress" style="margin-bottom:12px">
+        <div class="tape-seg current"></div>
+        <div class="tape-seg"></div>
+        <div class="tape-seg"></div>
+        <div class="tape-seg"></div>
+        <div class="tape-seg"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <span class="mono" style="font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;opacity:.45">Step 1 of 5</span>
+        <span style="font-size:.9rem;font-weight:600">Skin Tone</span>
+      </div>
+      <p style="font-size:.85rem;opacity:.55;margin-bottom:16px">Choose your skin tone</p>
+      <div class="skin-grid">
+        <button class="swatch-btn"><span class="swatch" style="background:#FAE7D8"></span><span class="swatch-label">Fair</span></button>
+        <button class="swatch-btn"><span class="swatch" style="background:#F5D4B8"></span><span class="swatch-label">Light</span></button>
+        <button class="swatch-btn"><span class="swatch active" style="background:#E0B899"></span><span class="swatch-label">Medium</span></button>
+        <button class="swatch-btn"><span class="swatch" style="background:#C89B75"></span><span class="swatch-label">Olive</span></button>
+        <button class="swatch-btn"><span class="swatch" style="background:#B07D52"></span><span class="swatch-label">Tan</span></button>
+        <button class="swatch-btn"><span class="swatch" style="background:#8B5A2B"></span><span class="swatch-label">Brown</span></button>
+        <button class="swatch-btn"><span class="swatch" style="background:#6B3A1F"></span><span class="swatch-label">Deep</span></button>
+        <button class="swatch-btn"><span class="swatch" style="background:#3D1C02"></span><span class="swatch-label">Dark</span></button>
+      </div>
+      <div style="margin-top:24px">
+        <button class="btn btn-primary">Next</button>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ── SCREEN 3: Manual Sheet — Step 3: Style + Live Preview ── -->
+<div>
+  <p class="frame-label">Phase 1.2 — Step 3 · Style + UC9 Live Preview</p>
+  <div class="frame">
+  <div class="screen">
+    <div style="background:var(--canvas);flex:1;opacity:.3;min-height:150px"></div>
+    <div class="sheet-backdrop">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="tape-progress" style="margin-bottom:12px">
+        <div class="tape-seg done"></div>
+        <div class="tape-seg done"></div>
+        <div class="tape-seg current"></div>
+        <div class="tape-seg"></div>
+        <div class="tape-seg"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <span class="mono" style="font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;opacity:.45">Step 3 of 5</span>
+        <span style="font-size:.9rem;font-weight:600">Style</span>
+      </div>
+      <p style="font-size:.85rem;opacity:.55;margin-bottom:12px">Pick styles you love</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span class="chip active">Casual</span>
+        <span class="chip">Minimal</span>
+        <span class="chip active">Bohemian</span>
+        <span class="chip">Classic</span>
+        <span class="chip">Festive</span>
+        <span class="chip">Streetwear</span>
+        <span class="chip">Preppy</span>
+        <span class="chip">Edgy</span>
+      </div>
+      <!-- Live Preview Rail (UC9) -->
+      <div class="preview-rail">
+        <div class="rail-thumb" style="background:#C4A882">
+          <div class="rail-label">Linen Kurta</div>
+        </div>
+        <div class="rail-thumb" style="background:#B87333">
+          <div class="rail-label">Floral Midi</div>
+        </div>
+        <div style="flex:1;display:flex;align-items:center">
+          <p style="font-size:.7rem;color:var(--ink);opacity:.5;font-family:var(--ff-body)">Updating your look</p>
+        </div>
+      </div>
+      <div style="margin-top:16px;display:flex;gap:10px">
+        <button style="background:none;border:none;cursor:pointer;font-family:var(--ff-body);font-size:.85rem;opacity:.5;padding:12px 0">Back</button>
+        <button class="btn btn-primary" style="flex:1">Next</button>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ── SCREEN 4: Manual Sheet — Step 4: Budget ───────────── -->
+<div>
+  <p class="frame-label">Phase 1.2 — Step 4 · Budget Slider</p>
+  <div class="frame">
+  <div class="screen">
+    <div style="background:var(--canvas);flex:1;opacity:.3;min-height:250px"></div>
+    <div class="sheet-backdrop">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="tape-progress" style="margin-bottom:12px">
+        <div class="tape-seg done"></div>
+        <div class="tape-seg done"></div>
+        <div class="tape-seg done"></div>
+        <div class="tape-seg current"></div>
+        <div class="tape-seg"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <span class="mono" style="font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;opacity:.45">Step 4 of 5</span>
+        <span style="font-size:.9rem;font-weight:600">Budget</span>
+      </div>
+      <p style="font-size:.85rem;opacity:.55;margin-bottom:20px">Set your outfit budget</p>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:10px">
+        <span style="font-size:.75rem;opacity:.4">₹500</span>
+        <span class="mono" style="font-size:1.5rem;color:var(--accent-primary)">₹8,000</span>
+        <span style="font-size:.75rem;opacity:.4">₹20,000</span>
+      </div>
+      <div class="range-wrap">
+        <div class="range-track">
+          <div class="range-fill" style="width:37%"></div>
+        </div>
+      </div>
+      <p style="font-size:.7rem;opacity:.4;text-align:center;margin-top:10px">Drag to set maximum spend per outfit</p>
+      <div style="margin-top:24px;display:flex;gap:10px">
+        <button style="background:none;border:none;cursor:pointer;font-family:var(--ff-body);font-size:.85rem;opacity:.5;padding:12px 0">Back</button>
+        <button class="btn btn-primary" style="flex:1">Next</button>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ── SCREEN 5: Generating ───────────────────────────────── -->
+<div>
+  <p class="frame-label">Phase 1.3 — Generating + Stitch Line</p>
+  <div class="frame">
+  <div class="screen" style="align-items:center;justify-content:center;gap:28px;padding:40px">
+    <!-- Stitch Line SVG (Tier 1 Signature) -->
+    <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+      <path class="stitch-path"
+        d="M20 60 C20 30, 50 10, 60 40 C70 70, 100 50, 100 60 C100 80, 80 100, 60 90 C40 80, 30 100, 20 80 C10 60, 30 40, 50 50 C70 60, 90 30, 80 20"
+        stroke="var(--accent-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="80" cy="20" r="4" fill="var(--accent-primary)"/>
+    </svg>
+    <p style="font-size:1rem;font-weight:500;color:var(--ink);text-align:center">Stitching the look</p>
+    <p class="mono" style="font-size:.75rem;color:var(--ink);opacity:.4;text-align:center">Matching silhouettes and tones</p>
+  </div>
+  </div>
+</div>
+
+<!-- ── SCREEN 6: Generating — Degraded (4s) ──────────────── -->
+<div>
+  <p class="frame-label">Phase 1.3 — Generating · Degraded (&gt;4s)</p>
+  <div class="frame">
+  <div class="screen" style="align-items:center;justify-content:center;gap:28px;padding:40px">
+    <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+      <path d="M20 60 C20 30, 50 10, 60 40 C70 70, 100 50, 100 60 C100 80, 80 100, 60 90 C40 80, 30 100, 20 80 C10 60, 30 40, 50 50 C70 60, 90 30, 80 20"
+        stroke="var(--accent-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 5"/>
+      <circle cx="80" cy="20" r="4" fill="var(--accent-primary)"/>
+    </svg>
+    <p style="font-size:1rem;font-weight:500;color:var(--ink);text-align:center">This one's taking a moment<br>— nearly there</p>
+    <div style="width:100%">
+      <p style="font-size:.75rem;color:var(--ink);opacity:.4;text-align:center;margin-bottom:10px" class="mono">Still personalising for you</p>
+      <p style="font-size:.8rem;font-weight:600;color:var(--ink);opacity:.6;text-align:center;margin-bottom:12px">Popular for this occasion</p>
+      <div style="display:flex;gap:12px;justify-content:center">
+        <div class="skeleton" style="width:100px;height:140px"></div>
+        <div class="skeleton" style="width:100px;height:140px"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ── SCREEN 7: Reveal ───────────────────────────────────── -->
+<div>
+  <p class="frame-label">Phase 1.4 — Cold-Start Reveal</p>
+  <div class="frame">
+  <div class="screen" style="overflow-y:auto;padding-bottom:80px">
+    <div style="padding:24px 24px 0">
+      <h2 class="display-s" style="color:var(--ink)">Your looks</h2>
+      <div style="margin-top:8px">
+        <span class="chip" style="font-size:.75rem;padding:6px 12px">Casual ✏️</span>
+      </div>
+    </div>
+    <!-- Stylist note -->
+    <div style="padding:16px 24px">
+      <div class="stylist-note">
+        Warm tones and a relaxed silhouette — this trio works because it doesn't try too hard.
+      </div>
+    </div>
+    <!-- Outfit Group 1 -->
+    <div style="padding:0 16px 20px">
+      <p style="font-size:.8rem;opacity:.5;margin-bottom:12px">Outfit 1</p>
+      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:4px">
+        <div class="look-card" style="background:#C4A882">
+          <div class="look-card-label">Linen Kurta</div>
+          <div class="badge" style="position:absolute;bottom:28px;left:8px">87%</div>
+        </div>
+        <div class="look-card" style="background:#8B6F5E">
+          <div class="look-card-label">Trousers</div>
+          <div class="badge" style="position:absolute;bottom:28px;left:8px">83%</div>
+        </div>
+        <div class="look-card" style="background:#D4B896">
+          <div class="look-card-label">Overshirt</div>
+          <div class="badge" style="position:absolute;bottom:28px;left:8px">79%</div>
+        </div>
+      </div>
+    </div>
+    <!-- Outfit Group 2 -->
+    <div style="padding:0 16px 20px">
+      <p style="font-size:.8rem;opacity:.5;margin-bottom:12px">Outfit 2</p>
+      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:4px">
+        <div class="look-card" style="background:#6B8E7F">
+          <div class="look-card-label">Slim Chinos</div>
+          <div class="badge" style="position:absolute;bottom:28px;left:8px">91%</div>
+        </div>
+        <div class="look-card" style="background:#4A6741">
+          <div class="look-card-label">Block Print</div>
+          <div class="badge" style="position:absolute;bottom:28px;left:8px">88%</div>
+        </div>
+        <div class="look-card" style="background:#7EA89B">
+          <div class="look-card-label">Sneakers</div>
+          <div class="badge" style="position:absolute;bottom:28px;left:8px">94%</div>
+        </div>
+      </div>
+    </div>
+    <!-- Action Row -->
+    <div class="action-row" style="position:sticky;bottom:0;background:linear-gradient(to top,var(--canvas),var(--canvas) 80%,transparent)">
+      <button class="btn" style="flex:1;background:var(--surface-elevated);border:1.5px solid var(--hairline);color:var(--ink);font-size:.8rem">Not for me</button>
+      <button class="btn btn-positive" style="flex:1;font-size:.8rem">Save</button>
+      <button class="btn btn-primary" style="flex:1;font-size:.8rem">Add to cart</button>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ── SCREEN 8: Action — Dismiss Toast ──────────────────── -->
+<div>
+  <p class="frame-label">Phase 1.5 — Action Row + Undo Toast</p>
+  <div class="frame">
+  <div class="screen" style="padding:24px">
+    <h2 class="display-s" style="color:var(--ink);margin-bottom:16px">Your looks</h2>
+    <!-- Dismissed reasons -->
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">
+      <span class="chip">Not my style</span>
+      <span class="chip active">Too expensive</span>
+      <span class="chip">Wrong occasion</span>
+    </div>
+    <!-- Toast -->
+    <div class="toast">
+      <span>Look dismissed</span>
+      <button style="background:none;border:none;color:var(--accent-warm);font-family:var(--ff-body);cursor:pointer;font-weight:600;font-size:.85rem">Undo</button>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ── SCREEN 9: Photo Path — Upload ─────────────────────── -->
+<div>
+  <p class="frame-label">Phase 2 — Photo Path · Upload</p>
+  <div class="frame">
+  <div class="screen" style="padding:24px;gap:20px">
+    <div style="padding-top:40px">
+      <h2 class="display-s" style="color:var(--ink)">Upload your photo</h2>
+      <p style="margin-top:8px;font-size:.9rem;opacity:.55">We'll read your tones and suggest the perfect palette</p>
+    </div>
+    <div class="photo-zone">
+      <span style="font-size:2.5rem">📷</span>
+      <p style="font-size:.9rem;color:var(--ink);opacity:.6">Tap to upload or take a photo</p>
+      <p style="font-size:.75rem;color:var(--ink);opacity:.4">JPG, PNG · Max 10MB</p>
+    </div>
+    <button class="btn" style="background:var(--surface-elevated);border:1.5px solid var(--hairline);color:var(--ink)">Tell us directly instead →</button>
+  </div>
+  </div>
+</div>
+
+<!-- ── SCREEN 10: Photo Path — Reading + Color Extraction ── -->
+<div>
+  <p class="frame-label">Phase 2 — Photo Path · Color Extraction</p>
+  <div class="frame">
+  <div class="screen" style="padding:24px;gap:20px">
+    <div style="width:100%;height:220px;border-radius:20px;background:linear-gradient(135deg,#C4A882,#8B6F5E);position:relative;overflow:hidden">
+      <!-- Mock photo with scan line -->
+      <div style="position:absolute;inset:0;background:rgba(27,34,51,.15)"></div>
+      <p style="position:absolute;bottom:16px;left:16px;color:#fff;font-size:.8rem;font-family:var(--ff-body)">Reading your photo…</p>
+    </div>
+    <!-- Extracted swatches -->
+    <div>
+      <p style="font-size:.8rem;font-weight:600;opacity:.6;margin-bottom:12px">Your tones</p>
+      <div style="display:flex;gap:12px">
+        <span class="swatch-circle" style="background:#C4A882"></span>
+        <span class="swatch-circle" style="background:#8B6F5E"></span>
+        <span class="swatch-circle" style="background:#D4B896"></span>
+        <span class="swatch-circle" style="background:#6B4F37"></span>
+      </div>
+    </div>
+    <!-- Deduced chips -->
+    <div>
+      <p style="font-size:.8rem;font-weight:600;opacity:.6;margin-bottom:12px">Deduced attributes</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span class="chip active">Medium skin tone</span>
+        <span class="chip active">Athletic build</span>
+        <span class="chip" style="border-style:dashed;opacity:.6">+ edit</span>
+      </div>
+    </div>
+    <button class="btn btn-primary">Use these →</button>
+  </div>
+  </div>
+</div>
+
+<!-- ── SCREEN 11: Refine Sheet (UC10/UC11) ───────────────── -->
+<div>
+  <p class="frame-label">Phase 3 — Refine Sheet (UC11 Drag-to-Reweight)</p>
+  <div class="frame">
+  <div class="screen">
+    <div style="padding:24px">
+      <h2 class="display-s" style="color:var(--ink);margin-bottom:4px">Your looks</h2>
+      <div style="display:flex;gap:10px;margin-top:10px">
+        <div class="look-card" style="background:#C4A882;width:110px;height:148px"><div class="look-card-label">Linen Kurta</div><div class="badge" style="position:absolute;bottom:20px;left:8px">87%</div></div>
+        <div class="look-card" style="background:#6B8E7F;width:110px;height:148px"><div class="look-card-label">Slim Chinos</div><div class="badge" style="position:absolute;bottom:20px;left:8px">91%</div></div>
+        <div class="look-card" style="background:#B87333;width:110px;height:148px"><div class="look-card-label">Floral Midi</div><div class="badge" style="position:absolute;bottom:20px;left:8px">76%</div></div>
+      </div>
+    </div>
+    <!-- Refine Sheet -->
+    <div class="sheet-backdrop" style="position:absolute;inset:0">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <h3 style="font-size:1rem;font-weight:600;margin-bottom:20px">Refine your preferences</h3>
+      <!-- Sliders -->
+      <div class="refine-slider">
+        <div class="refine-label"><span>Budget</span><span class="mono">₹8,000</span></div>
+        <div class="range-wrap"><div class="range-track"><div class="range-fill" style="width:37%"></div></div></div>
+      </div>
+      <div class="refine-slider">
+        <div class="refine-label"><span>Style Match</span><span class="mono">72%</span></div>
+        <div class="range-wrap"><div class="range-track"><div class="range-fill" style="width:72%"></div></div></div>
+      </div>
+      <div class="refine-slider">
+        <div class="refine-label"><span>Occasion Fit</span><span class="mono">85%</span></div>
+        <div class="range-wrap"><div class="range-track"><div class="range-fill" style="width:85%"></div></div></div>
+      </div>
+      <button class="btn btn-primary" style="margin-top:8px">Apply</button>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ── SCREEN 12: Guest Convert — Phone ──────────────────── -->
+<div>
+  <p class="frame-label">Phase 3 — Guest Convert · Phone Entry (Dark surface)</p>
+  <div class="frame">
+  <div class="screen surface-ink">
+    <div style="flex:1;min-height:200px"></div>
+    <div style="background:var(--ink);border-radius:24px 24px 0 0;padding:28px 24px 40px">
+      <div class="sheet-handle" style="background:rgba(227,224,216,.2)"></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+        <h2 class="display-s" style="color:var(--canvas)">Save your look</h2>
+        <button style="background:none;border:none;color:var(--canvas);opacity:.4;cursor:pointer;font-size:1.1rem">✕</button>
+      </div>
+      <p style="font-size:.85rem;color:var(--canvas);opacity:.55;margin-bottom:24px;line-height:1.5">Create an account to save this outfit and come back to it anytime.</p>
+      <!-- Phone input -->
+      <div style="display:flex;border-radius:14px;overflow:hidden;border:1.5px solid rgba(227,224,216,.2);background:rgba(227,224,216,.07);margin-bottom:14px">
+        <div style="display:flex;align-items:center;gap:6px;padding:14px 12px;border-right:1px solid rgba(227,224,216,.15)">
+          <span>🇮🇳</span>
+          <span class="mono" style="font-size:.9rem;color:var(--canvas)">+91</span>
+        </div>
+        <div style="flex:1;padding:14px 12px;color:rgba(227,224,216,.35);font-family:var(--ff-mono);font-size:.9rem">98765 43210</div>
+      </div>
+      <button class="btn" style="background:var(--canvas);color:var(--ink);font-size:.9rem">Send OTP</button>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ── SCREEN 13: Guest Convert — OTP ────────────────────── -->
+<div>
+  <p class="frame-label">Phase 3 — Guest Convert · OTP Entry</p>
+  <div class="frame">
+  <div class="screen surface-ink">
+    <div style="flex:1;min-height:200px"></div>
+    <div style="background:var(--ink);border-radius:24px 24px 0 0;padding:28px 24px 40px">
+      <div class="sheet-handle" style="background:rgba(227,224,216,.2)"></div>
+      <h2 class="display-s" style="color:var(--canvas);margin-bottom:8px">Save your look</h2>
+      <p style="font-size:.8rem;color:var(--canvas);opacity:.5;margin-bottom:24px">Enter the 6-digit code sent to +91 98765 43210</p>
+      <!-- OTP cells -->
+      <div class="otp-row" style="margin-bottom:20px">
+        <div class="otp-cell filled">4</div>
+        <div class="otp-cell filled">2</div>
+        <div class="otp-cell filled">7</div>
+        <div class="otp-cell">—</div>
+        <div class="otp-cell">—</div>
+        <div class="otp-cell">—</div>
+      </div>
+      <!-- Countdown -->
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="mono" style="font-size:.8rem;color:var(--canvas);opacity:.4">Resend code in 0:22</span>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ── SCREEN 14: Quick Edit Sheet ───────────────────────── -->
+<div>
+  <p class="frame-label">Phase 3 — Quick Edit Sheet (UC5)</p>
+  <div class="frame">
+  <div class="screen">
+    <div style="padding:24px;opacity:.4">
+      <h2 class="display-s" style="color:var(--ink)">Your looks</h2>
+    </div>
+    <div class="sheet-backdrop" style="position:absolute;inset:0">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <h3 style="font-size:1rem;font-weight:600;margin-bottom:16px">Change occasion</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">
+        <span class="chip active">Casual</span>
+        <span class="chip">Formal</span>
+        <span class="chip">Wedding</span>
+        <span class="chip">Festive</span>
+        <span class="chip">Sport</span>
+        <span class="chip">Work</span>
+      </div>
+      <p style="font-size:.75rem;opacity:.4;margin-bottom:16px">You can change this anytime</p>
+      <button class="btn btn-primary">Update my look</button>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+</div><!-- /screens -->
+
+<!-- ── Design Token Reference ───────────────────────────── -->
+<div style="padding:32px;max-width:900px;margin:0 auto">
+  <h2 style="color:var(--canvas);font-family:var(--ff-display);font-size:1.5rem;font-weight:300;margin-bottom:24px">Tailor's Bench Token Reference</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:12px">
+    <div style="background:var(--canvas);width:80px;height:80px;border-radius:14px;display:flex;align-items:flex-end;padding:8px"><span style="font-size:.6rem;font-family:var(--ff-mono);color:var(--ink)">canvas</span></div>
+    <div style="background:var(--ink);width:80px;height:80px;border-radius:14px;display:flex;align-items:flex-end;padding:8px"><span style="font-size:.6rem;font-family:var(--ff-mono);color:var(--canvas)">ink</span></div>
+    <div style="background:var(--accent-primary);width:80px;height:80px;border-radius:14px;display:flex;align-items:flex-end;padding:8px"><span style="font-size:.6rem;font-family:var(--ff-mono);color:#fff">accent-primary</span></div>
+    <div style="background:var(--accent-warm);width:80px;height:80px;border-radius:14px;display:flex;align-items:flex-end;padding:8px"><span style="font-size:.6rem;font-family:var(--ff-mono);color:#fff">accent-warm</span></div>
+    <div style="background:var(--positive);width:80px;height:80px;border-radius:14px;display:flex;align-items:flex-end;padding:8px"><span style="font-size:.6rem;font-family:var(--ff-mono);color:#fff">positive</span></div>
+    <div style="background:var(--hairline);width:80px;height:80px;border-radius:14px;display:flex;align-items:flex-end;padding:8px"><span style="font-size:.6rem;font-family:var(--ff-mono);color:var(--ink)">hairline</span></div>
+    <div style="background:var(--surface-elevated);width:80px;height:80px;border-radius:14px;display:flex;align-items:flex-end;padding:8px"><span style="font-size:.6rem;font-family:var(--ff-mono);color:var(--ink)">surface-elevated</span></div>
+    <div style="background:var(--shimmer-base);width:80px;height:80px;border-radius:14px;display:flex;align-items:flex-end;padding:8px"><span style="font-size:.6rem;font-family:var(--ff-mono);color:var(--ink)">shimmer-base</span></div>
+  </div>
+</div>
+
+</body>
+</html>
