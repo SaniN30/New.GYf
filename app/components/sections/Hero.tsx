@@ -125,11 +125,29 @@ export default function Hero() {
                 key={wi}
                 initial="hidden"
                 animate="visible"
+                whileHover={{ y: -6, transition: { type: 'spring', stiffness: 500, damping: 20 } }}
                 variants={{
                   hidden: {},
                   visible: { transition: { staggerChildren: 0.035, delayChildren: wi * 0.12 } },
                 }}
+                className={wi === 1 ? 'relative inline-block cursor-default select-none' : 'cursor-default select-none'}
               >
+                {/* "Style." gets a golden shimmer sweep after reveal */}
+                {wi === 1 && (
+                  <motion.span
+                    className="absolute inset-0 pointer-events-none"
+                    initial={{ backgroundPosition: '-200% center', opacity: 0 }}
+                    animate={{ backgroundPosition: ['-200% center', '200% center'], opacity: [0, 1, 0] }}
+                    transition={{ delay: 0.9, duration: 1.6, ease: 'easeInOut', repeat: Infinity, repeatDelay: 3.5 }}
+                    style={{
+                      background: 'linear-gradient(110deg, transparent 30%, rgba(196,149,106,0.55) 50%, transparent 70%)',
+                      backgroundSize: '250% auto',
+                      WebkitBackgroundClip: 'text',
+                      backgroundClip: 'text',
+                      mixBlendMode: 'overlay',
+                    }}
+                  />
+                )}
                 {word.split('').map((char, ci) => (
                   <motion.span
                     key={ci}

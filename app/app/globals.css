@@ -20,6 +20,9 @@
   --shimmer-base:         #E8E4DD;
   --shimmer-sweep:        #F6F4EF;
 
+  /* Redirect display font → body font so every component gets Plus Jakarta Sans */
+  --font-display: var(--font-body);
+
   /* Type scale */
   --text-display-l: clamp(2.5rem, 6.5vw, 4rem);
   --text-display-s: clamp(1.6rem, 4vw, 2.25rem);

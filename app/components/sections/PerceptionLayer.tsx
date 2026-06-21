@@ -1,6 +1,6 @@
 'use client'
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useSpring, useAnimate, stagger } from 'framer-motion'
 
 // ─── Data ──────────────────────────────────────────────────────
 
@@ -160,6 +160,8 @@ export default function PerceptionLayer() {
   const [isDragging, setIsDragging] = useState(false)
   const [scanPct, setScanPct]       = useState(0)
   const [stageIdx, setStageIdx]     = useState(0)
+  const [burstVisible, setBurstVisible] = useState(false)
+  const [sparkles, setSparkles]     = useState<{ id: number; x: number; y: number }[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
 
   const currentStage = SCAN_STAGES[Math.min(stageIdx, SCAN_STAGES.length - 1)]
@@ -177,7 +179,16 @@ export default function PerceptionLayer() {
       if (elapsed >= total) {
         clearInterval(tick)
         setScanPct(100); setStageIdx(SCAN_STAGES.length - 1)
-        setTimeout(() => setState('done'), 200)
+        // burst flash then reveal results
+        setBurstVisible(true)
+        setTimeout(() => { setBurstVisible(false); setState('done') }, 420)
+        // scatter sparkle particles
+        setSparkles(Array.from({ length: 12 }, (_, i) => ({
+          id: i,
+          x: 20 + Math.random() * 60,
+          y: 20 + Math.random() * 60,
+        })))
+        setTimeout(() => setSparkles([]), 1200)
       }
     }, 40)
   }, [])
@@ -193,7 +204,7 @@ export default function PerceptionLayer() {
     if (f?.type.startsWith('image/')) handleFile(f)
   }
 
-  const reset = () => { setState('idle'); setPreview(null); setTab('outfit'); setScanPct(0) }
+  const reset = () => { setState('idle'); setPreview(null); setTab('outfit'); setScanPct(0); setSparkles([]) }
 
   const bodyTypeText = useTypewriter(SAMPLE_RESULT.bodyType,      state === 'done', 100)
   const skinToneText = useTypewriter(SAMPLE_RESULT.skinTone,      state === 'done', 500)
@@ -254,7 +265,20 @@ export default function PerceptionLayer() {
           style={{ x: sx, y: sy }}
           className="mx-auto max-w-5xl"
         >
-          <div className="rounded-2xl overflow-hidden shadow-[0_48px_120px_rgba(0,0,0,0.65),0_0_0_1px_rgba(255,255,255,0.06)]"
+          <motion.div
+            className="rounded-2xl overflow-hidden"
+            animate={{
+              boxShadow: state === 'scanning'
+                ? [
+                    '0 48px 120px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.06)',
+                    '0 48px 140px rgba(196,149,106,0.18), 0 0 0 1px rgba(196,149,106,0.18)',
+                    '0 48px 120px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.06)',
+                  ]
+                : state === 'done'
+                ? '0 56px 140px rgba(0,0,0,0.7), 0 0 0 1px rgba(196,149,106,0.22)'
+                : '0 48px 120px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.06)',
+            }}
+            transition={{ duration: 1.8, repeat: state === 'scanning' ? Infinity : 0, ease: 'easeInOut' }}
             style={{ background: 'rgba(246,245,242,0.98)' }}>
 
             <MacWindowChrome title="GYF Perception Layer — Analysis" onClose={reset} />
@@ -348,15 +372,25 @@ export default function PerceptionLayer() {
                       }
                       <div className="absolute inset-0 bg-[#111318]/52 backdrop-blur-[2px]" />
 
-                      {/* Animated scan beam */}
+                      {/* Animated scan beam with glow orb */}
                       <motion.div
-                        className="absolute left-0 right-0 h-[2px] pointer-events-none z-10"
-                        style={{ background: 'linear-gradient(90deg, transparent, rgba(196,149,106,0.9) 40%, rgba(255,210,160,1) 50%, rgba(196,149,106,0.9) 60%, transparent)' }}
+                        className="absolute left-0 right-0 pointer-events-none z-10"
                         animate={{ top: ['0%', '100%'] }}
                         transition={{ duration: 2.8, ease: 'linear' }}
                       >
-                        <div className="absolute inset-x-0 -bottom-8 h-16 blur-3xl opacity-35"
-                          style={{ background: 'linear-gradient(to bottom, rgba(196,149,106,0.5), transparent)' }} />
+                        {/* beam line */}
+                        <div className="h-[2px] w-full"
+                          style={{ background: 'linear-gradient(90deg, transparent, rgba(196,149,106,0.9) 40%, rgba(255,210,160,1) 50%, rgba(196,149,106,0.9) 60%, transparent)' }} />
+                        {/* glow trail below beam */}
+                        <div className="h-16 w-full -mt-1 blur-2xl opacity-30"
+                          style={{ background: 'linear-gradient(to bottom, rgba(196,149,106,0.7), transparent)' }} />
+                        {/* travelling orb */}
+                        <motion.div
+                          className="absolute top-[-6px] left-1/2 -translate-x-1/2 w-3 h-3 rounded-full"
+                          style={{ background: '#E8C49A', boxShadow: '0 0 12px 4px rgba(196,149,106,0.8)' }}
+                          animate={{ x: ['-40%', '40%', '-40%'] }}
+                          transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+                        />
                       </motion.div>
 
                       {/* Corner brackets */}
@@ -364,6 +398,33 @@ export default function PerceptionLayer() {
                         <motion.div key={bi} initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: bi * 0.07, type: 'spring' }}
                           className={`absolute ${pos} w-5 h-5 ${bdr} border-[#C4956A]/70`} />
+                      ))}
+
+                      {/* Completion burst flash */}
+                      <AnimatePresence>
+                        {burstVisible && (
+                          <motion.div
+                            key="burst"
+                            className="absolute inset-0 z-20 pointer-events-none"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: [0, 0.55, 0] }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.42, ease: 'easeOut' }}
+                            style={{ background: 'radial-gradient(circle at 50% 40%, rgba(196,149,106,0.6), rgba(255,255,255,0.3) 50%, transparent 80%)' }}
+                          />
+                        )}
+                      </AnimatePresence>
+
+                      {/* Sparkle particles */}
+                      {sparkles.map(sp => (
+                        <motion.div
+                          key={sp.id}
+                          className="absolute w-1.5 h-1.5 rounded-full pointer-events-none z-20"
+                          style={{ left: `${sp.x}%`, top: `${sp.y}%`, background: '#C4956A', boxShadow: '0 0 6px 2px rgba(196,149,106,0.7)' }}
+                          initial={{ scale: 0, opacity: 1 }}
+                          animate={{ scale: [0, 1.5, 0], opacity: [1, 1, 0], y: -20 + Math.random() * -30, x: (Math.random() - 0.5) * 40 }}
+                          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                        />
                       ))}
 
                       {/* HUD */}
@@ -507,9 +568,9 @@ export default function PerceptionLayer() {
                             { label: 'Style Vibe', value: vibeText     },
                           ].map((item, i) => (
                             <motion.div key={item.label}
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: i * 0.12, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                              initial={{ opacity: 0, y: 14, filter: 'blur(6px)', scale: 0.92 }}
+                              animate={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
+                              transition={{ delay: i * 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                               className="bg-[#F4F3F0] rounded-xl px-3 py-2.5">
                               <div className="text-[0.57rem] text-[#c4c4c8] font-mono uppercase tracking-wide mb-1">{item.label}</div>
                               <div className="text-[0.78rem] text-[#111318] font-semibold min-h-[1rem] leading-snug">
@@ -630,13 +691,22 @@ export default function PerceptionLayer() {
                   animate={{ backgroundColor: state === 'done' ? '#28C840' : state === 'scanning' ? '#FEBC2E' : '#c4c4c8' }}
                   transition={{ duration: 0.4 }}
                 />
-                <span className="text-[0.62rem] text-[#9ca3af] font-mono">
-                  {state === 'idle' ? 'Ready' : state === 'scanning' ? `Analysing… ${Math.round(scanPct)}%` : 'Analysis complete'}
-                </span>
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={state}
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-[0.62rem] text-[#9ca3af] font-mono"
+                  >
+                    {state === 'idle' ? 'Ready' : state === 'scanning' ? `Analysing… ${Math.round(scanPct)}%` : 'Analysis complete'}
+                  </motion.span>
+                </AnimatePresence>
               </div>
               <span className="text-[0.62rem] text-[#c4c4c8] font-mono">GYF Perception Engine v1</span>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Privacy row */}
