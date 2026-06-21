@@ -118,7 +118,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Headline */}
-        <div className="text-[clamp(3rem,9vw,7.5rem)] font-black leading-[0.88] tracking-[-0.04em] text-[#111318] mb-3" style={{ fontFamily: 'var(--font-display)' }}>
+        <div className="text-[clamp(3rem,9vw,7.5rem)] font-black leading-[0.88] tracking-[-0.04em] text-[#111318] mb-3">
           <motion.div className="flex justify-center gap-[0.18em] flex-wrap">
             {headlineWords.map((word, wi) => (
               <motion.span
@@ -177,7 +177,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[clamp(1rem,2vw,1.2rem)] text-[#6b6b78] max-w-2xl mx-auto mb-10 leading-[1.7] mt-7 font-[350]"
+          className="text-[clamp(1rem,2vw,1.2rem)] text-[#3d3d48] max-w-2xl mx-auto mb-10 leading-[1.7] mt-7 font-[350]"
         >
           GYF reads your body, learns your taste, and builds complete outfits in real time — no stylist, no guesswork.
         </motion.p>
@@ -206,7 +206,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 1.05 + i * 0.07, ease: [0.16, 1, 0.3, 1] }}
               whileHover={{ scale: 1.04, y: -1 }}
-              className="px-4 py-1.5 rounded-full text-xs font-medium border border-black/[0.08] text-[#6b6b78] bg-white/70 backdrop-blur-sm cursor-default select-none"
+              className="px-4 py-1.5 rounded-full text-xs font-medium border border-black/[0.08] text-[#3d3d48] bg-white/70 backdrop-blur-sm cursor-default select-none"
             >
               {tag}
             </motion.span>
@@ -226,7 +226,7 @@ export default function Hero() {
               <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
               <div className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
               <div className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-              <span className="ml-2.5 text-[0.7rem] text-[#9ca3af] font-mono tracking-wide">GYF Stylist — outfit.03</span>
+              <span className="ml-2.5 text-[0.7rem] text-[#6b6b78] font-mono tracking-wide">GYF Stylist — outfit.03</span>
             </div>
 
             {/* Outfit grid */}
@@ -243,7 +243,7 @@ export default function Hero() {
                   <div className="w-12 h-12 rounded-lg bg-[#F7F6F3] border border-black/[0.05] mx-auto mb-2.5 flex items-center justify-center group-hover:bg-[#F0EFE9] transition-colors">
                     {CLOTHING_SVGS[item]}
                   </div>
-                  <div className="text-[0.7rem] text-[#9ca3af] font-medium capitalize">{item}</div>
+                  <div className="text-[0.7rem] text-[#6b6b78] font-medium capitalize">{item}</div>
                   <div className="text-[0.7rem] text-[#111318] font-semibold font-mono mt-1">Matched ✓</div>
                 </motion.div>
               ))}
@@ -285,7 +285,7 @@ export default function Hero() {
               className="text-center"
             >
               <div className="text-[clamp(1.5rem,3vw,2.25rem)] font-black gradient-text font-mono tracking-tight">{stat.num}</div>
-              <div className="text-[0.7rem] text-[#9ca3af] mt-1 uppercase tracking-[0.12em] font-medium">{stat.label}</div>
+              <div className="text-[0.7rem] text-[#6b6b78] mt-1 uppercase tracking-[0.12em] font-medium">{stat.label}</div>
             </motion.div>
           ))}
         </div>

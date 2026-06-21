@@ -148,8 +148,8 @@ export default function WhatWeDo() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mb-16 text-center"
         >
-          <div className="text-[0.68rem] font-mono text-[#9ca3af] uppercase tracking-[0.14em] mb-4">Core</div>
-          <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-[#111318] leading-[1.02] tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
+          <div className="text-[0.68rem] font-mono text-[#6b6b78] uppercase tracking-[0.14em] mb-4">Core</div>
+          <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-[#111318] leading-[1.02] tracking-tight">
             What GYF Does
           </h2>
         </motion.div>
@@ -196,7 +196,7 @@ export default function WhatWeDo() {
                 <h3 className={`text-[0.9375rem] font-semibold mb-2 leading-snug transition-colors duration-200 ${isExpanded ? 'text-white' : 'text-[#111318]'}`}>
                   {f.title}
                 </h3>
-                <p className={`text-[0.8125rem] leading-relaxed transition-colors duration-200 ${isExpanded ? 'text-white/50' : 'text-[#9ca3af]'}`}>
+                <p className={`text-[0.8125rem] leading-relaxed transition-colors duration-200 ${isExpanded ? 'text-white/50' : 'text-[#5a5a65]'}`}>
                   {f.body}
                 </p>
 

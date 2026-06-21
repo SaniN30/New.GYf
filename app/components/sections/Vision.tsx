@@ -36,11 +36,11 @@ export default function Vision() {
           transition={{ duration: 0.8 }}
           className="mb-20"
         >
-          <div className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-6">Mission</div>
+          <div className="text-xs font-mono text-gray-700 uppercase tracking-widest mb-6">Mission</div>
           <blockquote className="text-[clamp(1.6rem,3.5vw,2.6rem)] font-black text-gray-900 leading-tight mb-6 max-w-3xl">
             &ldquo;Make the intelligence of a professional stylist universal — free, instant, and genuinely personal to everyone.&rdquo;
           </blockquote>
-          <p className="text-base text-gray-500 leading-relaxed max-w-2xl">
+          <p className="text-base text-gray-700 leading-relaxed max-w-2xl">
             The expertise of a personal stylist has always been a luxury for the few. GYF changes that — not by simplifying the problem, but by solving it with AI that actually understands you.
           </p>
         </motion.div>
@@ -80,7 +80,7 @@ export default function Vision() {
                 </div>
 
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 leading-tight">{m.title}</h3>
-                <p className="text-base text-gray-500 leading-relaxed max-w-xl">{m.body}</p>
+                <p className="text-base text-gray-700 leading-relaxed max-w-xl">{m.body}</p>
               </motion.div>
             ))}
           </div>

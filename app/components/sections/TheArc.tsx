@@ -50,7 +50,7 @@ export default function TheArc() {
           transition={{ duration: 0.7 }}
           className="mb-16"
         >
-          <div className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Roadmap</div>
+          <div className="text-xs font-mono text-gray-700 uppercase tracking-widest mb-4">Roadmap</div>
           <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-gray-900 leading-tight">The Arc</h2>
         </motion.div>
 
@@ -106,14 +106,14 @@ export default function TheArc() {
                       Live
                     </motion.span>
                   ) : (
-                    <span className="text-[10px] font-mono px-2.5 py-1 rounded-full border border-gray-200 text-gray-400 uppercase tracking-widest">
+                    <span className="text-[10px] font-mono px-2.5 py-1 rounded-full border border-gray-200 text-gray-600 uppercase tracking-widest">
                       {phase.label}
                     </span>
                   )}
                 </div>
 
                 {/* Description */}
-                <p className={`text-base leading-relaxed max-w-xl ${phase.active ? 'text-gray-600' : 'text-gray-400'}`}>
+                <p className={`text-base leading-relaxed max-w-xl ${phase.active ? 'text-gray-600' : 'text-gray-600'}`}>
                   {phase.desc}
                 </p>
               </motion.div>

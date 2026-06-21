@@ -234,7 +234,7 @@ export default function PerceptionLayer() {
             <span className="w-1.5 h-1.5 rounded-full bg-[#C4956A]" />
             Perception Layer
           </div>
-          <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-white mb-4 leading-[1.02] tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
+          <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-white mb-4 leading-[1.02] tracking-tight">
             See Yourself{' '}
             <span className="bg-gradient-to-r from-[#C4956A] via-[#E8C49A] to-[#C4956A] bg-clip-text text-transparent" style={{ backgroundSize: '200% auto', animation: 'shimmer-text-move 3s linear infinite' }}>
               Differently.

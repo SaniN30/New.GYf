@@ -80,11 +80,11 @@ function Step({ step, index, isActive, onClick }: { step: typeof steps[0]; index
         transition={{ duration: 0.35, ease: 'easeInOut' }}
         className="overflow-hidden"
       >
-        <p className="text-base text-gray-500 leading-relaxed max-w-lg pb-2">{step.body}</p>
+        <p className="text-base text-gray-700 leading-relaxed max-w-lg pb-2">{step.body}</p>
       </motion.div>
 
       {!isActive && (
-        <p className="text-sm text-gray-400 leading-relaxed max-w-lg line-clamp-1">{step.body}</p>
+        <p className="text-sm text-gray-600 leading-relaxed max-w-lg line-clamp-1">{step.body}</p>
       )}
     </motion.div>
   )
@@ -103,7 +103,7 @@ export default function HowItWorks() {
           transition={{ duration: 0.7 }}
           className="mb-20"
         >
-          <div className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Process</div>
+          <div className="text-xs font-mono text-gray-700 uppercase tracking-widest mb-4">Process</div>
           <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-gray-900 leading-tight">How GYF Works</h2>
         </motion.div>
 
@@ -129,27 +129,27 @@ export default function HowItWorks() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="lg:sticky lg:top-32 bg-gray-50 rounded-2xl p-8 sm:p-10 border border-gray-100"
           >
-            <div className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-6">Why it works</div>
+            <div className="text-xs font-mono text-gray-700 uppercase tracking-widest mb-6">Why it works</div>
             <div className="space-y-6">
               <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm font-mono text-gray-500">→</div>
+                <div className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm font-mono text-gray-600">→</div>
                 <div>
                   <div className="font-semibold text-gray-900 mb-1 text-base">Style is visual</div>
-                  <p className="text-sm text-gray-500 leading-relaxed">You can't capture "this jacket has the right vibe" with tags. GYF perceives clothing from images — reading aesthetic, texture, colour, and silhouette the way a stylist does.</p>
+                  <p className="text-sm text-gray-700 leading-relaxed">You can't capture "this jacket has the right vibe" with tags. GYF perceives clothing from images — reading aesthetic, texture, colour, and silhouette the way a stylist does.</p>
                 </div>
               </div>
               <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm font-mono text-gray-500">→</div>
+                <div className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm font-mono text-gray-600">→</div>
                 <div>
                   <div className="font-semibold text-gray-900 mb-1 text-base">Taste is learned</div>
-                  <p className="text-sm text-gray-500 leading-relaxed">No fixed rulebook captures individual taste. GYF learns from behaviour — and updates continuously — so it gets more personal the more you use it.</p>
+                  <p className="text-sm text-gray-700 leading-relaxed">No fixed rulebook captures individual taste. GYF learns from behaviour — and updates continuously — so it gets more personal the more you use it.</p>
                 </div>
               </div>
               <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm font-mono text-gray-500">→</div>
+                <div className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center flex-shrink-0 mt-0.5 text-sm font-mono text-gray-600">→</div>
                 <div>
                   <div className="font-semibold text-gray-900 mb-1 text-base">Good styling compounds</div>
-                  <p className="text-sm text-gray-500 leading-relaxed">The more people GYF dresses and the more reactions it sees, the better it gets — for everyone. That's a learning system, not a static one.</p>
+                  <p className="text-sm text-gray-700 leading-relaxed">The more people GYF dresses and the more reactions it sees, the better it gets — for everyone. That's a learning system, not a static one.</p>
                 </div>
               </div>
             </div>

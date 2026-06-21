@@ -162,7 +162,7 @@ function PillarCard({ pillar, index, isActive, onClick }: {
       )}
 
       {/* Tag */}
-      <div className={`text-[0.6rem] font-mono tracking-[0.14em] mb-4 transition-colors duration-200 ${isActive ? 'text-white/30' : 'text-[#c4c4c8]'}`}>
+      <div className={`text-[0.6rem] font-mono tracking-[0.14em] mb-4 transition-colors duration-200 ${isActive ? 'text-white/30' : 'text-[#6b6b78]'}`}>
         {pillar.tag.toUpperCase()}
       </div>
 
@@ -182,7 +182,7 @@ function PillarCard({ pillar, index, isActive, onClick }: {
       <h3 className={`text-[0.9375rem] font-semibold mb-2 leading-snug transition-colors duration-200 ${isActive ? 'text-white' : 'text-[#111318]'}`}>
         {pillar.title}
       </h3>
-      <p className={`text-[0.8125rem] leading-relaxed transition-colors duration-200 ${isActive ? 'text-white/45' : 'text-[#9ca3af]'}`}>
+      <p className={`text-[0.8125rem] leading-relaxed transition-colors duration-200 ${isActive ? 'text-white/45' : 'text-[#5a5a65]'}`}>
         {pillar.summary}
       </p>
 
@@ -234,11 +234,11 @@ export default function Intelligence() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mb-16 text-center"
         >
-          <div className="text-[0.68rem] font-mono text-[#9ca3af] uppercase tracking-[0.14em] mb-4">Under the Hood</div>
-          <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-[#111318] leading-[1.02] tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
+          <div className="text-[0.68rem] font-mono text-[#6b6b78] uppercase tracking-[0.14em] mb-4">Under the Hood</div>
+          <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-[#111318] leading-[1.02] tracking-tight">
             The Intelligence
           </h2>
-          <p className="text-[#9ca3af] text-base mt-4 max-w-lg mx-auto font-[350] leading-[1.7]">
+          <p className="text-[#5a5a65] text-base mt-4 max-w-lg mx-auto font-[350] leading-[1.7]">
             Six interlocking systems that compound into something no single model can replicate.
           </p>
         </motion.div>
@@ -266,7 +266,7 @@ export default function Intelligence() {
           {pillars.map((p) => (
             <div key={p.tag} className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 rounded-full" style={{ background: p.accent }} />
-              <span className="text-[0.68rem] text-[#c4c4c8] font-mono">{p.tag}</span>
+              <span className="text-[0.68rem] text-[#6b6b78] font-mono">{p.tag}</span>
             </div>
           ))}
         </motion.div>

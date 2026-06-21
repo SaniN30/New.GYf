@@ -42,12 +42,12 @@ export default function CTABanner() {
             Accepting early members
           </div>
 
-          <h2 className="text-[clamp(2.5rem,6.5vw,5rem)] font-black text-[#111318] leading-[0.95] tracking-tight mb-6" style={{ fontFamily: 'var(--font-display)' }}>
+          <h2 className="text-[clamp(2.5rem,6.5vw,5rem)] font-black text-[#111318] leading-[0.95] tracking-tight mb-6">
             Be dressed by{' '}
             <span className="shimmer-text">intelligence.</span>
           </h2>
 
-          <p className="text-[#6b6b78] text-lg mb-12 font-[350] leading-[1.7]">
+          <p className="text-[#3d3d48] text-lg mb-12 font-[350] leading-[1.7]">
             Join thousands building their AI wardrobe.
           </p>
 
@@ -97,7 +97,7 @@ export default function CTABanner() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: 0.4 + i * 0.1 }}
-                className="text-xs text-[#c4c4c8] font-medium"
+                className="text-xs text-[#9ca3af] font-medium"
               >
                 {item}
               </motion.span>
