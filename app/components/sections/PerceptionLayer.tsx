@@ -1,8 +1,8 @@
 'use client'
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence, useMotionValue, useSpring, useAnimate, stagger } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
 
-// ─── Data ──────────────────────────────────────────────────────
+// ─── Data ───────────────────────────────────────────────────────
 
 const SAMPLE_RESULT = {
   bodyType: 'Inverted Triangle',
@@ -17,9 +17,9 @@ const MEASUREMENT_LINES = [
 ]
 
 const OUTFIT_DATA = {
-  top:      { name: 'Structured Blazer',  color: 'Slate Grey', material: 'Wool Blend',  why: 'Balances inverted triangle' },
-  bottom:   { name: 'Tapered Trousers',   color: 'Charcoal',   material: 'Cotton Twill', why: 'Adds visual weight below'  },
-  footwear: { name: 'Chelsea Boots',       color: 'Tan',        material: 'Leather',       why: 'Grounds the silhouette'   },
+  top:      { name: 'Structured Blazer', color: 'Slate Grey', material: 'Wool Blend',   why: 'Balances inverted triangle' },
+  bottom:   { name: 'Tapered Trousers',  color: 'Charcoal',   material: 'Cotton Twill', why: 'Adds visual weight below'   },
+  footwear: { name: 'Chelsea Boots',      color: 'Tan',        material: 'Leather',       why: 'Grounds the silhouette'    },
 }
 
 const PALETTE_DATA = [
@@ -39,14 +39,13 @@ const STYLE_PROFILE = {
 
 const SCAN_STAGES = [
   { label: 'Detecting body proportions', pct: 0   },
-  { label: 'Mapping silhouette',         pct: 25  },
-  { label: 'Analysing skin tone',        pct: 50  },
-  { label: 'Reading style signals',      pct: 72  },
-  { label: 'Building outfit profile',   pct: 88  },
-  { label: 'Complete',                   pct: 100 },
+  { label: 'Mapping silhouette',         pct: 20  },
+  { label: 'Analysing skin tone',        pct: 42  },
+  { label: 'Reading style signals',      pct: 62  },
+  { label: 'Building outfit profile',    pct: 82  },
 ]
 
-// ─── SVG Icons ──────────────────────────────────────────────────
+// ─── SVG Icons ───────────────────────────────────────────────────
 
 const UploadIcon = () => (
   <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="w-9 h-9">
@@ -60,10 +59,8 @@ const PersonSilhouette = () => (
   <svg viewBox="0 0 80 120" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" className="w-20 h-28 text-[#c4c4c8]">
     <circle cx="40" cy="18" r="12" />
     <path d="M16 50 C16 35 27 28 40 28 C53 28 64 35 64 50 L60 85 L50 85 L48 65 L40 65 L32 65 L30 85 L20 85 Z" />
-    <path d="M20 85 L18 115" />
-    <path d="M60 85 L62 115" />
-    <path d="M30 85 L30 115" />
-    <path d="M50 85 L50 115" />
+    <path d="M20 85 L18 115" /><path d="M60 85 L62 115" />
+    <path d="M30 85 L30 115" /><path d="M50 85 L50 115" />
   </svg>
 )
 
@@ -72,13 +69,11 @@ const ShirtIcon = () => (
     <path d="M9 3 L4 8 L8 11 L8 25 L20 25 L20 11 L24 8 L19 3 C19 3 17 6 14 6 C11 6 9 3 9 3Z" />
   </svg>
 )
-
 const TrousersIcon = () => (
   <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
     <path d="M5 5 L23 5 L20 25 L16 25 L14 15 L12 25 L8 25 Z" />
   </svg>
 )
-
 const ShoeIcon = () => (
   <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
     <path d="M3 19 C3 19 6 13 13 11 L20 11 L25 15 L25 19 C25 21.2 23.2 23 21 23 L5 23 C3.9 23 3 22.1 3 21 Z" />
@@ -88,18 +83,16 @@ const ShoeIcon = () => (
 
 const OUTFIT_ICONS = { top: ShirtIcon, bottom: TrousersIcon, footwear: ShoeIcon }
 
-// ─── Hook ────────────────────────────────────────────────────────
+// ─── Typewriter hook ─────────────────────────────────────────────
 
 function useTypewriter(text: string, active: boolean, delay = 0, speed = 24) {
   const [displayed, setDisplayed] = useState('')
   useEffect(() => {
     if (!active) { setDisplayed(''); return }
-    let i = 0
-    setDisplayed('')
+    let i = 0; setDisplayed('')
     const t = setTimeout(() => {
       const id = setInterval(() => {
-        i++
-        setDisplayed(text.slice(0, i))
+        i++; setDisplayed(text.slice(0, i))
         if (i >= text.length) clearInterval(id)
       }, speed)
       return () => clearInterval(id)
@@ -151,6 +144,29 @@ function AnalysisTabs({ tab, setTab }: { tab: Tab; setTab: (t: Tab) => void }) {
   )
 }
 
+// Precision crosshair for idle right pane
+function Crosshair() {
+  return (
+    <motion.svg
+      viewBox="0 0 72 72" className="w-16 h-16"
+      animate={{ opacity: [0.18, 0.32, 0.18] }}
+      transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+    >
+      <line x1="36" y1="0" x2="36" y2="72" stroke="#111318" strokeWidth="0.5" />
+      <line x1="0" y1="36" x2="72" y2="36" stroke="#111318" strokeWidth="0.5" />
+      <circle cx="36" cy="36" r="10" fill="none" stroke="#111318" strokeWidth="0.5" />
+      <circle cx="36" cy="36" r="1.5" fill="#111318" />
+      {/* corner ticks */}
+      {[[0,0,8,0],[64,0,72,0],[0,72,8,72],[64,72,72,72]].map(([x1,y1,x2,y2],i) => (
+        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#111318" strokeWidth="1.2" strokeLinecap="round" />
+      ))}
+      {[[0,0,0,8],[72,0,72,8],[0,64,0,72],[72,64,72,72]].map(([x1,y1,x2,y2],i) => (
+        <line key={`v${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#111318" strokeWidth="1.2" strokeLinecap="round" />
+      ))}
+    </motion.svg>
+  )
+}
+
 // ─── Main ────────────────────────────────────────────────────────
 
 export default function PerceptionLayer() {
@@ -160,8 +176,6 @@ export default function PerceptionLayer() {
   const [isDragging, setIsDragging] = useState(false)
   const [scanPct, setScanPct]       = useState(0)
   const [stageIdx, setStageIdx]     = useState(0)
-  const [burstVisible, setBurstVisible] = useState(false)
-  const [sparkles, setSparkles]     = useState<{ id: number; x: number; y: number }[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
 
   const currentStage = SCAN_STAGES[Math.min(stageIdx, SCAN_STAGES.length - 1)]
@@ -169,7 +183,7 @@ export default function PerceptionLayer() {
   const runScan = useCallback(() => {
     setScanPct(0); setStageIdx(0); setState('scanning')
     const start = Date.now()
-    const total = 2800
+    const total = 3000
     const tick = setInterval(() => {
       const elapsed = Date.now() - start
       const pct = Math.min((elapsed / total) * 100, 100)
@@ -178,24 +192,15 @@ export default function PerceptionLayer() {
       setStageIdx(si === -1 ? SCAN_STAGES.length - 1 : Math.max(0, si - 1))
       if (elapsed >= total) {
         clearInterval(tick)
-        setScanPct(100); setStageIdx(SCAN_STAGES.length - 1)
-        // burst flash then reveal results
-        setBurstVisible(true)
-        setTimeout(() => { setBurstVisible(false); setState('done') }, 420)
-        // scatter sparkle particles
-        setSparkles(Array.from({ length: 12 }, (_, i) => ({
-          id: i,
-          x: 20 + Math.random() * 60,
-          y: 20 + Math.random() * 60,
-        })))
-        setTimeout(() => setSparkles([]), 1200)
+        setScanPct(100)
+        setStageIdx(SCAN_STAGES.length - 1)
+        setTimeout(() => setState('done'), 180)
       }
     }, 40)
   }, [])
 
   const handleFile = useCallback((file: File) => {
-    setPreview(URL.createObjectURL(file))
-    runScan()
+    setPreview(URL.createObjectURL(file)); runScan()
   }, [runScan])
 
   const handleDrop = (e: React.DragEvent) => {
@@ -204,13 +209,13 @@ export default function PerceptionLayer() {
     if (f?.type.startsWith('image/')) handleFile(f)
   }
 
-  const reset = () => { setState('idle'); setPreview(null); setTab('outfit'); setScanPct(0); setSparkles([]) }
+  const reset = () => { setState('idle'); setPreview(null); setTab('outfit'); setScanPct(0) }
 
-  const bodyTypeText = useTypewriter(SAMPLE_RESULT.bodyType,      state === 'done', 100)
-  const skinToneText = useTypewriter(SAMPLE_RESULT.skinTone,      state === 'done', 500)
-  const vibeText     = useTypewriter(SAMPLE_RESULT.perceivedVibe, state === 'done', 950)
+  const bodyTypeText = useTypewriter(SAMPLE_RESULT.bodyType,      state === 'done', 80)
+  const skinToneText = useTypewriter(SAMPLE_RESULT.skinTone,      state === 'done', 460)
+  const vibeText     = useTypewriter(SAMPLE_RESULT.perceivedVibe, state === 'done', 860)
 
-  // Subtle floating spring for the window
+  // Subtle parallax float on the window
   const wx = useMotionValue(0)
   const wy = useMotionValue(0)
   const sx = useSpring(wx, { stiffness: 60, damping: 18 })
@@ -219,8 +224,8 @@ export default function PerceptionLayer() {
   useEffect(() => {
     const h = (e: MouseEvent) => {
       const cx = window.innerWidth / 2, cy = window.innerHeight / 2
-      wx.set((e.clientX - cx) * 0.006)
-      wy.set((e.clientY - cy) * 0.004)
+      wx.set((e.clientX - cx) * 0.005)
+      wy.set((e.clientY - cy) * 0.003)
     }
     window.addEventListener('mousemove', h, { passive: true })
     return () => window.removeEventListener('mousemove', h)
@@ -230,15 +235,15 @@ export default function PerceptionLayer() {
     <section id="perception" className="py-20 sm:py-32 relative overflow-hidden"
       style={{ background: 'linear-gradient(160deg, #1a1b20 0%, #0d0e11 100%)' }}>
 
-      {/* Ambient orbs */}
-      <div className="pointer-events-none absolute top-[-120px] left-1/4 w-[700px] h-[700px] rounded-full opacity-[0.1] blur-[140px]"
+      {/* Ambient gradient — very subtle */}
+      <div className="pointer-events-none absolute top-[-80px] left-1/4 w-[600px] h-[600px] rounded-full opacity-[0.07] blur-[160px]"
         style={{ background: 'radial-gradient(circle, #C4956A, transparent 70%)' }} />
-      <div className="pointer-events-none absolute bottom-[-100px] right-1/4 w-[500px] h-[500px] rounded-full opacity-[0.07] blur-[100px]"
+      <div className="pointer-events-none absolute bottom-[-80px] right-1/4 w-[400px] h-[400px] rounded-full opacity-[0.05] blur-[120px]"
         style={{ background: 'radial-gradient(circle, #7B8FBF, transparent 70%)' }} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8">
 
-        {/* Header */}
+        {/* Section header */}
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="text-center mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.1] bg-white/[0.04] text-white/45 text-[0.72rem] font-mono tracking-wide mb-6 backdrop-blur-sm">
@@ -247,7 +252,8 @@ export default function PerceptionLayer() {
           </div>
           <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-white mb-4 leading-[1.02] tracking-tight">
             See Yourself{' '}
-            <span className="bg-gradient-to-r from-[#C4956A] via-[#E8C49A] to-[#C4956A] bg-clip-text text-transparent" style={{ backgroundSize: '200% auto', animation: 'shimmer-text-move 3s linear infinite' }}>
+            <span className="bg-gradient-to-r from-[#C4956A] via-[#E8C49A] to-[#C4956A] bg-clip-text text-transparent"
+              style={{ backgroundSize: '200% auto', animation: 'shimmer-text-move 3s linear infinite' }}>
               Differently.
             </span>
           </h2>
@@ -256,68 +262,65 @@ export default function PerceptionLayer() {
           </p>
         </motion.div>
 
-        {/* macOS Window */}
+        {/* macOS window */}
         <motion.div
-          initial={{ opacity: 0, y: 52, scale: 0.95 }}
+          initial={{ opacity: 0, y: 48, scale: 0.97 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           style={{ x: sx, y: sy }}
           className="mx-auto max-w-5xl"
         >
-          <motion.div
-            className="rounded-2xl overflow-hidden"
-            animate={{
-              boxShadow: state === 'scanning'
-                ? [
-                    '0 48px 120px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.06)',
-                    '0 48px 140px rgba(196,149,106,0.18), 0 0 0 1px rgba(196,149,106,0.18)',
-                    '0 48px 120px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.06)',
-                  ]
-                : state === 'done'
-                ? '0 56px 140px rgba(0,0,0,0.7), 0 0 0 1px rgba(196,149,106,0.22)'
-                : '0 48px 120px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.06)',
-            }}
-            transition={{ duration: 1.8, repeat: state === 'scanning' ? Infinity : 0, ease: 'easeInOut' }}
-            style={{ background: 'rgba(246,245,242,0.98)' }}>
+          <div className="rounded-2xl overflow-hidden"
+            style={{
+              background: 'rgba(246,245,242,0.99)',
+              boxShadow: '0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.07)',
+            }}>
 
             <MacWindowChrome title="GYF Perception Layer — Analysis" onClose={reset} />
 
             <div className="flex flex-col lg:flex-row" style={{ minHeight: 520 }}>
 
-              {/* ── LEFT: Input pane ── */}
+              {/* ── LEFT: Input / Scan pane ── */}
               <div className="lg:w-[52%] border-r border-black/[0.06] flex flex-col">
-                <div className="px-5 pt-4 pb-2">
+                <div className="px-5 pt-4 pb-2 flex items-center justify-between">
                   <span className="text-[0.62rem] font-mono text-[#c4c4c8] uppercase tracking-[0.14em]">Input</span>
+                  {state === 'scanning' && (
+                    <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                      className="text-[0.62rem] font-mono text-[#9ca3af] tabular-nums">
+                      {Math.round(scanPct).toString().padStart(3, ' ')}%
+                    </motion.span>
+                  )}
                 </div>
 
                 <AnimatePresence mode="wait">
 
                   {/* Idle */}
                   {state === 'idle' && (
-                    <motion.div key="upload" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, scale: 0.97 }}
-                      transition={{ duration: 0.25 }} className="flex-1 flex flex-col items-center justify-center p-8">
+                    <motion.div key="upload"
+                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, scale: 0.98 }}
+                      transition={{ duration: 0.22 }}
+                      className="flex-1 flex flex-col items-center justify-center p-8">
                       <motion.div
                         onDrop={handleDrop}
                         onDragOver={(e) => { e.preventDefault(); setIsDragging(true) }}
                         onDragLeave={() => setIsDragging(false)}
                         onClick={() => inputRef.current?.click()}
                         animate={{
-                          borderColor: isDragging ? 'rgba(196,149,106,0.55)' : 'rgba(17,19,24,0.1)',
-                          scale: isDragging ? 1.012 : 1,
-                          backgroundColor: isDragging ? 'rgba(196,149,106,0.03)' : 'transparent',
+                          borderColor: isDragging ? 'rgba(17,19,24,0.3)' : 'rgba(17,19,24,0.1)',
+                          scale: isDragging ? 1.01 : 1,
+                          backgroundColor: isDragging ? 'rgba(17,19,24,0.02)' : 'transparent',
                         }}
                         transition={{ type: 'spring', stiffness: 300, damping: 28 }}
-                        className="w-full border-2 border-dashed rounded-xl p-10 flex flex-col items-center justify-center gap-5 cursor-pointer min-h-[320px] hover:border-black/20 transition-colors"
+                        className="w-full border-2 border-dashed rounded-xl p-10 flex flex-col items-center justify-center gap-5 cursor-pointer min-h-[320px] hover:border-black/25 transition-colors"
                       >
                         <input ref={inputRef} type="file" accept="image/*" className="hidden"
                           onChange={e => { const f = e.target.files?.[0]; if (f) handleFile(f) }} />
 
                         <motion.div
-                          animate={{ y: isDragging ? -6 : 0 }}
+                          animate={{ y: isDragging ? -5 : 0 }}
                           transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-                          className="w-16 h-16 rounded-xl bg-white border border-black/[0.07] shadow-sm flex items-center justify-center text-[#c4c4c8]"
-                        >
+                          className="w-16 h-16 rounded-xl bg-white border border-black/[0.07] shadow-sm flex items-center justify-center text-[#c4c4c8]">
                           <UploadIcon />
                         </motion.div>
 
@@ -332,31 +335,26 @@ export default function PerceptionLayer() {
                           <div className="h-px flex-1 bg-black/[0.07]" />
                         </div>
 
-                        {/* Sample demo button — with shine + spring */}
                         <motion.button
                           onClick={(e) => { e.stopPropagation(); runScan() }}
-                          whileHover={{ scale: 1.05, y: -2 }}
-                          whileTap={{ scale: 0.95, y: 1 }}
+                          whileHover={{ scale: 1.03, y: -1 }}
+                          whileTap={{ scale: 0.97 }}
                           transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-                          className="relative overflow-hidden group flex items-center gap-2.5 text-[0.8125rem] font-semibold text-[#111318] border border-black/[0.12] px-6 py-3 rounded-full bg-white shadow-[0_2px_8px_rgba(17,19,24,0.06)]"
+                          className="relative overflow-hidden flex items-center gap-2.5 text-[0.8125rem] font-semibold text-[#111318] border border-black/[0.14] px-6 py-3 rounded-full bg-white shadow-[0_2px_8px_rgba(17,19,24,0.06)]"
                         >
+                          {/* shine sweep on hover */}
                           <motion.span
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent pointer-events-none"
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none"
                             initial={{ x: '-100%' }}
                             whileHover={{ x: '100%' }}
-                            transition={{ duration: 0.45, ease: 'easeInOut' }}
+                            transition={{ duration: 0.4, ease: 'easeInOut' }}
                           />
                           <span className="relative flex h-2 w-2 flex-shrink-0">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C4956A] opacity-60" />
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C4956A]" />
                           </span>
                           Try sample demo
-                          <motion.span
-                            className="text-[#9ca3af] text-xs"
-                            animate={{ x: 0 }}
-                            whileHover={{ x: 3 }}
-                            transition={{ duration: 0.15 }}
-                          >→</motion.span>
+                          <span className="text-[#9ca3af] text-xs">→</span>
                         </motion.button>
                       </motion.div>
                     </motion.div>
@@ -364,102 +362,68 @@ export default function PerceptionLayer() {
 
                   {/* Scanning */}
                   {state === 'scanning' && (
-                    <motion.div key="scanning" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                    <motion.div key="scanning"
+                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                       className="flex-1 relative overflow-hidden" style={{ minHeight: 360 }}>
+
+                      {/* Image or silhouette */}
                       {preview
                         ? <img src={preview} alt="Input" className="absolute inset-0 w-full h-full object-cover" /> // eslint-disable-line @next/next/no-img-element
-                        : <div className="absolute inset-0 bg-[#F0EFE9] flex items-center justify-center"><PersonSilhouette /></div>
+                        : <div className="absolute inset-0 bg-[#EDECE7] flex items-center justify-center"><PersonSilhouette /></div>
                       }
-                      <div className="absolute inset-0 bg-[#111318]/52 backdrop-blur-[2px]" />
 
-                      {/* Animated scan beam with glow orb */}
+                      {/* Dark overlay with subtle grid */}
+                      <div className="absolute inset-0"
+                        style={{
+                          background: 'rgba(13,14,17,0.62)',
+                          backgroundImage: 'linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)',
+                          backgroundSize: '24px 24px',
+                        }} />
+
+                      {/* Single clean scan line — 1px, no glow */}
                       <motion.div
-                        className="absolute left-0 right-0 pointer-events-none z-10"
-                        animate={{ top: ['0%', '100%'] }}
-                        transition={{ duration: 2.8, ease: 'linear' }}
-                      >
-                        {/* beam line */}
-                        <div className="h-[2px] w-full"
-                          style={{ background: 'linear-gradient(90deg, transparent, rgba(196,149,106,0.9) 40%, rgba(255,210,160,1) 50%, rgba(196,149,106,0.9) 60%, transparent)' }} />
-                        {/* glow trail below beam */}
-                        <div className="h-16 w-full -mt-1 blur-2xl opacity-30"
-                          style={{ background: 'linear-gradient(to bottom, rgba(196,149,106,0.7), transparent)' }} />
-                        {/* travelling orb */}
-                        <motion.div
-                          className="absolute top-[-6px] left-1/2 -translate-x-1/2 w-3 h-3 rounded-full"
-                          style={{ background: '#E8C49A', boxShadow: '0 0 12px 4px rgba(196,149,106,0.8)' }}
-                          animate={{ x: ['-40%', '40%', '-40%'] }}
-                          transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
-                        />
+                        className="absolute left-0 right-0 h-px pointer-events-none z-10"
+                        style={{ background: 'rgba(255,255,255,0.55)' }}
+                        animate={{ top: ['-1px', '100%'] }}
+                        transition={{ duration: 3, ease: 'linear' }}
+                      />
+
+                      {/* Corner brackets — sharp, precise */}
+                      {[
+                        ['top-3 left-3',    'border-t border-l'],
+                        ['top-3 right-3',   'border-t border-r'],
+                        ['bottom-3 left-3', 'border-b border-l'],
+                        ['bottom-3 right-3','border-b border-r'],
+                      ].map(([pos, bdr], bi) => (
+                        <motion.div key={bi}
+                          initial={{ opacity: 0, scale: 0.6 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: bi * 0.06, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                          className={`absolute ${pos} w-4 h-4 ${bdr} border-white/50`} />
+                      ))}
+
+                      {/* Top-left scan label */}
+                      <motion.div
+                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+                        className="absolute top-4 left-5 z-10">
+                        <div className="flex items-center gap-1.5">
+                          <motion.span
+                            className="w-1.5 h-1.5 rounded-full bg-white/60"
+                            animate={{ opacity: [1, 0.3, 1] }}
+                            transition={{ duration: 0.9, repeat: Infinity }}
+                          />
+                          <span className="text-[0.6rem] font-mono text-white/55 uppercase tracking-[0.14em]">Scanning</span>
+                        </div>
                       </motion.div>
 
-                      {/* Corner brackets */}
-                      {[['top-3 left-3', 'border-t-2 border-l-2'], ['top-3 right-3', 'border-t-2 border-r-2'], ['bottom-3 left-3', 'border-b-2 border-l-2'], ['bottom-3 right-3', 'border-b-2 border-r-2']].map(([pos, bdr], bi) => (
-                        <motion.div key={bi} initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: bi * 0.07, type: 'spring' }}
-                          className={`absolute ${pos} w-5 h-5 ${bdr} border-[#C4956A]/70`} />
-                      ))}
-
-                      {/* Completion burst flash */}
-                      <AnimatePresence>
-                        {burstVisible && (
+                      {/* Bottom progress bar */}
+                      <div className="absolute bottom-0 left-0 right-0 z-10">
+                        <div className="h-px bg-white/10 w-full">
                           <motion.div
-                            key="burst"
-                            className="absolute inset-0 z-20 pointer-events-none"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: [0, 0.55, 0] }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.42, ease: 'easeOut' }}
-                            style={{ background: 'radial-gradient(circle at 50% 40%, rgba(196,149,106,0.6), rgba(255,255,255,0.3) 50%, transparent 80%)' }}
+                            className="h-full bg-white/50"
+                            animate={{ width: `${scanPct}%` }}
+                            transition={{ duration: 0.06 }}
                           />
-                        )}
-                      </AnimatePresence>
-
-                      {/* Sparkle particles */}
-                      {sparkles.map(sp => (
-                        <motion.div
-                          key={sp.id}
-                          className="absolute w-1.5 h-1.5 rounded-full pointer-events-none z-20"
-                          style={{ left: `${sp.x}%`, top: `${sp.y}%`, background: '#C4956A', boxShadow: '0 0 6px 2px rgba(196,149,106,0.7)' }}
-                          initial={{ scale: 0, opacity: 1 }}
-                          animate={{ scale: [0, 1.5, 0], opacity: [1, 1, 0], y: -20 + Math.random() * -30, x: (Math.random() - 0.5) * 40 }}
-                          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                        />
-                      ))}
-
-                      {/* HUD */}
-                      <div className="absolute inset-0 flex items-center justify-center z-10">
-                        <div className="text-center px-7 py-5 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/[0.09]">
-                          <div className="relative w-14 h-14 mx-auto mb-3.5">
-                            <svg className="w-full h-full -rotate-90" viewBox="0 0 56 56">
-                              <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="2.5" />
-                              <motion.circle cx="28" cy="28" r="22" fill="none" stroke="#C4956A" strokeWidth="2.5" strokeLinecap="round"
-                                strokeDasharray={`${2 * Math.PI * 22}`}
-                                strokeDashoffset={`${2 * Math.PI * 22 * (1 - scanPct / 100)}`}
-                                style={{ transition: 'stroke-dashoffset 0.08s linear' }} />
-                            </svg>
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white text-xs font-mono font-semibold">{Math.round(scanPct)}%</span>
-                            </div>
-                          </div>
-                          <AnimatePresence mode="wait">
-                            <motion.p key={currentStage.label} initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: -5 }} transition={{ duration: 0.2 }}
-                              className="text-white/75 text-[0.72rem] font-mono">{currentStage.label}</motion.p>
-                          </AnimatePresence>
-                          <div className="mt-3.5 flex gap-1.5 justify-center">
-                            {SCAN_STAGES.slice(0, -1).map((s, si) => (
-                              <motion.span key={s.label}
-                                animate={{
-                                  backgroundColor: scanPct >= s.pct ? 'rgba(196,149,106,0.28)' : 'rgba(255,255,255,0.05)',
-                                  borderColor: scanPct >= s.pct ? 'rgba(196,149,106,0.55)' : 'rgba(255,255,255,0.1)',
-                                  color: scanPct >= s.pct ? '#E8C49A' : 'rgba(255,255,255,0.3)',
-                                }}
-                                transition={{ duration: 0.35 }}
-                                className="text-[0.6rem] font-mono w-5 h-5 flex items-center justify-center rounded border"
-                              >{si + 1}</motion.span>
-                            ))}
-                          </div>
                         </div>
                       </div>
                     </motion.div>
@@ -467,46 +431,60 @@ export default function PerceptionLayer() {
 
                   {/* Done */}
                   {state === 'done' && (
-                    <motion.div key="done" initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                    <motion.div key="done"
+                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35 }}
                       className="flex-1 relative overflow-hidden" style={{ minHeight: 360 }}>
                       {preview
                         ? <img src={preview} alt="Input" className="absolute inset-0 w-full h-full object-cover" /> // eslint-disable-line @next/next/no-img-element
-                        : <div className="absolute inset-0 bg-[#F0EFE9] flex items-center justify-center"><PersonSilhouette /></div>
+                        : <div className="absolute inset-0 bg-[#EDECE7] flex items-center justify-center"><PersonSilhouette /></div>
                       }
+                      {/* Subtle vignette */}
                       <div className="absolute inset-0 pointer-events-none"
-                        style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.12), transparent 30%, transparent 70%, rgba(0,0,0,0.12))' }} />
+                        style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.1), transparent 25%, transparent 75%, rgba(0,0,0,0.1))' }} />
 
                       {/* Measurement lines */}
                       <div className="absolute inset-0 pointer-events-none">
                         <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                           {MEASUREMENT_LINES.map((line, i) => (
-                            <motion.g key={line.label} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 + i * 0.25 }}>
-                              <motion.line x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2}
-                                stroke="rgba(255,255,255,0.65)" strokeWidth="0.3" strokeDasharray="2 1.5"
+                            <motion.g key={line.label} initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                              transition={{ delay: 0.15 + i * 0.22 }}>
+                              <motion.line
+                                x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2}
+                                stroke="rgba(255,255,255,0.6)" strokeWidth="0.25" strokeDasharray="1.5 1.2"
                                 initial={{ pathLength: 0 }} animate={{ pathLength: 1 }}
-                                transition={{ duration: 0.7, delay: 0.3 + i * 0.25, ease: [0.16, 1, 0.3, 1] }} />
-                              <motion.circle cx={line.x1} cy={line.y1} r="0.8" fill="#C4956A"
-                                initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.7 + i * 0.25, type: 'spring' }} />
-                              <motion.circle cx={line.x2} cy={line.y2} r="0.8" fill="#C4956A"
-                                initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.7 + i * 0.25, type: 'spring' }} />
+                                transition={{ duration: 0.6, delay: 0.2 + i * 0.22, ease: [0.16, 1, 0.3, 1] }} />
+                              {/* endpoint dots */}
+                              <motion.circle cx={line.x1} cy={line.y1} r="0.6" fill="white" opacity={0.7}
+                                initial={{ scale: 0 }} animate={{ scale: 1 }}
+                                transition={{ delay: 0.65 + i * 0.22, type: 'spring', stiffness: 600 }} />
+                              <motion.circle cx={line.x2} cy={line.y2} r="0.6" fill="white" opacity={0.7}
+                                initial={{ scale: 0 }} animate={{ scale: 1 }}
+                                transition={{ delay: 0.65 + i * 0.22, type: 'spring', stiffness: 600 }} />
                             </motion.g>
                           ))}
                         </svg>
+                        {/* Labels */}
                         {MEASUREMENT_LINES.map((line, i) => (
-                          <motion.div key={line.label} initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.8 + i * 0.25, ease: [0.16, 1, 0.3, 1] }}
-                            className="absolute text-[0.6rem] font-mono text-white bg-black/55 backdrop-blur-sm px-1.5 py-0.5 rounded"
-                            style={{ left: '83%', top: line.y1 }}>
+                          <motion.div key={line.label}
+                            initial={{ opacity: 0, x: 6 }} animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.75 + i * 0.22, ease: [0.16, 1, 0.3, 1] }}
+                            className="absolute text-[0.58rem] font-mono text-white/65 bg-black/40 backdrop-blur-sm px-1.5 py-0.5 rounded-sm"
+                            style={{ left: '84%', top: line.y1, transform: 'translateY(-50%)' }}>
                             {line.label}
                           </motion.div>
                         ))}
                       </div>
 
                       {/* Bottom bar */}
-                      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.3 }}
-                        className="absolute bottom-0 left-0 right-0 px-4 py-3 bg-black/50 backdrop-blur-md border-t border-white/[0.07] flex items-center justify-between">
-                        <span className="text-[0.68rem] text-white/55 font-mono">Analysis complete</span>
-                        <button onClick={reset} className="text-[0.68rem] text-[#C4956A] font-mono hover:text-[#E8C49A] transition-colors">← Reset</button>
+                      <motion.div
+                        initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.1 }}
+                        className="absolute bottom-0 left-0 right-0 px-4 py-2.5 bg-black/45 backdrop-blur-md border-t border-white/[0.06] flex items-center justify-between">
+                        <span className="text-[0.62rem] text-white/45 font-mono">Analysis complete</span>
+                        <button onClick={reset}
+                          className="text-[0.62rem] text-white/45 font-mono hover:text-white/70 transition-colors">
+                          ← Reset
+                        </button>
                       </motion.div>
                     </motion.div>
                   )}
@@ -517,47 +495,98 @@ export default function PerceptionLayer() {
               <div className="lg:w-[48%] flex flex-col">
                 <AnimatePresence mode="wait">
 
-                  {/* Empty / scanning right pane */}
-                  {state !== 'done' && (
-                    <motion.div key="empty-panel" exit={{ opacity: 0 }}
-                      className="flex-1 flex flex-col items-center justify-center p-10 text-center gap-5">
-                      <div className="relative w-20 h-20">
-                        {[0, 1, 2].map((ring) => (
-                          <motion.div key={ring} className="absolute inset-0 rounded-full border border-black/[0.06]"
-                            animate={{ scale: [1, 1.18 + ring * 0.14, 1], opacity: [0.5, 0, 0.5] }}
-                            transition={{ duration: 2.6 + ring * 0.4, repeat: Infinity, delay: ring * 0.55 }} />
-                        ))}
-                        <div className="absolute inset-0 rounded-full bg-[#F4F3F0] border border-black/[0.07] flex items-center justify-center">
-                          <svg viewBox="0 0 40 40" fill="none" stroke="#c4c4c8" strokeWidth="1.2" strokeLinecap="round" className="w-10 h-10">
-                            <circle cx="20" cy="12" r="6" />
-                            <path d="M8 38 C8 28 13 22 20 22 C27 22 32 28 32 38" />
-                          </svg>
-                        </div>
-                      </div>
+                  {/* Idle */}
+                  {state === 'idle' && (
+                    <motion.div key="idle-panel"
+                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="flex-1 flex flex-col items-center justify-center p-10 text-center gap-6">
+                      <Crosshair />
                       <div>
                         <p className="text-[#111318] font-semibold text-[0.9375rem] mb-1.5">Analysis appears here</p>
-                        <p className="text-[#c4c4c8] text-[0.78rem] font-mono">Upload a photo or try the demo</p>
+                        <p className="text-[#9ca3af] text-[0.78rem] font-mono">Upload a photo or try the demo</p>
                       </div>
-                      {state === 'scanning' && (
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full max-w-xs mt-2">
-                          <div className="h-1 bg-black/[0.05] rounded-full overflow-hidden">
-                            <motion.div className="h-full bg-[#C4956A] rounded-full"
-                              animate={{ width: `${scanPct}%` }} transition={{ duration: 0.08 }} />
-                          </div>
-                          <motion.p
-                            key={currentStage.label}
-                            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                            className="text-[0.68rem] text-[#9ca3af] font-mono mt-2 text-center"
-                          >{currentStage.label}</motion.p>
-                        </motion.div>
-                      )}
+                    </motion.div>
+                  )}
+
+                  {/* Scanning — terminal log */}
+                  {state === 'scanning' && (
+                    <motion.div key="scan-log"
+                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="flex-1 flex flex-col">
+
+                      <div className="px-5 pt-4 pb-3 border-b border-black/[0.05] flex items-center justify-between">
+                        <span className="text-[0.62rem] font-mono text-[#c4c4c8] uppercase tracking-[0.14em]">Analysis log</span>
+                        <span className="text-[0.62rem] font-mono text-[#9ca3af] tabular-nums">{Math.round(scanPct).toString().padStart(3,' ')}%</span>
+                      </div>
+
+                      <div className="flex-1 px-5 py-6 flex flex-col justify-center gap-3.5">
+                        {SCAN_STAGES.map((s, si) => {
+                          const isDone    = si < stageIdx
+                          const isCurrent = si === stageIdx
+                          const isPending = si > stageIdx
+                          return (
+                            <motion.div key={s.label}
+                              initial={{ opacity: 0, x: -12 }}
+                              animate={{ opacity: isPending ? 0.2 : 1, x: 0 }}
+                              transition={{ delay: si * 0.08, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                              className="flex items-center gap-3">
+
+                              {/* Status glyph */}
+                              <span className={`text-[0.7rem] font-mono w-4 text-center flex-shrink-0 ${
+                                isDone ? 'text-[#5B7339]' : isCurrent ? 'text-[#111318]' : 'text-[#d4d4d8]'
+                              }`}>
+                                {isDone ? '✓' : isCurrent ? '›' : '·'}
+                              </span>
+
+                              {/* Label */}
+                              <span className={`text-[0.8rem] leading-snug flex-1 ${
+                                isDone ? 'text-[#6b6b78]' : isCurrent ? 'text-[#111318] font-medium' : 'text-[#d4d4d8]'
+                              }`}>
+                                {s.label}
+                                {isCurrent && (
+                                  <motion.span
+                                    className="inline-block w-px h-3.5 bg-[#111318] ml-1 align-middle"
+                                    animate={{ opacity: [1, 0, 1] }}
+                                    transition={{ duration: 0.8, repeat: Infinity }}
+                                  />
+                                )}
+                              </span>
+
+                              {/* Done tag */}
+                              {isDone && (
+                                <motion.span
+                                  initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }}
+                                  transition={{ duration: 0.2 }}
+                                  className="text-[0.58rem] font-mono text-[#5B7339] bg-[#5B7339]/10 px-1.5 py-0.5 rounded flex-shrink-0">
+                                  done
+                                </motion.span>
+                              )}
+                            </motion.div>
+                          )
+                        })}
+                      </div>
+
+                      {/* Progress track at bottom */}
+                      <div className="px-5 pb-5">
+                        <div className="h-px bg-black/[0.07] w-full overflow-hidden rounded-full">
+                          <motion.div
+                            className="h-full bg-[#111318] rounded-full"
+                            animate={{ width: `${scanPct}%` }}
+                            transition={{ duration: 0.06 }}
+                          />
+                        </div>
+                      </div>
                     </motion.div>
                   )}
 
                   {/* Results */}
                   {state === 'done' && (
-                    <motion.div key="results-panel" initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                      transition={{ duration: 0.4 }} className="flex-1 flex flex-col">
+                    <motion.div key="results-panel"
+                      initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                      transition={{ duration: 0.35 }}
+                      className="flex-1 flex flex-col">
 
                       {/* Summary chips */}
                       <div className="px-5 pt-5 pb-4 border-b border-black/[0.06]">
@@ -568,14 +597,14 @@ export default function PerceptionLayer() {
                             { label: 'Style Vibe', value: vibeText     },
                           ].map((item, i) => (
                             <motion.div key={item.label}
-                              initial={{ opacity: 0, y: 14, filter: 'blur(6px)', scale: 0.92 }}
-                              animate={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
-                              transition={{ delay: i * 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                              initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
+                              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                              transition={{ delay: i * 0.12, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                               className="bg-[#F4F3F0] rounded-xl px-3 py-2.5">
                               <div className="text-[0.57rem] text-[#c4c4c8] font-mono uppercase tracking-wide mb-1">{item.label}</div>
                               <div className="text-[0.78rem] text-[#111318] font-semibold min-h-[1rem] leading-snug">
                                 {item.value}
-                                <span className="inline-block w-px h-3 bg-[#C4956A] ml-0.5 animate-pulse align-middle" />
+                                <span className="inline-block w-px h-3 bg-[#111318]/40 ml-0.5 align-middle animate-pulse" />
                               </div>
                             </motion.div>
                           ))}
@@ -589,16 +618,16 @@ export default function PerceptionLayer() {
                         <AnimatePresence mode="wait">
 
                           {tab === 'outfit' && (
-                            <motion.div key="outfit" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }} transition={{ duration: 0.22 }}
-                              className="space-y-2">
+                            <motion.div key="outfit"
+                              initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }}
+                              transition={{ duration: 0.2 }} className="space-y-2">
                               {Object.entries(OUTFIT_DATA).map(([key, item], i) => {
                                 const Icon = OUTFIT_ICONS[key as keyof typeof OUTFIT_ICONS]
                                 return (
                                   <motion.div key={key}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: i * 0.1, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                                    whileHover={{ x: 3 }}
+                                    initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: i * 0.09, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                                    whileHover={{ x: 2 }}
                                     className="flex items-center gap-3.5 p-3 rounded-xl bg-[#F9F8F6] border border-black/[0.05] hover:border-black/10 transition-all cursor-default">
                                     <div className="w-9 h-9 rounded-lg bg-white border border-black/[0.07] flex items-center justify-center flex-shrink-0 text-[#9ca3af]">
                                       <Icon />
@@ -615,29 +644,30 @@ export default function PerceptionLayer() {
                           )}
 
                           {tab === 'palette' && (
-                            <motion.div key="palette" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }} transition={{ duration: 0.22 }}
-                              className="space-y-2.5">
+                            <motion.div key="palette"
+                              initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }}
+                              transition={{ duration: 0.2 }} className="space-y-2.5">
                               {PALETTE_DATA.map((color, i) => (
                                 <motion.div key={color.name}
-                                  initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: i * 0.08 }} whileHover={{ x: 3 }}
+                                  initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: i * 0.07 }} whileHover={{ x: 2 }}
                                   className="flex items-center gap-3.5 cursor-default">
-                                  <motion.div whileHover={{ scale: 1.1, rotate: 2 }}
-                                    className="w-12 h-8 rounded-lg border border-black/[0.08] shadow-sm flex-shrink-0"
+                                  <div className="w-12 h-8 rounded-lg border border-black/[0.08] flex-shrink-0"
                                     style={{ backgroundColor: color.hex }} />
                                   <div className="flex-1">
                                     <div className="text-[0.8125rem] font-semibold text-[#111318]">{color.name}</div>
                                     <div className="text-[0.68rem] text-[#c4c4c8] font-mono">{color.hex}</div>
                                   </div>
-                                  <span className="text-[0.62rem] font-mono text-[#c4c4c8] bg-[#F4F3F0] px-2 py-0.5 rounded-full shrink-0">{color.role}</span>
+                                  <span className="text-[0.62rem] font-mono text-[#9ca3af] bg-[#F4F3F0] px-2 py-0.5 rounded-sm shrink-0">{color.role}</span>
                                 </motion.div>
                               ))}
                             </motion.div>
                           )}
 
                           {tab === 'profile' && (
-                            <motion.div key="profile" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }} transition={{ duration: 0.22 }}
-                              className="space-y-4">
+                            <motion.div key="profile"
+                              initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }}
+                              transition={{ duration: 0.2 }} className="space-y-4">
                               <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
                                 className="p-4 rounded-xl bg-[#111318] text-white">
                                 <div className="text-[0.6rem] font-mono text-white/30 mb-1.5 uppercase tracking-wide">Style Archetype</div>
@@ -648,9 +678,11 @@ export default function PerceptionLayer() {
                                 <div className="text-[0.6rem] font-mono text-[#c4c4c8] mb-2.5 uppercase tracking-wide">Lean Into</div>
                                 <div className="flex flex-wrap gap-1.5">
                                   {STYLE_PROFILE.lean.map((item, i) => (
-                                    <motion.span key={item} initial={{ opacity: 0, scale: 0.88 }} animate={{ opacity: 1, scale: 1 }}
-                                      transition={{ delay: i * 0.08 }}
-                                      className="text-[0.72rem] px-3 py-1.5 rounded-full bg-[#111318] text-white font-medium">{item}</motion.span>
+                                    <motion.span key={item}
+                                      initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
+                                      transition={{ delay: i * 0.07 }}
+                                      className="text-[0.72rem] px-3 py-1.5 rounded-full bg-[#111318] text-white font-medium">{item}
+                                    </motion.span>
                                   ))}
                                 </div>
                               </div>
@@ -658,9 +690,11 @@ export default function PerceptionLayer() {
                                 <div className="text-[0.6rem] font-mono text-[#c4c4c8] mb-2.5 uppercase tracking-wide">Avoid</div>
                                 <div className="flex flex-wrap gap-1.5">
                                   {STYLE_PROFILE.avoid.map((item, i) => (
-                                    <motion.span key={item} initial={{ opacity: 0, scale: 0.88 }} animate={{ opacity: 1, scale: 1 }}
-                                      transition={{ delay: 0.25 + i * 0.08 }}
-                                      className="text-[0.72rem] px-3 py-1.5 rounded-full bg-[#F4F3F0] text-[#c4c4c8] font-medium line-through decoration-[#d4d4d8]">{item}</motion.span>
+                                    <motion.span key={item}
+                                      initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
+                                      transition={{ delay: 0.2 + i * 0.07 }}
+                                      className="text-[0.72rem] px-3 py-1.5 rounded-full bg-[#F4F3F0] text-[#c4c4c8] font-medium line-through decoration-[#d4d4d8]">{item}
+                                    </motion.span>
                                   ))}
                                 </div>
                               </div>
@@ -672,7 +706,8 @@ export default function PerceptionLayer() {
 
                       {/* CTA */}
                       <div className="px-5 pb-5 pt-3 border-t border-black/[0.05]">
-                        <motion.a href="#cta" whileHover={{ scale: 1.01, y: -1 }} whileTap={{ scale: 0.99 }}
+                        <motion.a href="#cta"
+                          whileHover={{ scale: 1.01, y: -1 }} whileTap={{ scale: 0.99 }}
                           className="btn-3d block w-full text-center py-3 rounded-xl bg-[#111318] text-white font-semibold text-[0.8125rem] hover:bg-[#1e2230]">
                           Get Early Access →
                         </motion.a>
@@ -689,24 +724,20 @@ export default function PerceptionLayer() {
                 <motion.span
                   className="w-1.5 h-1.5 rounded-full"
                   animate={{ backgroundColor: state === 'done' ? '#28C840' : state === 'scanning' ? '#FEBC2E' : '#c4c4c8' }}
-                  transition={{ duration: 0.4 }}
+                  transition={{ duration: 0.35 }}
                 />
                 <AnimatePresence mode="wait">
-                  <motion.span
-                    key={state}
-                    initial={{ opacity: 0, y: 4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -4 }}
-                    transition={{ duration: 0.2 }}
-                    className="text-[0.62rem] text-[#9ca3af] font-mono"
-                  >
-                    {state === 'idle' ? 'Ready' : state === 'scanning' ? `Analysing… ${Math.round(scanPct)}%` : 'Analysis complete'}
+                  <motion.span key={state}
+                    initial={{ opacity: 0, y: 3 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -3 }}
+                    transition={{ duration: 0.18 }}
+                    className="text-[0.62rem] text-[#9ca3af] font-mono">
+                    {state === 'idle' ? 'Ready' : state === 'scanning' ? `Processing — ${Math.round(scanPct)}%` : 'Analysis complete'}
                   </motion.span>
                 </AnimatePresence>
               </div>
               <span className="text-[0.62rem] text-[#c4c4c8] font-mono">GYF Perception Engine v1</span>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
 
         {/* Privacy row */}
