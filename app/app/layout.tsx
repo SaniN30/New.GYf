@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { inter, bricolageGrotesque, jetbrainsMono } from "@/lib/fonts";
+import { fraunces, fragmentMono } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${bricolageGrotesque.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${fragmentMono.variable}`}>
       <body>{children}</body>
     </html>
   );

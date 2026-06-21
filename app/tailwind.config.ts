@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { colors, fonts } from "./lib/tokens";
 
 const config: Config = {
   content: [
@@ -7,23 +8,26 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        bg: "#0A0A0A",
-        surface: "#111111",
-        "surface-2": "#1A1A1A",
-        border: "#222222",
-        "text-primary": "#EFEFEF",
-        "text-muted": "#666666",
-        accent: "#BFBFBF",
-        "accent-warm": "#C8A96E",
-      },
-      fontFamily: {
-        display: ["var(--font-display)", "system-ui", "sans-serif"],
-        body: ["var(--font-inter)", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "monospace"],
-      },
+    // Replace Tailwind defaults entirely — all values come from tokens.ts
+    colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      white: "#ffffff",
+      black: "#000000",
+      canvas:             colors.canvas,
+      ink:                colors.ink,
+      "accent-primary":   colors["accent-primary"],
+      "accent-warm":      colors["accent-warm"],
+      positive:           colors.positive,
+      hairline:           colors.hairline,
+      "surface-elevated": colors["surface-elevated"],
     },
+    fontFamily: {
+      display: fonts.display,
+      body:    fonts.body,
+      mono:    fonts.mono,
+    },
+    extend: {},
   },
   plugins: [],
 };

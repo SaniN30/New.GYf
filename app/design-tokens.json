@@ -1,0 +1,235 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$meta": {
+    "name": "GYF — Tailor's Bench",
+    "version": "3.0.0",
+    "surface": "Onboarding & Cold-Start",
+    "source": "App.md v3"
+  },
+  "color": {
+    "canvas": {
+      "$value": "#E3E0D8",
+      "$type": "color",
+      "$description": "Loom Grey — primary background. The paper on which the outfit is laid."
+    },
+    "ink": {
+      "$value": "#1B2233",
+      "$type": "color",
+      "$description": "Vat Indigo — primary text + the one dark contextual surface (conversion screen). Never a page default."
+    },
+    "accent-primary": {
+      "$value": "#C2185B",
+      "$type": "color",
+      "$description": "Rani Pink — CTAs, confidence badge, Stitch Line."
+    },
+    "accent-primary-press": {
+      "$value": "#9E1149",
+      "$type": "color",
+      "$description": "Rani Pink at -15% lightness. Used only for active/pressed states on accent-primary elements."
+    },
+    "accent-warm": {
+      "$value": "#D98E04",
+      "$type": "color",
+      "$description": "Haldi Gold — badges, highlights. Focus rings use accent-warm-glow, not this directly."
+    },
+    "accent-warm-glow": {
+      "$value": "rgba(217, 142, 4, 0.35)",
+      "$type": "color",
+      "$description": "Haldi Gold at 35% opacity — focus ring blur/glow only. Never a hard 2px outline."
+    },
+    "positive": {
+      "$value": "#5B7339",
+      "$type": "color",
+      "$description": "Mehendi Green — saved / confirmed states."
+    },
+    "hairline": {
+      "$value": "#BCB2A0",
+      "$type": "color",
+      "$description": "Raw Thread — borders, dividers, tape ticks."
+    },
+    "surface-elevated": {
+      "$value": "#EDEAE2",
+      "$type": "color",
+      "$description": "Cards lifted off canvas on hover/drag. Slightly warmer than canvas."
+    },
+    "scrim": {
+      "$value": "rgba(27, 34, 51, 0.45)",
+      "$type": "color",
+      "$description": "Sheet/modal backdrop — derived from ink. Used behind bottom sheets in the manual attribute flow."
+    },
+    "shimmer-base": {
+      "$value": "#D8D4CA",
+      "$type": "color",
+      "$description": "Skeleton loading base — warm, never generic grey."
+    },
+    "shimmer-sweep": {
+      "$value": "#F0EDE5",
+      "$type": "color",
+      "$description": "Skeleton loading sweep highlight — warm, never generic grey."
+    }
+  },
+  "typography": {
+    "family": {
+      "display": {
+        "$value": "Fraunces",
+        "$type": "fontFamily",
+        "$description": "Variable, soft axis. Hero moments only — not for UI controls or body copy."
+      },
+      "body": {
+        "$value": "General Sans",
+        "$type": "fontFamily",
+        "$description": "Every control, label, paragraph, and UI element."
+      },
+      "mono": {
+        "$value": "Fragment Mono",
+        "$type": "fontFamily",
+        "$description": "Confidence %, counters, prices, measurements, OTP countdown. Always tabular-nums."
+      }
+    },
+    "scale": {
+      "display-l": {
+        "$value": "clamp(2.25rem, 6vw, 3.5rem)",
+        "$type": "dimension",
+        "$description": "Fraunces / -2% tracking. Homepage hero, Welcome headline."
+      },
+      "display-s": {
+        "$value": "clamp(1.5rem, 4vw, 2rem)",
+        "$type": "dimension",
+        "$description": "Fraunces / -1% tracking. Section headers, Stylist's Notes panel title."
+      },
+      "body-l": {
+        "$value": "1.125rem",
+        "$type": "dimension",
+        "$description": "General Sans / 1.5 line-height. Lead body copy."
+      },
+      "body": {
+        "$value": "1rem",
+        "$type": "dimension",
+        "$description": "General Sans / 1.5 line-height. Standard body copy."
+      },
+      "caption": {
+        "$value": "0.875rem",
+        "$type": "dimension",
+        "$description": "General Sans / 1.4 line-height. Helper text, chip labels."
+      },
+      "mono": {
+        "$value": "0.9375rem",
+        "$type": "dimension",
+        "$description": "Fragment Mono / tabular-nums. All numeric/data contexts."
+      }
+    }
+  },
+  "motion": {
+    "tier-0": {
+      "duration": {
+        "$value": "120ms",
+        "$type": "duration",
+        "$description": "Settle — button press, card lift. The floor every control meets."
+      },
+      "easing": {
+        "$value": "ease-out",
+        "$type": "cubicBezier",
+        "$description": "Settle easing."
+      },
+      "scale-press": {
+        "$value": "0.96",
+        "$type": "number",
+        "$description": "Scale target on press."
+      },
+      "lift-hover": {
+        "$value": "2px",
+        "$type": "dimension",
+        "$description": "Vertical lift on hover/focus."
+      }
+    },
+    "tier-2": {
+      "duration": {
+        "$value": "180ms",
+        "$type": "duration",
+        "$description": "Responsive — garment crossfade, badge count-up, slider fill. Must feel instant."
+      },
+      "easing": {
+        "$value": "cubic-bezier(0.2, 0, 0, 1)",
+        "$type": "cubicBezier",
+        "$description": "Responsive easing. Snappy start, smooth settle."
+      }
+    },
+    "tier-3": {
+      "duration": {
+        "$value": "2000ms",
+        "$type": "duration",
+        "$description": "Ambient — pre-reveal badge pulse, tape tick glow. Looped."
+      },
+      "easing": {
+        "$value": "ease-in-out",
+        "$type": "cubicBezier",
+        "$description": "Ambient easing."
+      },
+      "max-delta": {
+        "$value": "0.05",
+        "$type": "number",
+        "$description": "Maximum scale/opacity delta for ambient. Felt, not seen."
+      }
+    },
+    "tier-1": {
+      "duration-min": {
+        "$value": "600ms",
+        "$type": "duration",
+        "$description": "Signature (Stitch Line) minimum duration."
+      },
+      "duration-max": {
+        "$value": "900ms",
+        "$type": "duration",
+        "$description": "Signature (Stitch Line) maximum duration."
+      },
+      "easing": {
+        "$value": "custom-hand-wobble",
+        "$type": "cubicBezier",
+        "$description": "Custom per Stitch Line spec. One use only — never repurposed."
+      }
+    }
+  },
+  "component": {
+    "pressable": {
+      "states": ["idle", "hover", "focus", "press", "disabled"],
+      "$description": "Shared primitive. Every tappable element composes this. Do not hand-roll press states."
+    },
+    "tape-progress": {
+      "states": ["step-n", "current", "complete", "ambient-glow"]
+    },
+    "path-choice-card": {
+      "states": ["idle", "pointer-tilt", "pressed", "selected"],
+      "tilt-max-deg": 2
+    },
+    "live-preview-rail": {
+      "states": ["idle", "crossfading"],
+      "aria": "live=polite",
+      "animation-constraint": "transform/opacity only — no width/height"
+    },
+    "generating-state": {
+      "states": ["in-progress", "degraded", "fallback"],
+      "degraded-threshold-ms": 4000,
+      "fallback-threshold-ms": 10000
+    },
+    "confidence-badge": {
+      "states": ["static", "counting"],
+      "font": "mono",
+      "aria": "live=polite"
+    },
+    "guest-convert-sheet": {
+      "background": "ink",
+      "decoration": "none",
+      "$description": "Dark mode exception — signals the identity crossing moment. Zero Tailor's Bench decoration."
+    }
+  },
+  "breakpoints": {
+    "min": { "$value": "360px", "$type": "dimension" },
+    "max": { "$value": "1440px", "$type": "dimension" }
+  },
+  "accessibility": {
+    "contrast-minimum": "AA",
+    "focus-ring": "accent-warm-glow",
+    "focus-ring-style": "soft blur, never 2px hard outline",
+    "aria-live-required": ["live-preview-rail", "confidence-badge"]
+  }
+}

@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GYF — Tailor's Bench Design System</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap');
+
+  :root {
+    --canvas:               #E3E0D8;
+    --ink:                  #1B2233;
+    --accent-primary:       #C2185B;
+    --accent-primary-press: #9E1149;
+    --accent-warm:          #D98E04;
+    --accent-warm-glow:     rgba(217,142,4,0.35);
+    --positive:             #5B7339;
+    --hairline:             #BCB2A0;
+    --surface-elevated:     #EDEAE2;
+    --scrim:                rgba(27,34,51,0.45);
+    --shimmer-base:         #D8D4CA;
+    --shimmer-sweep:        #F0EDE5;
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body:    'General Sans', 'Inter', system-ui, sans-serif;
+    --font-mono:    'Fragment Mono', 'JetBrains Mono', 'Fira Code', monospace;
+
+    --text-display-l: clamp(2.25rem, 6vw, 3.5rem);
+    --text-display-s: clamp(1.5rem, 4vw, 2rem);
+    --text-body-l:    1.125rem;
+    --text-body:      1rem;
+    --text-caption:   0.875rem;
+    --text-mono:      0.9375rem;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h1 { font-family: var(--font-display); font-size: var(--text-display-l); letter-spacing: -0.02em; font-weight: 300; }
+  h2 { font-family: var(--font-display); font-size: var(--text-display-s); letter-spacing: -0.01em; font-weight: 300; margin-bottom: 1.5rem; }
+  h3 { font-family: var(--font-body); font-size: var(--text-body-l); font-weight: 600; margin-bottom: 1rem; }
+
+  .section {
+    margin-bottom: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .section:first-child { border-top: none; }
+
+  /* ── Color Swatches ── */
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .swatch {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--hairline);
+  }
+
+  .swatch-color {
+    height: 80px;
+    display: flex;
+    align-items: flex-end;
+    padding: 8px;
+  }
+
+  .swatch-label {
+    background: white;
+    padding: 10px 12px;
+  }
+
+  .swatch-name {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--ink);
+    display: block;
+    tab-size: 4;
+  }
+
+  .swatch-hex {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: #666;
+    margin-top: 2px;
+    display: block;
+  }
+
+  .swatch-desc {
+    font-size: 0.7rem;
+    color: #888;
+    margin-top: 4px;
+    display: block;
+    line-height: 1.3;
+  }
+
+  /* ── Typography Scale ── */
+  .type-row {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .type-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--hairline);
+    min-width: 180px;
+    flex-shrink: 0;
+  }
+
+  /* ── Motion Demo ── */
+  .motion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .motion-card {
+    background: var(--surface-elevated);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .motion-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-warm);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .motion-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .motion-spec {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: #888;
+    line-height: 1.6;
+  }
+
+  /* ── Pressable ── */
+  .pressable {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    background: var(--accent-primary);
+    color: white;
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: transform 120ms ease-out, box-shadow 120ms ease-out, background 120ms ease-out;
+    user-select: none;
+  }
+
+  .pressable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(194,24,91,0.25);
+  }
+
+  .pressable:active {
+    transform: scale(0.96);
+    background: var(--accent-primary-press);
+    box-shadow: none;
+  }
+
+  .pressable:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--accent-warm-glow);
+  }
+
+  .pressable.secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--hairline);
+  }
+
+  .pressable.secondary:hover {
+    background: var(--surface-elevated);
+    box-shadow: 0 2px 8px rgba(27,34,51,0.08);
+  }
+
+  .pressable.secondary:active {
+    background: var(--shimmer-base);
+    transform: scale(0.96);
+  }
+
+  /* ── Path Choice Card ── */
+  .path-card-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    max-width: 480px;
+    margin-top: 1rem;
+  }
+
+  .path-card {
+    background: var(--surface-elevated);
+    border: 1px solid var(--hairline);
+    border-radius: 16px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+    transform-style: preserve-3d;
+  }
+
+  .path-card:hover {
+    transform: perspective(600px) rotateY(-2deg) translateY(-2px);
+    box-shadow: 0 8px 24px rgba(27,34,51,0.1);
+  }
+
+  .path-card:active {
+    transform: scale(0.96);
+    box-shadow: none;
+  }
+
+  .path-card-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .path-card-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .path-card-sub {
+    font-size: var(--text-caption);
+    color: #666;
+  }
+
+  /* ── Confidence Badge ── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    background: var(--accent-primary);
+    color: white;
+    padding: 0.25rem 0.625rem;
+    border-radius: 100px;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+
+  /* ── Tape Progress ── */
+  .tape {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 1rem;
+  }
+
+  .tape-tick {
+    width: 32px;
+    height: 3px;
+    background: var(--hairline);
+    position: relative;
+    transition: background 180ms cubic-bezier(0.2,0,0,1);
+  }
+
+  .tape-tick.complete { background: var(--accent-primary); }
+  .tape-tick.current {
+    background: var(--accent-primary);
+    box-shadow: 0 0 6px var(--accent-warm-glow);
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 4px var(--accent-warm-glow); }
+    50% { box-shadow: 0 0 10px rgba(217,142,4,0.5); }
+  }
+
+  .tape-gap { width: 4px; }
+
+  /* ── Look Card ── */
+  .look-card {
+    background: var(--surface-elevated);
+    border: 1px solid var(--hairline);
+    border-radius: 16px;
+    overflow: hidden;
+    width: 200px;
+    cursor: pointer;
+    transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+    position: relative;
+  }
+
+  .look-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(27,34,51,0.1);
+  }
+
+  .look-card:active { transform: scale(0.96); }
+
+  .look-card-img {
+    height: 160px;
+    background: var(--shimmer-base);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .look-card-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, var(--shimmer-sweep), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .look-card-corner {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 16px;
+    height: 16px;
+    background: var(--canvas);
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+  }
+
+  .look-card-body {
+    padding: 0.75rem 1rem;
+  }
+
+  .look-card-name {
+    font-weight: 600;
+    font-size: var(--text-caption);
+    margin-bottom: 0.375rem;
+  }
+
+  /* ── Async State ── */
+  .async-states {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .async-chip {
+    padding: 0.375rem 0.875rem;
+    border-radius: 100px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .async-idle { background: var(--hairline); color: var(--ink); }
+  .async-loading { background: var(--accent-warm); color: white; }
+  .async-degraded { background: #F59E0B; color: white; }
+  .async-success { background: var(--positive); color: white; }
+  .async-error { background: var(--accent-primary); color: white; }
+
+  /* ── Stitch Line ── */
+  .stitch-demo {
+    margin-top: 1rem;
+    position: relative;
+    height: 40px;
+  }
+
+  .stitch-svg { width: 100%; height: 40px; }
+
+  .stitch-path {
+    stroke: var(--accent-primary);
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 800;
+    stroke-dashoffset: 800;
+    animation: drawStitch 800ms cubic-bezier(0.37, 0, 0.63, 1) forwards;
+    animation-delay: 0.3s;
+  }
+
+  @keyframes drawStitch {
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* ── Dark conversion surface ── */
+  .ink-surface {
+    background: var(--ink);
+    color: var(--canvas);
+    padding: 2rem;
+    border-radius: 16px;
+    margin-top: 1rem;
+    max-width: 360px;
+  }
+
+  .ink-surface h3 { color: var(--canvas); }
+
+  .otp-input {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .otp-digit {
+    width: 48px;
+    height: 56px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    color: var(--canvas);
+  }
+
+  .otp-digit.filled { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); }
+
+  .otp-countdown {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    color: var(--accent-warm);
+    margin-top: 0.75rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: sticky;
+    top: 0;
+    background: var(--canvas);
+    border-bottom: 1px solid var(--hairline);
+    padding: 1rem 2rem;
+    margin: -2rem -2rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    z-index: 100;
+  }
+
+  nav a {
+    font-size: var(--text-caption);
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 120ms ease-out;
+  }
+
+  nav a:hover { opacity: 1; }
+
+  .nav-brand {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--ink);
+    margin-right: auto;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+
+  .hero {
+    padding: 4rem 0 3rem;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    color: var(--accent-warm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .hero h1 { margin-bottom: 1rem; }
+
+  .hero-sub {
+    font-size: var(--text-body-l);
+    color: #555;
+    max-width: 560px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">GYF</span>
+  <a href="#colors">Colors</a>
+  <a href="#type">Type</a>
+  <a href="#motion">Motion</a>
+  <a href="#components">Components</a>
+  <a href="#async">Async</a>
+  <a href="#dark">Dark Surface</a>
+</nav>
+
+<div class="hero">
+  <span class="hero-eyebrow">Design System · v3.0.0</span>
+  <h1>Tailor's Bench</h1>
+  <p class="hero-sub">GYF's visual identity. A tailor's workbench: warm linen canvas, precise ink annotations, a single thread of Rani Pink. Not a fashion e-commerce app, not a SaaS dashboard.</p>
+</div>
+
+<!-- Colors -->
+<section class="section" id="colors">
+  <h2>Color</h2>
+
+  <h3>Surface Colors</h3>
+  <div class="swatches">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#E3E0D8;"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">canvas</span>
+        <span class="swatch-hex">#E3E0D8</span>
+        <span class="swatch-desc">Loom Grey — primary background</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#1B2233;"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">ink</span>
+        <span class="swatch-hex">#1B2233</span>
+        <span class="swatch-desc">Vat Indigo — text + conversion bg only</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#EDEAE2;"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">surface-elevated</span>
+        <span class="swatch-hex">#EDEAE2</span>
+        <span class="swatch-desc">Cards on hover/drag</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#D8D4CA;"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">shimmer-base</span>
+        <span class="swatch-hex">#D8D4CA</span>
+        <span class="swatch-desc">Skeleton base — warm, never grey</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#F0EDE5;"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">shimmer-sweep</span>
+        <span class="swatch-hex">#F0EDE5</span>
+        <span class="swatch-desc">Skeleton sweep highlight</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:2rem;">Accent Colors</h3>
+  <div class="swatches">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#C2185B;"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">accent-primary</span>
+        <span class="swatch-hex">#C2185B</span>
+        <span class="swatch-desc">Rani Pink — CTAs, badge, Stitch Line</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#9E1149;"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">accent-primary-press</span>
+        <span class="swatch-hex">#9E1149</span>
+        <span class="swatch-desc">Pressed state only</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#D98E04;"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">accent-warm</span>
+        <span class="swatch-hex">#D98E04</span>
+        <span class="swatch-desc">Haldi Gold — badges, highlights</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:rgba(217,142,4,0.35); border: 1px solid #BCB2A0;"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">accent-warm-glow</span>
+        <span class="swatch-hex">rgba(217,142,4,0.35)</span>
+        <span class="swatch-desc">Focus rings only — soft blur</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#5B7339;"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">positive</span>
+        <span class="swatch-hex">#5B7339</span>
+        <span class="swatch-desc">Mehendi Green — saved/confirmed</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#BCB2A0;"></div>
+      <div class="swatch-label">
+        <span class="swatch-name">hairline</span>
+        <span class="swatch-hex">#BCB2A0</span>
+        <span class="swatch-desc">Raw Thread — borders, tape ticks</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Typography -->
+<section class="section" id="type">
+  <h2>Typography</h2>
+
+  <div class="type-row">
+    <span class="type-meta">display-l · Fraunces · -2% tracking</span>
+    <span style="font-family:var(--font-display); font-size:var(--text-display-l); letter-spacing:-0.02em; font-weight:300;">Your look, stitched.</span>
+  </div>
+  <div class="type-row">
+    <span class="type-meta">display-s · Fraunces · -1% tracking</span>
+    <span style="font-family:var(--font-display); font-size:var(--text-display-s); letter-spacing:-0.01em; font-weight:300;">Outfit Groups</span>
+  </div>
+  <div class="type-row">
+    <span class="type-meta">body-l · General Sans · 1.5lh</span>
+    <span style="font-size:var(--text-body-l);">We read your tone, matched your silhouette.</span>
+  </div>
+  <div class="type-row">
+    <span class="type-meta">body · General Sans · 1.5lh</span>
+    <span style="font-size:var(--text-body);">Something that photographs well — festive but not over the top.</span>
+  </div>
+  <div class="type-row">
+    <span class="type-meta">caption · General Sans · 1.4lh</span>
+    <span style="font-size:var(--text-caption);">You can change this anytime.</span>
+  </div>
+  <div class="type-row">
+    <span class="type-meta">mono · Fragment Mono · tabular-nums</span>
+    <span style="font-family:var(--font-mono); font-size:var(--text-mono); font-variant-numeric:tabular-nums; color:var(--accent-primary);">87% · ₹2,400 · STEP 2 OF 4 · 0:28</span>
+  </div>
+</section>
+
+<!-- Motion -->
+<section class="section" id="motion">
+  <h2>Motion — Four Tiers</h2>
+
+  <div class="motion-grid">
+    <div class="motion-card">
+      <span class="motion-label">Tier 0</span>
+      <div class="motion-name">Settle</div>
+      <div class="motion-spec">
+        100–140ms<br>
+        ease-out<br>
+        scale 96% · lift 2px<br>
+        Universal floor
+      </div>
+    </div>
+    <div class="motion-card">
+      <span class="motion-label">Tier 2</span>
+      <div class="motion-name">Responsive</div>
+      <div class="motion-spec">
+        120–220ms<br>
+        cubic-bezier(0.2, 0, 0, 1)<br>
+        Input-coupled only<br>
+        Must feel instant
+      </div>
+    </div>
+    <div class="motion-card">
+      <span class="motion-label">Tier 3</span>
+      <div class="motion-name">Ambient</div>
+      <div class="motion-spec">
+        1.6–2.4s loop<br>
+        ease-in-out<br>
+        ≤5% delta<br>
+        Felt, not seen
+      </div>
+    </div>
+    <div class="motion-card">
+      <span class="motion-label">Tier 1</span>
+      <div class="motion-name">Signature</div>
+      <div class="motion-spec">
+        600–900ms<br>
+        hand-wobble curve<br>
+        Stitch Line only<br>
+        One use, one meaning
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:2rem;">Stitch Line (Tier 1 — Signature)</h3>
+  <div class="stitch-demo">
+    <svg class="stitch-svg" viewBox="0 0 800 40" preserveAspectRatio="none">
+      <path class="stitch-path" d="M 0 20 C 50 10, 100 30, 150 18 S 250 8, 300 20 S 400 32, 450 18 S 550 8, 600 22 S 700 30, 800 20" />
+    </svg>
+  </div>
+  <p style="font-size:var(--text-caption); color:#888; margin-top:0.5rem;">Reload page to replay. Never reused for secondary purposes.</p>
+</section>
+
+<!-- Components -->
+<section class="section" id="components">
+  <h2>Components</h2>
+
+  <h3>Pressable (shared primitive)</h3>
+  <p style="font-size:var(--text-caption); color:#888; margin-bottom:1rem;">Every tappable element composes this. Never hand-roll press states.</p>
+  <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+    <button class="pressable">Save Look</button>
+    <button class="pressable" style="background:var(--positive);">Saved ✓</button>
+    <button class="pressable secondary">Not for me</button>
+    <button class="pressable" disabled style="opacity:0.4; cursor:not-allowed;">Disabled</button>
+  </div>
+
+  <h3 style="margin-top:2rem;">PathChoiceCard (Welcome — §4.1)</h3>
+  <p style="font-size:var(--text-caption); color:#888; margin-bottom:0.5rem;">2° tilt toward cursor on hover. Disabled under prefers-reduced-motion.</p>
+  <div class="path-card-demo">
+    <div class="path-card">
+      <span class="path-card-icon">📷</span>
+      <div class="path-card-title">Use a photo</div>
+      <div class="path-card-sub">Upload or take one</div>
+    </div>
+    <div class="path-card">
+      <span class="path-card-icon">✍️</span>
+      <div class="path-card-title">Tell us directly</div>
+      <div class="path-card-sub">Answer a few questions</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:2rem;">TapeProgress (step-overlay — §12.3)</h3>
+  <div class="tape">
+    <div class="tape-tick complete"></div>
+    <div class="tape-gap"></div>
+    <div class="tape-tick complete"></div>
+    <div class="tape-gap"></div>
+    <div class="tape-tick current"></div>
+    <div class="tape-gap"></div>
+    <div class="tape-tick"></div>
+    <div class="tape-gap"></div>
+    <div class="tape-tick"></div>
+  </div>
+  <span style="font-family:var(--font-mono); font-size:var(--text-caption); color:#888; margin-top:0.5rem; display:block;">STEP 3 OF 5</span>
+
+  <h3 style="margin-top:2rem;">ConfidenceBadge + LookCard</h3>
+  <div style="display:flex; gap:1.5rem; align-items:flex-start; margin-top:0.5rem; flex-wrap:wrap;">
+    <div class="look-card">
+      <div class="look-card-img">
+        <div class="look-card-corner"></div>
+      </div>
+      <div class="look-card-body">
+        <div class="look-card-name">Evening Outfit A</div>
+        <span class="badge"><span class="badge-dot"></span>87%</span>
+      </div>
+    </div>
+    <div class="look-card">
+      <div class="look-card-img">
+        <div class="look-card-corner"></div>
+      </div>
+      <div class="look-card-body">
+        <div class="look-card-name">Evening Outfit B</div>
+        <span class="badge" style="background:var(--positive);"><span class="badge-dot"></span>92%</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:2rem;">Example Chips (§12.4 — occasion-tuned)</h3>
+  <p style="font-size:var(--text-caption); color:#888; margin-bottom:0.75rem;">Wedding-guest occasion. Rotates to match selected context.</p>
+  <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+    <span style="padding:0.375rem 0.875rem; background:var(--surface-elevated); border:1px solid var(--hairline); border-radius:100px; font-size:var(--text-caption); cursor:pointer;">something that photographs well</span>
+    <span style="padding:0.375rem 0.875rem; background:var(--surface-elevated); border:1px solid var(--hairline); border-radius:100px; font-size:var(--text-caption); cursor:pointer;">festive but not over the top</span>
+    <span style="padding:0.375rem 0.875rem; background:var(--accent-primary); color:white; border-radius:100px; font-size:var(--text-caption); cursor:pointer;">first time meeting the in-laws</span>
+  </div>
+</section>
+
+<!-- Async States -->
+<section class="section" id="async">
+  <h2>Async State Contract</h2>
+  <p style="margin-bottom:1rem; color:#555;">Every async boundary implements this. No ad-hoc handling.</p>
+
+  <div class="async-states">
+    <span class="async-chip async-idle">idle</span>
+    <span class="async-chip async-loading">loading</span>
+    <span class="async-chip async-degraded">degraded &gt;4s</span>
+    <span class="async-chip async-success">success</span>
+    <span class="async-chip async-error">error: network</span>
+    <span class="async-chip async-error">error: model</span>
+    <span class="async-chip async-error">error: validation</span>
+  </div>
+
+  <div style="margin-top:1.5rem; background:var(--surface-elevated); border:1px solid var(--hairline); border-radius:12px; padding:1.25rem;">
+    <h3>GeneratingState — UC12 Degradation Path</h3>
+    <div style="display:grid; grid-template-columns:auto 1fr; gap:0.5rem 1rem; margin-top:1rem; align-items:baseline;">
+      <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-warm);">0–4s</span>
+      <span style="font-size:var(--text-caption);">Reading your tone → Matching silhouettes → Stitching the look</span>
+      <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-warm);">&gt;4s</span>
+      <span style="font-size:var(--text-caption);">Status copy acknowledges delay</span>
+      <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-warm);">&gt;10s</span>
+      <span style="font-size:var(--text-caption);">Cached "popular for this occasion" set + "still personalizing" — never a dead spinner</span>
+    </div>
+  </div>
+</section>
+
+<!-- Dark Surface -->
+<section class="section" id="dark">
+  <h2>Dark Surface Exception</h2>
+  <p style="color:#555; margin-bottom:1rem;">The <code style="font-family:var(--font-mono);">ink</code> background is used <strong>only</strong> at guest→account conversion. It signals crossing from "browsing GYF" to "GYF knows who I am." Zero decoration — no Stitch Line, no corner-fold, no ambient motion.</p>
+
+  <div class="ink-surface">
+    <h3 style="margin-bottom:0.25rem;">Enter your number</h3>
+    <p style="font-size:var(--text-caption); color:rgba(227,224,216,0.6); margin-bottom:1rem;">We'll send a code to verify it's you.</p>
+
+    <div style="display:flex; align-items:center; gap:0.75rem; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:0.75rem 1rem;">
+      <span style="font-family:var(--font-mono); font-size:var(--text-body);">🇮🇳 +91</span>
+      <span style="color:rgba(255,255,255,0.2);">|</span>
+      <span style="font-family:var(--font-mono); font-size:var(--text-body); color:rgba(227,224,216,0.4);">98765 43210</span>
+    </div>
+
+    <div class="otp-input" style="margin-top:1.25rem;">
+      <div class="otp-digit filled">4</div>
+      <div class="otp-digit filled">2</div>
+      <div class="otp-digit filled">1</div>
+      <div class="otp-digit">_</div>
+      <div class="otp-digit">_</div>
+      <div class="otp-digit">_</div>
+    </div>
+
+    <div class="otp-countdown">Resend code in 0:28</div>
+
+    <button class="pressable" style="margin-top:1.25rem; width:100%; background:var(--accent-primary);">Verify</button>
+  </div>
+</section>
+
+<div style="height:4rem;"></div>
+
+</body>
+</html>

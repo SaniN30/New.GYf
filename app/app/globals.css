@@ -1,17 +1,47 @@
+/* General Sans via Bunny Fonts CDN — not on Google Fonts */
+@import url("https://fonts.bunny.net/css?family=general-sans:400,500,600&display=swap");
+
 @import "tailwindcss";
 
+/* ─── Tailor's Bench Design Token System ────────────────────── */
+/* All values mirror tokens.ts — this file must stay in sync.   */
+/* Never hardcode a hex or duration here — reference a variable. */
+
 :root {
-  --color-bg:           #FFFFFF;
-  --color-surface:      #F7F7F7;
-  --color-surface-2:    #EFEFEF;
-  --color-border:       rgba(0,0,0,0.08);
-  --color-text-primary: #0A0A0A;
-  --color-text-muted:   #6B6B6B;
-  --color-accent:       #1A1A1A;
-  --color-accent-2:     #444444;
+  /* Color tokens */
+  --canvas:              #E3E0D8;
+  --ink:                 #1B2233;
+  --accent-primary:      #C2185B;
+  --accent-warm:         #D98E04;
+  --positive:            #5B7339;
+  --hairline:            #BCB2A0;
+
+  /* Interaction-state tokens */
+  --accent-primary-press: #9E1149;
+  --accent-warm-glow:     rgba(217, 142, 4, 0.35);
+  --surface-elevated:     #EDEAE2;
+  --scrim:                rgba(27, 34, 51, 0.45);
+  --shimmer-base:         #D8D4CA;
+  --shimmer-sweep:        #F0EDE5;
+
+  /* Type scale */
+  --text-display-l: clamp(2.25rem, 6vw, 3.5rem);
+  --text-display-s: clamp(1.5rem, 4vw, 2rem);
+  --text-body-l:    1.125rem;
+  --text-body:      1rem;
+  --text-caption:   0.875rem;
+  --text-mono:      0.9375rem;
+
+  /* Motion tier durations */
+  --dur-settle:     120ms;
+  --dur-responsive: 180ms;
+  --dur-ambient:    2000ms;
+  --dur-signature:  750ms;
 }
 
-* {
+/* ─── Base ───────────────────────────────────────────────────── */
+
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
@@ -20,122 +50,105 @@ html {
 }
 
 body {
-  background-color: #FFFFFF;
-  color: #0A0A0A;
-  font-family: var(--font-body), sans-serif;
+  background-color: var(--canvas);
+  color: var(--ink);
+  font-family: "General Sans", system-ui, sans-serif;
+  font-size: var(--text-body);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Glassmorphism ─────────────────────────────────────────── */
+/* ─── Typography utilities ───────────────────────────────────── */
 
-.glass-card {
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  background: rgba(255, 255, 255, 0.90);
-  border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 24px;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+.text-display-l {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: var(--text-display-l);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
-/* ─── 3D Buttons ────────────────────────────────────────────── */
-
-.btn-3d {
-  border-radius: 50px;
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.20) inset,
-    0 -1px 0 rgba(0, 0, 0, 0.12) inset,
-    0 4px 16px rgba(0, 0, 0, 0.20);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.text-display-s {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: var(--text-display-s);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
 }
 
-.btn-3d:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.20) inset,
-    0 -1px 0 rgba(0, 0, 0, 0.12) inset,
-    0 8px 28px rgba(0, 0, 0, 0.30);
+.text-body-l {
+  font-size: var(--text-body-l);
+  line-height: 1.5;
 }
 
-/* ─── Bezels ─────────────────────────────────────────────────── */
-
-.bezel {
-  border-top: 1px solid rgba(255, 255, 255, 0.60);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.30) inset,
-    0 -1px 0 rgba(0, 0, 0, 0.06) inset;
+.text-caption {
+  font-size: var(--text-caption);
+  line-height: 1.4;
 }
 
-/* ─── Typography ─────────────────────────────────────────────── */
-
-.gradient-text {
-  background: linear-gradient(135deg, #1A1A1A, #555555);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.text-mono {
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-mono);
+  font-variant-numeric: tabular-nums;
 }
 
-.gradient-border-card {
-  border: 1px solid transparent;
-  background-clip: padding-box;
-  position: relative;
+/* ─── Focus ring ─────────────────────────────────────────────── */
+/* Haldi Gold glow — never a hard 2px outline */
+
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-warm-glow), 0 0 0 1px var(--accent-warm);
 }
 
-.gradient-border-card::before {
+/* ─── Skeleton shimmer ───────────────────────────────────────── */
+/* Warm, on-canvas shimmer — not generic grey */
+
+@keyframes shimmer-sweep {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--shimmer-base) 25%,
+    var(--shimmer-sweep) 50%,
+    var(--shimmer-base) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-sweep 1.6s ease-in-out infinite;
+}
+
+/* ─── Tape corner-fold ───────────────────────────────────────── */
+/* Signature GYF structural detail on LookCard */
+
+.corner-fold::after {
   content: '';
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(0,0,0,0.1), rgba(0,0,0,0.05));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-.glow-subtle {
-  box-shadow: 0 8px 40px rgba(0,0,0,0.08);
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-.shimmer-text {
-  background: linear-gradient(90deg, #1A1A1A, #555, #1A1A1A, #555);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 4s linear infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-}
-
-.float-anim { animation: float 4s ease-in-out infinite; }
-
-/* ─── Scan line animation for PerceptionLayer ──────────────── */
-
-@keyframes scanDown {
-  0%   { top: 0%; opacity: 1; }
-  90%  { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
-}
-
-.scan-line {
-  position: absolute;
-  left: 0;
+  bottom: 0;
   right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.6), transparent);
-  box-shadow: 0 0 12px 4px rgba(0,0,0,0.15);
-  animation: scanDown 2s ease-in-out forwards;
-  pointer-events: none;
-  z-index: 10;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(
+    135deg,
+    transparent 50%,
+    var(--hairline) 50%
+  );
+}
+
+/* ─── Ink surface (dark exception) ──────────────────────────── */
+/* Used ONLY on the guest→account conversion screen (UC7).       */
+/* Never use as a default background. */
+
+.surface-ink {
+  background-color: var(--ink);
+  color: var(--canvas);
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    background: var(--shimmer-base);
+  }
 }
