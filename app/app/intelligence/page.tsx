@@ -18,7 +18,7 @@ export default function IntelligencePage() {
           The mind behind the fit.
         </h1>
         <p className="text-gray-600 text-lg max-w-xl leading-relaxed">
-          Four AI pillars work together to give you styling intelligence that actually understands you.
+          GYF is an AI-first product — intelligence is the foundation, not a feature bolted on later. Six pillars work together: visual style understanding, deep personal-taste modelling, collective intelligence, generative on-body visualization, honest confidence, and a compounding stylist that gets sharper the more people it dresses. Click any pillar to go deeper.
         </p>
       </div>
       <Intelligence />

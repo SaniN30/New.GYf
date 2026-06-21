@@ -55,7 +55,7 @@ export default function FeaturesPage() {
             lineHeight: 1.7,
           }}
         >
-          Complete outfit generation, deep personalisation, virtual try-on, social style sharing, and honest AI confidence — all in one place.
+          From AI outfit generation and virtual try-on to natural-language styling goals, social style sharing, and a personal wardrobe — every capability a professional stylist brings, available to everyone instantly and for free.
         </p>
       </div>
       <WhatWeDo />

@@ -18,7 +18,7 @@ export default function HowItWorksPage() {
           Dressed in three steps.
         </h1>
         <p className="text-gray-600 text-lg max-w-xl leading-relaxed">
-          From your first visit to your best-dressed day — GYF builds complete, explained outfits and gets smarter with every interaction.
+          From your first visit to your best-dressed day — GYF builds complete, explained outfits and gets smarter with every interaction. Click each step to learn more, and discover why an AI-first approach is the only way to truly solve personal style.
         </p>
       </div>
       <HowItWorks />

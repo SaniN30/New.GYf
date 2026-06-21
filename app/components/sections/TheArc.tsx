@@ -2,75 +2,120 @@
 import { motion } from 'framer-motion'
 
 const phases = [
-  { num: '01', title: 'The Intelligent Stylist', desc: 'Complete outfit recommendations powered by AI taste modeling.', active: true },
-  { num: '02', title: 'The Perception Layer', desc: 'Upload your photo. GYF sees your body and builds around it.', active: false },
-  { num: '03', title: 'The Shopping Companion', desc: 'Buy what GYF recommends — curated, filtered, size-matched.', active: false },
-  { num: '04', title: 'The Ambient Stylist', desc: 'GYF knows your calendar, weather, and mood — and dresses you accordingly.', active: false },
-  { num: '05', title: 'Style as Infrastructure', desc: 'Your taste model travels everywhere. GYF as a platform.', active: false },
+  {
+    num: '01',
+    title: 'The Intelligent Stylist',
+    label: 'Launch',
+    desc: 'An AI that builds personalized, explained outfits from day one and learns from real user behaviour immediately. Complete outfit generation — top, bottom, footwear — with a clear stylist reason behind every look.',
+    active: true,
+  },
+  {
+    num: '02',
+    title: 'The Personal Taste Engine',
+    label: 'Coming Soon',
+    desc: "GYF knows your style deeply enough that its picks feel uncannily you. It styles around your real wardrobe and adapts to context — weather, event, mood. The more you use it, the more it matures.",
+    active: false,
+  },
+  {
+    num: '03',
+    title: 'The Shopping Companion',
+    label: 'Planned',
+    desc: 'GYF shops with you — across brands and retailers — recommending not just looks but the smartest things to buy to complete your wardrobe, within your budget. From inspiration to purchase in one place.',
+    active: false,
+  },
+  {
+    num: '04',
+    title: 'The Visualization Layer',
+    label: 'Planned',
+    desc: 'See any look realistically on yourself before committing. Select a complete outfit and see all three pieces rendered on your own body from your photo — removing the last barrier between inspiration and confidence.',
+    active: false,
+  },
+  {
+    num: '05',
+    title: 'The Ambient Stylist',
+    label: 'Vision',
+    desc: 'GYF becomes the default way people decide what to wear and what to buy — a trusted companion present wherever fashion decisions happen, getting smarter for everyone it serves.',
+    active: false,
+  },
 ]
 
 export default function TheArc() {
   return (
     <section className="py-16 sm:py-32 bg-white">
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
-        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.7}}
-          className="mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mb-16"
+        >
           <div className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Roadmap</div>
           <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-gray-900 leading-tight">The Arc</h2>
         </motion.div>
+
         <div className="relative">
-          {/* SVG animated vertical line */}
-          <svg className="absolute left-[22px] top-0 h-full w-px overflow-visible" viewBox="0 0 1 100" preserveAspectRatio="none">
-            <motion.line
-              x1="0" y1="0" x2="0" y2="100"
-              stroke="url(#arcGrad)"
-              strokeWidth="40"
-              initial={{ pathLength: 0 }}
-              whileInView={{ pathLength: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.5, ease: 'easeOut' }}
-            />
-            <defs>
-              <linearGradient id="arcGrad" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
-                <stop offset="0%" stopColor="#1A1A1A" stopOpacity="0.6" />
-                <stop offset="60%" stopColor="#1A1A1A" stopOpacity="0.15" />
-                <stop offset="100%" stopColor="#1A1A1A" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-gray-900/40 via-gray-400/20 to-transparent" />
+          {/* Animated vertical line */}
+          <motion.div
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.6, ease: 'easeOut' }}
+            className="absolute left-[15px] top-3 bottom-3 w-px bg-gradient-to-b from-gray-900 via-gray-400/40 to-transparent origin-top"
+          />
+
           <div className="space-y-0">
             {phases.map((phase, i) => (
-              <motion.div key={phase.num} initial={{opacity:0,x:-20}} whileInView={{opacity:1,x:0}} viewport={{once:true}} transition={{duration:0.6,delay:i*0.1}}
-                className="flex gap-6 sm:gap-8 pb-10 sm:pb-12 pl-12 sm:pl-16 relative">
-                {/* dot */}
+              <motion.div
+                key={phase.num}
+                initial={{ opacity: 0, x: -24 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.12 }}
+                className="relative pl-14 sm:pl-16 pb-12 sm:pb-16"
+              >
+                {/* Dot */}
                 <motion.div
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.2 + i * 0.1, type: 'spring', stiffness: 300 }}
-                  className={`absolute left-[18px] top-1 w-3.5 h-3.5 rounded-full border-2 flex-shrink-0 ${
+                  transition={{ delay: 0.25 + i * 0.12, type: 'spring', stiffness: 280 }}
+                  className={`absolute left-[8px] top-2 w-4 h-4 rounded-full border-2 flex-shrink-0 transition-colors ${
                     phase.active
-                      ? 'border-gray-900 bg-gray-900'
+                      ? 'border-gray-900 bg-gray-900 ring-4 ring-gray-900/10'
                       : 'border-gray-300 bg-white'
-                  } ${phase.active ? 'ring-4 ring-gray-900/10' : ''}`}
+                  }`}
                 />
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-xs font-mono text-gray-400">{phase.num}</span>
-                    <h3 className={`font-bold ${phase.active ? 'text-gray-900' : 'text-gray-500'}`}>{phase.title}</h3>
-                    {phase.active && (
-                      <motion.span
-                        animate={{ opacity: [1, 0.5, 1] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                        className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-gray-900 text-white border border-gray-800"
-                      >
-                        LIVE
-                      </motion.span>
-                    )}
-                  </div>
-                  <p className="text-sm leading-relaxed text-gray-500">{phase.desc}</p>
+
+                {/* Phase number */}
+                <div className="text-[clamp(2.5rem,4.5vw,3.5rem)] font-black font-mono leading-none text-gray-100 mb-3 select-none">
+                  {phase.num}
                 </div>
+
+                {/* Header row */}
+                <div className="flex flex-wrap items-center gap-3 mb-3">
+                  <h3 className={`text-lg sm:text-xl font-bold leading-tight ${phase.active ? 'text-gray-900' : 'text-gray-600'}`}>
+                    {phase.title}
+                  </h3>
+                  {phase.active ? (
+                    <motion.span
+                      animate={{ opacity: [1, 0.5, 1] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                      className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-gray-900 text-white uppercase tracking-widest"
+                    >
+                      Live
+                    </motion.span>
+                  ) : (
+                    <span className="text-[10px] font-mono px-2.5 py-1 rounded-full border border-gray-200 text-gray-400 uppercase tracking-widest">
+                      {phase.label}
+                    </span>
+                  )}
+                </div>
+
+                {/* Description */}
+                <p className={`text-base leading-relaxed max-w-xl ${phase.active ? 'text-gray-600' : 'text-gray-400'}`}>
+                  {phase.desc}
+                </p>
               </motion.div>
             ))}
           </div>

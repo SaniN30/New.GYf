@@ -20,7 +20,7 @@ export default function VisionPage() {
           A universal personal stylist. Free, instant, yours.
         </h1>
         <p className="text-gray-600 text-lg max-w-xl leading-relaxed">
-          A personal stylist has always been a luxury. GYF makes that intelligence universal — a compounding system that gets smarter for every person it dresses.
+          A personal stylist has always been a luxury for the few. GYF makes that intelligence universal — a compounding system that gets smarter for every person it dresses, grounded in four core missions and built toward a five-phase arc.
         </p>
       </div>
       <Vision />

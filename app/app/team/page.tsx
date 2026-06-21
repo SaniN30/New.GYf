@@ -311,10 +311,8 @@ export default function TeamPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-              gap: "1px",
-              background: "var(--rule)",
-              border: "1px solid var(--rule)",
+              gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+              gap: "1.25rem",
             }}
           >
             {values.map(({ label, body, icon }, i) => (
@@ -323,34 +321,43 @@ export default function TeamPage() {
                 onMouseEnter={() => setHoveredValue(i)}
                 onMouseLeave={() => setHoveredValue(null)}
                 style={{
-                  background: hoveredValue === i ? "var(--wash)" : "var(--bg)",
-                  padding: "2rem",
+                  background: hoveredValue === i ? "var(--accent)" : "var(--bg)",
+                  border: "1px solid",
+                  borderColor: hoveredValue === i ? "var(--accent)" : "var(--rule)",
+                  borderRadius: "16px",
+                  padding: "2.5rem",
                   display: "flex",
                   flexDirection: "column",
-                  gap: "0.85rem",
-                  transition: "background 0.22s ease",
+                  gap: "1rem",
+                  transition: "all 0.28s ease",
                   cursor: "default",
                   position: "relative",
                   overflow: "hidden",
+                  boxShadow: hoveredValue === i ? "0 20px 50px rgba(0,0,0,0.15)" : "none",
+                  transform: hoveredValue === i ? "translateY(-4px)" : "translateY(0)",
                 }}
               >
+                {/* Large number accent */}
                 <div
                   style={{
                     position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "2px",
-                    background: "var(--accent)",
-                    transform: hoveredValue === i ? "scaleX(1)" : "scaleX(0)",
-                    transformOrigin: "left",
-                    transition: "transform 0.3s ease",
+                    top: "-0.5rem",
+                    right: "1.5rem",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "5rem",
+                    fontWeight: 900,
+                    color: hoveredValue === i ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)",
+                    lineHeight: 1,
+                    userSelect: "none",
+                    transition: "color 0.28s ease",
                   }}
-                />
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </div>
                 <span
                   style={{
-                    color: hoveredValue === i ? "var(--accent)" : "var(--mid)",
-                    transition: "color 0.22s",
+                    color: hoveredValue === i ? "rgba(255,255,255,0.9)" : "var(--mid)",
+                    transition: "color 0.28s",
                     display: "flex",
                   }}
                 >
@@ -359,10 +366,11 @@ export default function TeamPage() {
                 <div
                   style={{
                     fontFamily: "var(--font-display), sans-serif",
-                    fontSize: "1.05rem",
+                    fontSize: "1.2rem",
                     fontWeight: 500,
-                    color: "var(--text)",
+                    color: hoveredValue === i ? "#fff" : "var(--text)",
                     letterSpacing: "-0.01em",
+                    transition: "color 0.28s ease",
                   }}
                 >
                   {label}
@@ -370,10 +378,11 @@ export default function TeamPage() {
                 <p
                   style={{
                     fontFamily: "var(--font-body), sans-serif",
-                    fontSize: "0.875rem",
-                    color: "var(--mid)",
+                    fontSize: "0.9rem",
+                    color: hoveredValue === i ? "rgba(255,255,255,0.7)" : "var(--mid)",
                     lineHeight: 1.7,
                     margin: 0,
+                    transition: "color 0.28s ease",
                   }}
                 >
                   {body}
