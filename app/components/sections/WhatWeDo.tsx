@@ -224,8 +224,13 @@ function FeatureCard({
         rotateX: isExpanded ? 0 : rotateX,
         rotateY: isExpanded ? 0 : rotateY,
         perspective: 900,
-        transformStyle: 'preserve-3d',
+        transformStyle: 'preserve-3d' as React.CSSProperties['transformStyle'],
         zIndex: isExpanded ? 10 : isHovered ? 5 : 1,
+        boxShadow: isExpanded
+          ? `0 24px 80px rgba(17,19,24,0.35), 0 4px 16px rgba(17,19,24,0.2), 0 0 0 1px ${feature.accent}33`
+          : isHovered
+          ? `0 16px 48px rgba(17,19,24,0.14), 0 4px 12px rgba(17,19,24,0.08), inset 0 1px 0 rgba(255,255,255,0.8), 0 0 0 1px ${feature.accent}20`
+          : '0 1px 4px rgba(17,19,24,0.04), inset 0 1px 0 rgba(255,255,255,0.6)',
       }}
       animate={{
         y: isExpanded ? 0 : isHovered ? -8 : 0,
@@ -235,23 +240,9 @@ function FeatureCard({
       whileTap={{ scale: isExpanded ? 1 : 0.975 }}
       className={`rounded-2xl border cursor-pointer overflow-hidden relative select-none ${
         isExpanded
-          ? 'bg-[#111318] border-[#111318] shadow-[0_24px_80px_rgba(17,19,24,0.35),0_4px_16px_rgba(17,19,24,0.2)] col-span-1 sm:col-span-2'
+          ? 'bg-[#111318] border-[#111318] col-span-1 sm:col-span-2'
           : 'bg-white border-black/[0.08]'
       }`}
-      style={{
-        ...({
-          rotateX: isExpanded ? 0 : rotateX,
-          rotateY: isExpanded ? 0 : rotateY,
-          perspective: 900,
-          transformStyle: 'preserve-3d',
-          zIndex: isExpanded ? 10 : isHovered ? 5 : 1,
-          boxShadow: isExpanded
-            ? `0 24px 80px rgba(17,19,24,0.35), 0 4px 16px rgba(17,19,24,0.2), 0 0 0 1px ${feature.accent}33`
-            : isHovered
-            ? `0 16px 48px rgba(17,19,24,0.14), 0 4px 12px rgba(17,19,24,0.08), inset 0 1px 0 rgba(255,255,255,0.8), 0 0 0 1px ${feature.accent}20`
-            : '0 1px 4px rgba(17,19,24,0.04), inset 0 1px 0 rgba(255,255,255,0.6)',
-        } as React.CSSProperties),
-      }}
     >
       {/* Cursor-tracking spotlight (idle/hover only) */}
       {!isExpanded && (
