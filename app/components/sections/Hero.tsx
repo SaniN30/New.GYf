@@ -105,14 +105,14 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.025]"
         style={{ backgroundImage: 'linear-gradient(#111318 1px, transparent 1px), linear-gradient(90deg, #111318 1px, transparent 1px)', backgroundSize: '64px 64px' }} />
 
-      <motion.div style={{ y }} className="relative z-10 text-center max-w-5xl mx-auto px-5 sm:px-8 pt-28 sm:pt-48 pb-12 sm:pb-24">
+      <motion.div style={{ y }} className="relative z-10 text-center max-w-5xl mx-auto px-4 sm:px-8 pt-20 sm:pt-48 pb-8 sm:pb-24">
 
         {/* ── Premium Early Access badge ── */}
         <motion.div
           initial={{ opacity: 0, y: 16, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-block mb-10"
+          className="inline-block mb-6 sm:mb-10"
         >
           <motion.a
             href="/#cta"
@@ -214,7 +214,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[clamp(0.9375rem,2.5vw,1.2rem)] text-[#3d3d48] max-w-2xl mx-auto mb-10 leading-[1.7] mt-5 sm:mt-7 font-[350] px-2 sm:px-0"
+          className="text-[clamp(0.9375rem,2.5vw,1.2rem)] text-[#3d3d48] max-w-2xl mx-auto mb-7 sm:mb-10 leading-[1.7] mt-4 sm:mt-7 font-[350] px-2 sm:px-0"
         >
           GYF reads your body, learns your taste, and builds complete outfits in real time — no stylist, no guesswork.
         </motion.p>
@@ -224,7 +224,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.95, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center justify-center gap-3 mb-10 sm:mb-14"
+          className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 mb-8 sm:mb-14"
         >
           <a href="#perception" className="btn-3d w-full sm:w-auto px-8 py-4 font-semibold text-[0.9375rem] text-white bg-[#111318] hover:bg-[#1e2230] text-center">
             Try Perception Layer
@@ -235,7 +235,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Tag cloud */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12 sm:mb-20">
+        <div className="flex flex-wrap justify-center gap-2 mb-8 sm:mb-20">
           {tags.map((tag, i) => (
             <motion.span
               key={tag}

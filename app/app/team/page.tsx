@@ -1,34 +1,36 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import CTABanner from "@/components/sections/CTABanner";
-import AnimatedHeading from "@/components/AnimatedHeading";
+import { useState } from 'react'
+import Navbar from '@/components/layout/Navbar'
+import Footer from '@/components/layout/Footer'
+import CTABanner from '@/components/sections/CTABanner'
+import AnimatedHeading from '@/components/AnimatedHeading'
 
 const team = [
   {
-    name: "Sanidhya Nautiyal",
-    role: "Co-founder & CEO",
-    bio: "Sanidhya leads GYF's product vision, strategy, and growth. Driven by the belief that great personal style shouldn't be a luxury, he's building the intelligence layer that makes every person their own stylist — free, instant, and deeply personal.",
-    initials: "SN",
+    name: 'Sanidhya Nautiyal',
+    role: 'Co-founder & CEO',
+    bio: 'Sanidhya leads GYF\'s product vision, strategy, and growth. Driven by the belief that great personal style shouldn\'t be a luxury, he\'s building the intelligence layer that makes every person their own stylist — free, instant, and deeply personal.',
+    initials: 'SN',
   },
   {
-    name: "Atharv Motghare",
-    role: "Co-founder & CTO",
-    bio: "Atharv architects the AI and engineering backbone of GYF. He translates complex machine learning research into real, scalable products — from visual style understanding to personal taste modelling — ensuring GYF's intelligence compounds with every user interaction.",
-    initials: "AM",
+    name: 'Atharv Motghare',
+    role: 'Co-founder & CTO',
+    bio: 'Atharv architects the AI and engineering backbone of GYF. He translates complex machine learning research into real, scalable products — from visual style understanding to personal taste modelling — ensuring GYF\'s intelligence compounds with every user interaction.',
+    initials: 'AM',
   },
   {
-    name: "Aryan Kumar",
-    role: "Lead Engineer",
-    bio: "Aryan drives GYF's frontend and fullstack engineering. He crafts the interfaces and systems that make GYF feel as sharp as it looks — high-quality, performant, and built to scale.",
-    initials: "AK",
+    name: 'Aryan Kumar',
+    role: 'Lead Engineer',
+    bio: 'Aryan drives GYF\'s frontend and fullstack engineering. He crafts the interfaces and systems that make GYF feel as sharp as it looks — high-quality, performant, and built to scale.',
+    initials: 'AK',
   },
-];
+]
 
 const values = [
   {
-    label: "AI-First",
-    body: "Intelligence is the foundation of everything we build — not a feature added later.",
+    label: 'AI-First',
+    body: 'Intelligence is the foundation of everything we build — not a feature added later.',
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
@@ -36,8 +38,8 @@ const values = [
     ),
   },
   {
-    label: "Trust-First",
-    body: "Every recommendation is explainable and honest about its confidence. Transparency and sophistication advance together.",
+    label: 'Trust-First',
+    body: 'Every recommendation is explainable and honest about its confidence.',
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -45,8 +47,8 @@ const values = [
     ),
   },
   {
-    label: "People-First",
-    body: "Deeply personal, private by design, and built to feel like it was made specifically for you.",
+    label: 'People-First',
+    body: 'Deeply personal, private by design, and built to feel like it was made specifically for you.',
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
@@ -54,330 +56,99 @@ const values = [
     ),
   },
   {
-    label: "Quality-First",
-    body: "We evaluate continuously so recommendation quality provably improves — we never silently regress.",
+    label: 'Quality-First',
+    body: 'We evaluate continuously so recommendation quality provably improves — we never silently regress.',
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
       </svg>
     ),
   },
-];
+]
 
 export default function TeamPage() {
-  const [hoveredMember, setHoveredMember] = useState<number | null>(null);
-  const [hoveredValue, setHoveredValue] = useState<number | null>(null);
+  const [hoveredMember, setHoveredMember] = useState<number | null>(null)
 
   return (
-    <div>
-      {/* Page header */}
-      <div
-        className="page-header"
-        style={{
-          paddingTop: "140px",
-          paddingBottom: "4rem",
-          paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
-          paddingRight: "clamp(1.5rem, 5vw, 5rem)",
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: "0.6rem",
-            letterSpacing: "0.22em",
-            textTransform: "uppercase",
-            color: "var(--mid)",
-            marginBottom: "1.5rem",
-          }}
-        >
-          The Team
-        </p>
+    <div className="bg-white min-h-screen">
+      <Navbar />
+
+      {/* Header */}
+      <div className="pt-32 sm:pt-44 pb-10 sm:pb-14 max-w-5xl mx-auto px-5 sm:px-8">
+        <p className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">The Team</p>
         <AnimatedHeading
           text="Meet the people building GYF."
-          className="text-[clamp(2.8rem,7vw,6rem)] font-black text-gray-900 leading-tight mb-6 max-w-[700px]"
+          className="text-[clamp(2.2rem,7vw,5rem)] font-black text-gray-900 leading-tight mb-5"
         />
-        <p
-          style={{
-            fontFamily: "var(--font-body), sans-serif",
-            fontSize: "clamp(1rem, 1.5vw, 1.15rem)",
-            color: "var(--mid)",
-            maxWidth: "520px",
-            lineHeight: 1.7,
-          }}
-        >
+        <p className="text-gray-600 text-base sm:text-lg max-w-xl leading-relaxed">
           A small, focused team on a big mission — making the intelligence of a personal stylist available to everyone, free and instant.
         </p>
       </div>
 
       {/* Team grid */}
-      <section style={{ padding: "0 clamp(1.5rem, 5vw, 5rem) 6rem" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-              gap: "1px",
-              background: "var(--rule)",
-              border: "1px solid var(--rule)",
-            }}
-          >
-            {team.map(({ name, role, bio, initials }, i) => (
-              <div
-                key={name}
-                onMouseEnter={() => setHoveredMember(i)}
-                onMouseLeave={() => setHoveredMember(null)}
-                style={{
-                  background: hoveredMember === i ? "var(--wash)" : "var(--bg)",
-                  padding: "2.5rem",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "1.25rem",
-                  transition: "background 0.22s ease",
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "2px",
-                    height: "100%",
-                    background: "var(--accent)",
-                    transform: hoveredMember === i ? "scaleY(1)" : "scaleY(0)",
-                    transformOrigin: "top",
-                    transition: "transform 0.3s ease",
-                  }}
-                />
-                <div
-                  style={{
-                    width: "52px",
-                    height: "52px",
-                    borderRadius: "50%",
-                    background: hoveredMember === i ? "var(--accent)" : "var(--surface)",
-                    border: "1px solid var(--rule)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: "var(--font-display)",
-                    fontSize: "1rem",
-                    fontWeight: 500,
-                    color: hoveredMember === i ? "var(--bg)" : "var(--mid)",
-                    letterSpacing: "0.02em",
-                    transition: "all 0.25s ease",
-                  }}
-                >
-                  {initials}
-                </div>
-                <div>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-display), sans-serif",
-                      fontSize: "1.3rem",
-                      fontWeight: 400,
-                      color: "var(--text)",
-                      letterSpacing: "-0.01em",
-                      marginBottom: "0.3rem",
-                    }}
-                  >
-                    {name}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.6rem",
-                      letterSpacing: "0.18em",
-                      textTransform: "uppercase",
-                      color: "var(--accent)",
-                    }}
-                  >
-                    {role}
-                  </div>
-                </div>
-                <p
-                  style={{
-                    fontFamily: "var(--font-body), sans-serif",
-                    fontSize: "0.9rem",
-                    color: "var(--mid)",
-                    lineHeight: 1.7,
-                    margin: 0,
-                  }}
-                >
-                  {bio}
-                </p>
-              </div>
-            ))}
-
-            {/* Open roles card */}
+      <section className="max-w-5xl mx-auto px-5 sm:px-8 pb-16 sm:pb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-black/[0.06] rounded-2xl overflow-hidden border border-black/[0.06]">
+          {team.map(({ name, role, bio, initials }, i) => (
             <div
-              style={{
-                border: "none",
-                background: "var(--surface)",
-                padding: "2.5rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem",
-                justifyContent: "center",
-              }}
+              key={name}
+              onMouseEnter={() => setHoveredMember(i)}
+              onMouseLeave={() => setHoveredMember(null)}
+              className="relative bg-white p-6 sm:p-8 flex flex-col gap-4 transition-colors duration-200 hover:bg-[#fafaf8]"
             >
+              {/* accent bar */}
               <div
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: "0.6rem",
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "var(--mid)",
-                }}
-              >
-                We&apos;re growing
-              </div>
+                className="absolute top-0 left-0 w-0.5 h-full bg-[#111318] origin-top transition-transform duration-300"
+                style={{ transform: hoveredMember === i ? 'scaleY(1)' : 'scaleY(0)' }}
+              />
               <div
+                className="w-12 h-12 rounded-full border border-black/[0.08] flex items-center justify-center text-sm font-semibold font-mono transition-colors duration-200 flex-shrink-0"
                 style={{
-                  fontFamily: "var(--font-display), sans-serif",
-                  fontSize: "1.3rem",
-                  fontWeight: 400,
-                  color: "var(--text)",
-                  letterSpacing: "-0.01em",
-                  lineHeight: 1.25,
+                  background: hoveredMember === i ? '#111318' : '#F7F6F3',
+                  color: hoveredMember === i ? '#fff' : '#5a5a65',
                 }}
               >
-                Want to help build the future of personal style?
+                {initials}
               </div>
-              <p
-                style={{
-                  fontFamily: "var(--font-body), sans-serif",
-                  fontSize: "0.9rem",
-                  color: "var(--mid)",
-                  lineHeight: 1.7,
-                  margin: 0,
-                }}
-              >
-                We&apos;re looking for people who care deeply about AI, fashion, and building products that genuinely improve people&apos;s lives.
-              </p>
-              <a
-                href="mailto:gyf1ltd@gmail.com"
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: "0.65rem",
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "var(--accent)",
-                  textDecoration: "none",
-                  marginTop: "0.5rem",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                }}
-              >
-                Get in touch →
-              </a>
+              <div>
+                <div className="text-[1.05rem] font-semibold text-[#111318] mb-0.5">{name}</div>
+                <div className="text-[0.62rem] font-mono uppercase tracking-[0.14em] text-[#C2185B]">{role}</div>
+              </div>
+              <p className="text-[0.875rem] text-[#5a5a65] leading-[1.75]">{bio}</p>
             </div>
+          ))}
+
+          {/* Open roles card */}
+          <div className="bg-[#F7F6F3] p-6 sm:p-8 flex flex-col gap-3 justify-center">
+            <div className="text-[0.6rem] font-mono uppercase tracking-[0.18em] text-[#9ca3af]">We&apos;re growing</div>
+            <div className="text-[1.05rem] font-semibold text-[#111318] leading-snug">
+              Want to help build the future of personal style?
+            </div>
+            <p className="text-[0.875rem] text-[#5a5a65] leading-[1.7]">
+              We&apos;re looking for people who care deeply about AI, fashion, and building products that genuinely improve people&apos;s lives.
+            </p>
+            <a
+              href="mailto:gyf1ltd@gmail.com"
+              className="text-[0.65rem] font-mono uppercase tracking-[0.18em] text-[#C2185B] hover:text-[#9E1149] transition-colors mt-1"
+            >
+              Get in touch →
+            </a>
           </div>
         </div>
       </section>
 
-      {/* What We Stand For */}
-      <section
-        style={{
-          padding: "5rem clamp(1.5rem, 5vw, 5rem)",
-          borderTop: "1px solid var(--rule)",
-        }}
-      >
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <p
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.6rem",
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color: "var(--mid)",
-              marginBottom: "3rem",
-            }}
-          >
-            What we stand for
-          </p>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-              gap: "1.25rem",
-            }}
-          >
-            {values.map(({ label, body, icon }, i) => (
+      {/* What we stand for */}
+      <section className="border-t border-black/[0.05] py-16 sm:py-24 bg-[#fafaf8]">
+        <div className="max-w-5xl mx-auto px-5 sm:px-8">
+          <p className="text-[0.6rem] font-mono uppercase tracking-[0.22em] text-[#9ca3af] mb-8 sm:mb-12">What we stand for</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {values.map(({ label, body, icon }) => (
               <div
                 key={label}
-                onMouseEnter={() => setHoveredValue(i)}
-                onMouseLeave={() => setHoveredValue(null)}
-                style={{
-                  background: hoveredValue === i ? "var(--accent)" : "var(--bg)",
-                  border: "1px solid",
-                  borderColor: hoveredValue === i ? "var(--accent)" : "var(--rule)",
-                  borderRadius: "16px",
-                  padding: "2.5rem",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "1rem",
-                  transition: "all 0.28s ease",
-                  cursor: "default",
-                  position: "relative",
-                  overflow: "hidden",
-                  boxShadow: hoveredValue === i ? "0 20px 50px rgba(0,0,0,0.15)" : "none",
-                  transform: hoveredValue === i ? "translateY(-4px)" : "translateY(0)",
-                }}
+                className="bg-white border border-black/[0.07] rounded-2xl p-5 sm:p-6 flex flex-col gap-3"
               >
-                {/* Large number accent */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "-0.5rem",
-                    right: "1.5rem",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "5rem",
-                    fontWeight: 900,
-                    color: hoveredValue === i ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)",
-                    lineHeight: 1,
-                    userSelect: "none",
-                    transition: "color 0.28s ease",
-                  }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-                <span
-                  style={{
-                    color: hoveredValue === i ? "rgba(255,255,255,0.9)" : "var(--mid)",
-                    transition: "color 0.28s",
-                    display: "flex",
-                  }}
-                >
-                  {icon}
-                </span>
-                <div
-                  style={{
-                    fontFamily: "var(--font-display), sans-serif",
-                    fontSize: "1.2rem",
-                    fontWeight: 500,
-                    color: hoveredValue === i ? "#fff" : "var(--text)",
-                    letterSpacing: "-0.01em",
-                    transition: "color 0.28s ease",
-                  }}
-                >
-                  {label}
-                </div>
-                <p
-                  style={{
-                    fontFamily: "var(--font-body), sans-serif",
-                    fontSize: "0.9rem",
-                    color: hoveredValue === i ? "rgba(255,255,255,0.7)" : "var(--mid)",
-                    lineHeight: 1.7,
-                    margin: 0,
-                    transition: "color 0.28s ease",
-                  }}
-                >
-                  {body}
-                </p>
+                <span className="text-[#5a5a65]">{icon}</span>
+                <div className="text-[0.9375rem] font-semibold text-[#111318]">{label}</div>
+                <p className="text-[0.875rem] text-[#5a5a65] leading-[1.7]">{body}</p>
               </div>
             ))}
           </div>
@@ -385,6 +156,7 @@ export default function TeamPage() {
       </section>
 
       <CTABanner />
+      <Footer />
     </div>
-  );
+  )
 }

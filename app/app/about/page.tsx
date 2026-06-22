@@ -318,11 +318,11 @@ export default function AboutPage() {
 
           <AnimatedHeading
             text="An intelligence built to dress you —"
-            className="text-[clamp(2.4rem,6vw,5rem)] font-black text-[#111318] leading-[1.02] tracking-tight"
+            className="text-[clamp(1.9rem,6vw,5rem)] font-black text-[#111318] leading-[1.02] tracking-tight"
           />
           <AnimatedHeading
             text="not the average person."
-            className="text-[clamp(2.4rem,6vw,5rem)] font-black text-[#111318] leading-[1.02] tracking-tight mb-10"
+            className="text-[clamp(1.9rem,6vw,5rem)] font-black text-[#111318] leading-[1.02] tracking-tight mb-8 sm:mb-10"
           />
 
           <motion.p
