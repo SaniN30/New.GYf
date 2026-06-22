@@ -46,7 +46,7 @@ export default function Navbar() {
                 alt="GYF"
                 width={200}
                 height={200}
-                className="h-10 sm:h-[90px] md:h-[120px] w-auto transition-all duration-300 group-hover:brightness-90"
+                className="h-[120px] sm:h-[180px] md:h-[230px] w-auto transition-all duration-300 group-hover:brightness-90"
                 priority
               />
             </div>
