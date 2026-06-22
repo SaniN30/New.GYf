@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const links = [
   { href: '/how-it-works', label: 'How It Works' },
-  { href: '/perception', label: 'Perception Layer' },
+  { href: '/perception', label: 'Demo' },
   { href: '/vision', label: 'Vision' },
   { href: '/intelligence', label: 'Intelligence' },
   { href: '/about', label: 'About' },
