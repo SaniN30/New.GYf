@@ -113,8 +113,8 @@ function MagneticWrapper({ children }: { children: React.ReactNode }) {
     const rect = ref.current.getBoundingClientRect()
     const cx = rect.left + rect.width / 2
     const cy = rect.top + rect.height / 2
-    x.set((e.clientX - cx) * 0.35)
-    y.set((e.clientY - cy) * 0.35)
+    x.set((e.clientX - cx) * 0.12)
+    y.set((e.clientY - cy) * 0.12)
   }
   const reset = () => { x.set(0); y.set(0) }
 
@@ -180,7 +180,7 @@ function PillarCard({ pillar, index }: { pillar: typeof PILLARS[0]; index: numbe
           ? `0 8px 40px rgba(0,0,0,0.1), 0 0 0 1px ${pillar.accent}22`
           : '0 1px 4px rgba(0,0,0,0.04)',
       }}
-      whileHover={{ y: -3 }}
+      whileHover={{ y: -1 }}
     >
       {/* accent bar */}
       <motion.div
@@ -256,7 +256,7 @@ function ValueCard({ v, index }: { v: typeof VALUES[0]; index: number }) {
       transition={{ duration: 0.55, delay: index * 0.1 }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
-      whileHover={{ y: -4 }}
+      whileHover={{ y: -2 }}
       className="relative p-6 rounded-2xl border border-black/[0.07] bg-white overflow-hidden"
     >
       <motion.div
@@ -438,7 +438,7 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.55, delay: i * 0.07 }}
-              whileHover={{ x: 6 }}
+              whileHover={{ x: 3 }}
               className="group flex gap-6 sm:gap-10 py-6 border-b border-black/[0.05] last:border-0 cursor-default"
             >
               <div className="flex-shrink-0 w-10 text-right">

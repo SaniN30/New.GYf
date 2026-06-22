@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { fraunces, fragmentMono, plusJakarta } from "@/lib/fonts";
+import ScrollReset from "@/components/ScrollReset";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,7 +21,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${fraunces.variable} ${fragmentMono.variable} ${plusJakarta.variable}`}>
-      <body>{children}</body>
+      <body>
+        <ScrollReset />
+        {children}
+      </body>
     </html>
   );
 }

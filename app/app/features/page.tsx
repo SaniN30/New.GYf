@@ -1,5 +1,6 @@
 import WhatWeDo from "@/components/sections/WhatWeDo";
 import CTABanner from "@/components/sections/CTABanner";
+import AnimatedHeading from "@/components/AnimatedHeading";
 
 export const metadata = {
   title: "Features — GYF",
@@ -32,20 +33,10 @@ export default function FeaturesPage() {
         >
           Features
         </p>
-        <h1
-          style={{
-            fontFamily: "var(--font-display), sans-serif",
-            fontSize: "clamp(2.8rem, 7vw, 6rem)",
-            fontWeight: 400,
-            color: "var(--text)",
-            lineHeight: 1.05,
-            letterSpacing: "-0.03em",
-            maxWidth: "700px",
-            marginBottom: "1.5rem",
-          }}
-        >
-          Everything a personal stylist does — at scale.
-        </h1>
+        <AnimatedHeading
+          text="Everything a personal stylist does — at scale."
+          className="text-[clamp(2.8rem,7vw,6rem)] font-black text-gray-900 leading-tight mb-6 max-w-[700px]"
+        />
         <p
           style={{
             fontFamily: "var(--font-body), sans-serif",
