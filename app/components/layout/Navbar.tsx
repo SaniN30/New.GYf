@@ -6,10 +6,10 @@ import Link from 'next/link'
 
 const links = [
   { href: '/how-it-works', label: 'How It Works' },
-  { href: '/perception', label: 'Demo' },
-  { href: '/vision', label: 'Vision' },
-  { href: '/intelligence', label: 'Intelligence' },
-  { href: '/about', label: 'About' },
+  { href: '/perception',   label: 'Demo'          },
+  { href: '/vision',       label: 'Vision'        },
+  { href: '/intelligence', label: 'Intelligence'  },
+  { href: '/about',        label: 'About GYF'     },
 ]
 
 export default function Navbar() {
@@ -55,7 +55,7 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-1">
-          {links.slice(0, 4).map((l) => (
+          {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
