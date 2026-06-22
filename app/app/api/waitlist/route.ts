@@ -19,16 +19,25 @@ export async function POST(req: NextRequest) {
     // Append row to Google Sheet via Apps Script Web App
     const sheetsUrl = process.env.GOOGLE_SHEETS_SCRIPT_URL
     if (sheetsUrl) {
-      await fetch(sheetsUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          timestamp: new Date().toISOString(),
-          name: name.trim(),
-          email: email.trim(),
-          phone: phone.trim(),
-        }),
-      }).catch(e => console.error('[waitlist] Sheets error:', e))
+      try {
+        const sheetsRes = await fetch(sheetsUrl, {
+          method: 'POST',
+          redirect: 'follow', // Google Apps Script redirects POST — must follow
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids CORS preflight
+          body: JSON.stringify({
+            timestamp: new Date().toISOString(),
+            name: name.trim(),
+            email: email.trim(),
+            phone: phone.trim(),
+          }),
+        })
+        const text = await sheetsRes.text()
+        console.log('[waitlist] Sheets response:', sheetsRes.status, text)
+      } catch (e) {
+        console.error('[waitlist] Sheets error:', e)
+      }
+    } else {
+      console.warn('[waitlist] GOOGLE_SHEETS_SCRIPT_URL not set')
     }
 
     return NextResponse.json({ success: true, firstName })
