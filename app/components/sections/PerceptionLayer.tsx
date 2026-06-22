@@ -250,7 +250,7 @@ export default function PerceptionLayer() {
           <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.1] bg-white/[0.04] text-white/45 text-[0.72rem] font-mono tracking-wide backdrop-blur-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-[#C4956A]" />
-              Layer 01 of 06 — Perception
+              Demo
             </div>
             <div className="hidden sm:flex items-center gap-1">
               {[1,2,3,4,5,6].map(n => (
@@ -283,6 +283,14 @@ export default function PerceptionLayer() {
             <div className="w-px h-3.5 bg-white/10" />
             <span className="hidden sm:inline text-[0.72rem] font-mono text-white/25 tracking-wide">5 more layers shipping through 2026</span>
           </div>
+
+          {/* Demo disclaimer */}
+          <div className="mt-4 flex items-start gap-2 px-4 py-3 rounded-xl border border-[#C4956A]/20 bg-[#C4956A]/[0.06] backdrop-blur-sm max-w-lg mx-auto">
+            <span className="text-[#C4956A]/70 text-[0.75rem] mt-px flex-shrink-0">⚠</span>
+            <p className="text-[0.72rem] text-white/35 font-mono leading-relaxed text-left">
+              This demo is not the exact model that is going to get shipped — hence the output / results may or may not be accurate.
+            </p>
+          </div>
         </motion.div>
 
         {/* macOS window */}
@@ -300,7 +308,7 @@ export default function PerceptionLayer() {
               boxShadow: '0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.07)',
             }}>
 
-            <MacWindowChrome title="GYF Perception Layer — Analysis" onClose={reset} />
+            <MacWindowChrome title="GYF Demo — Analysis" onClose={reset} />
 
             <div className="flex flex-col lg:flex-row min-h-[300px] sm:min-h-[520px]">
 
@@ -758,7 +766,7 @@ export default function PerceptionLayer() {
                   </motion.span>
                 </AnimatePresence>
               </div>
-              <span className="text-[0.62rem] text-[#c4c4c8] font-mono">GYF Perception Engine v1</span>
+              <span className="text-[0.62rem] text-[#c4c4c8] font-mono">GYF Demo Engine v1</span>
             </div>
           </div>
         </motion.div>
