@@ -171,6 +171,10 @@ function FeatureCard({
   // Spotlight position
   const spotX = useMotionValue(50)
   const spotY = useMotionValue(50)
+  const spotBg = useTransform(
+    [spotX, spotY] as const,
+    ([x, y]: number[]) => `radial-gradient(140px circle at ${x}% ${y}%, ${feature.accent}18, transparent 70%)`
+  )
 
   const [isHovered, setIsHovered] = useState(false)
   const [shimmerKey, setShimmerKey] = useState(0)
@@ -249,10 +253,7 @@ function FeatureCard({
         <motion.div
           className="absolute inset-0 pointer-events-none rounded-2xl"
           style={{
-            background: useTransform(
-              [spotX, spotY],
-              ([x, y]) => `radial-gradient(140px circle at ${x}% ${y}%, ${feature.accent}18, transparent 70%)`
-            ),
+            background: spotBg,
             opacity: isHovered ? 1 : 0,
             transition: 'opacity 0.3s ease',
           }}
