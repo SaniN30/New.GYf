@@ -211,9 +211,9 @@ export default function CTABanner() {
                   You&apos;re in, {firstName}.
                 </h3>
                 <p className="text-[#6b6b78] text-sm leading-relaxed mb-6">
-                  We&apos;ve sent a confirmation to{' '}
-                  <span className="font-mono text-[#111318]">{fields.email}</span>.<br />
-                  We&apos;ll reach out the moment early access opens.
+                  We&apos;ll reach out to{' '}
+                  <span className="font-mono text-[#111318]">{fields.email}</span>{' '}
+                  the moment early access opens.
                 </p>
 
                 <div className="px-5 py-3.5 rounded-2xl bg-[#F7F6F3] border border-black/[0.07]">
