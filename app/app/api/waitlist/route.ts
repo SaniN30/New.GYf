@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import sgMail from '@sendgrid/mail'
+import { Resend } from 'resend'
 
 const SHEETS_URL =
   process.env.GOOGLE_SHEETS_SCRIPT_URL ??
@@ -36,18 +36,15 @@ export async function POST(req: NextRequest) {
     const text = await sheetsRes.text()
     console.log('[waitlist] Sheets response:', sheetsRes.status, text)
 
-    // Send confirmation email via SendGrid
-    if (process.env.SENDGRID_API_KEY) {
-      sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-      const msg = {
-        to: email.trim(),
-        from: {
-          email: process.env.SENDGRID_FROM_EMAIL ?? 'gyf1ltd@gmail.com',
-          name: 'GYF — Get Your Fit',
-        },
-        subject: `You're on the list, ${firstName} 🎉`,
-        text: `Hi ${firstName},\n\nThanks for signing up for early access to GYF — Get Your Fit!\n\nWe'll be in touch as soon as we're ready to let you in.\n\nIn the meantime, follow us on Instagram and LinkedIn for updates.\n\n— The GYF Team\nhttps://getyourfit.tech`,
-        html: `
+    // Send confirmation email via Resend
+    if (process.env.RESEND_API_KEY) {
+      const resend = new Resend(process.env.RESEND_API_KEY)
+      try {
+        await resend.emails.send({
+          from: `GYF — Get Your Fit <${process.env.RESEND_FROM_EMAIL ?? 'onboarding@resend.dev'}>`,
+          to: email.trim(),
+          subject: `You're on the list, ${firstName} 🎉`,
+          html: `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,14 +56,12 @@ export async function POST(req: NextRequest) {
     <tr>
       <td align="center">
         <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 2px 24px rgba(0,0,0,0.07);">
-          <!-- Header -->
           <tr>
             <td style="background:#111318;padding:32px 40px;text-align:center;">
               <p style="margin:0;color:#ffffff;font-size:22px;font-weight:700;letter-spacing:-0.3px;">GYF</p>
               <p style="margin:4px 0 0;color:rgba(255,255,255,0.55);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;">Get Your Fit</p>
             </td>
           </tr>
-          <!-- Body -->
           <tr>
             <td style="padding:40px 40px 32px;">
               <p style="margin:0 0 8px;font-size:24px;font-weight:700;color:#111318;letter-spacing:-0.3px;">You're on the list, ${firstName}!</p>
@@ -79,7 +74,7 @@ export async function POST(req: NextRequest) {
               <table cellpadding="0" cellspacing="0" style="margin:32px 0;">
                 <tr>
                   <td style="background:#111318;border-radius:10px;">
-                    <a href="https://getyourfit.tech" style="display:inline-block;padding:14px 28px;color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;letter-spacing:0.1px;">Visit GYF →</a>
+                    <a href="https://getyourfit.tech" style="display:inline-block;padding:14px 28px;color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;">Visit GYF →</a>
                   </td>
                 </tr>
               </table>
@@ -92,7 +87,6 @@ export async function POST(req: NextRequest) {
               </p>
             </td>
           </tr>
-          <!-- Footer -->
           <tr>
             <td style="padding:24px 40px;border-top:1px solid #f0f0f0;">
               <p style="margin:0;font-size:12px;color:#b0b0ba;text-align:center;">
@@ -106,16 +100,14 @@ export async function POST(req: NextRequest) {
   </table>
 </body>
 </html>`,
-      }
-      try {
-        await sgMail.send(msg)
+        })
         console.log('[waitlist] Confirmation email sent to', email.trim())
       } catch (mailErr) {
-        // Non-fatal: log the error but don't fail the registration
-        console.error('[waitlist] SendGrid error:', mailErr)
+        // Non-fatal: log but don't fail the registration
+        console.error('[waitlist] Resend error:', mailErr)
       }
     } else {
-      console.warn('[waitlist] SENDGRID_API_KEY not set — skipping confirmation email')
+      console.warn('[waitlist] RESEND_API_KEY not set — skipping confirmation email')
     }
 
     return NextResponse.json({ success: true, firstName })
