@@ -9,6 +9,7 @@ const links = [
   { href: '/perception', label: 'Perception Layer' },
   { href: '/vision', label: 'Vision' },
   { href: '/intelligence', label: 'Intelligence' },
+  { href: '/about', label: 'About' },
 ]
 
 export default function Navbar() {
@@ -54,7 +55,7 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-1">
-          {links.slice(0, 3).map((l) => (
+          {links.slice(0, 4).map((l) => (
             <Link
               key={l.href}
               href={l.href}
