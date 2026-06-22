@@ -137,9 +137,9 @@ const features = [
   },
   {
     Icon: SocialIcon,
-    title: 'Social & Inspiration',
-    body: 'Shoppable looks, style sharing, and a discovery feed inspired by LTK.',
-    detail: "A dedicated social layer: interactive, shareable posts, creator feeds, style-following re-rendered to your own skin tone and preferences. Follow someone's style — but as you.",
+    title: 'Social & Style Sharing',
+    body: 'Share looks, follow styles, and discover outfits built by real people — re-rendered for your own body and tone.',
+    detail: "A social layer built around intelligent re-rendering: follow anyone's style and GYF rebuilds it for your skin tone, body type, and preferences. Every post is shoppable. Every look is yours to own.",
     accent: '#C2185B',
     tag: 'Social',
   },
