@@ -247,7 +247,7 @@ export default function PerceptionLayer() {
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="text-center mb-14">
           {/* Layer index badge */}
-          <div className="flex items-center justify-center gap-3 mb-6">
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.1] bg-white/[0.04] text-white/45 text-[0.72rem] font-mono tracking-wide backdrop-blur-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-[#C4956A]" />
               Layer 01 of 06 — Perception
@@ -281,7 +281,7 @@ export default function PerceptionLayer() {
               <span className="text-[0.72rem] font-mono text-white/40 tracking-wide">Beta open to everyone</span>
             </div>
             <div className="w-px h-3.5 bg-white/10" />
-            <span className="text-[0.72rem] font-mono text-white/25 tracking-wide">5 more layers shipping through 2025</span>
+            <span className="hidden sm:inline text-[0.72rem] font-mono text-white/25 tracking-wide">5 more layers shipping through 2026</span>
           </div>
         </motion.div>
 
@@ -302,7 +302,7 @@ export default function PerceptionLayer() {
 
             <MacWindowChrome title="GYF Perception Layer — Analysis" onClose={reset} />
 
-            <div className="flex flex-col lg:flex-row" style={{ minHeight: 520 }}>
+            <div className="flex flex-col lg:flex-row min-h-[300px] sm:min-h-[520px]">
 
               {/* ── LEFT: Input / Scan pane ── */}
               <div className="lg:w-[52%] border-r border-black/[0.06] flex flex-col">
@@ -323,7 +323,7 @@ export default function PerceptionLayer() {
                     <motion.div key="upload"
                       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, scale: 0.98 }}
                       transition={{ duration: 0.22 }}
-                      className="flex-1 flex flex-col items-center justify-center p-8">
+                      className="flex-1 flex flex-col items-center justify-center p-4 sm:p-8">
                       <motion.div
                         onDrop={handleDrop}
                         onDragOver={(e) => { e.preventDefault(); setIsDragging(true) }}
@@ -335,7 +335,7 @@ export default function PerceptionLayer() {
                           backgroundColor: isDragging ? 'rgba(17,19,24,0.02)' : 'transparent',
                         }}
                         transition={{ type: 'spring', stiffness: 300, damping: 28 }}
-                        className="w-full border-2 border-dashed rounded-xl p-10 flex flex-col items-center justify-center gap-5 cursor-pointer min-h-[320px] hover:border-black/25 transition-colors"
+                        className="w-full border-2 border-dashed rounded-xl p-6 sm:p-10 flex flex-col items-center justify-center gap-4 sm:gap-5 cursor-pointer min-h-[220px] sm:min-h-[320px] hover:border-black/25 transition-colors"
                       >
                         <input ref={inputRef} type="file" accept="image/*" className="hidden"
                           onChange={e => { const f = e.target.files?.[0]; if (f) handleFile(f) }} />
@@ -387,7 +387,7 @@ export default function PerceptionLayer() {
                   {state === 'scanning' && (
                     <motion.div key="scanning"
                       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                      className="flex-1 relative overflow-hidden" style={{ minHeight: 360 }}>
+                      className="flex-1 relative overflow-hidden min-h-[220px] sm:min-h-[360px]">
 
                       {/* Image or silhouette */}
                       {preview
@@ -456,7 +456,7 @@ export default function PerceptionLayer() {
                   {state === 'done' && (
                     <motion.div key="done"
                       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35 }}
-                      className="flex-1 relative overflow-hidden" style={{ minHeight: 360 }}>
+                      className="flex-1 relative overflow-hidden min-h-[220px] sm:min-h-[360px]">
                       {preview
                         ? <img src={preview} alt="Input" className="absolute inset-0 w-full h-full object-cover" /> // eslint-disable-line @next/next/no-img-element
                         : <div className="absolute inset-0 bg-[#EDECE7] flex items-center justify-center"><PersonSilhouette /></div>
@@ -523,7 +523,7 @@ export default function PerceptionLayer() {
                     <motion.div key="idle-panel"
                       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                       transition={{ duration: 0.25 }}
-                      className="flex-1 flex flex-col items-center justify-center p-10 text-center gap-6">
+                      className="flex-1 flex flex-col items-center justify-center p-6 sm:p-10 text-center gap-6">
                       <Crosshair />
                       <div>
                         <p className="text-[#111318] font-semibold text-[0.9375rem] mb-1.5">Analysis appears here</p>

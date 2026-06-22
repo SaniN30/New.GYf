@@ -36,8 +36,8 @@ export default function Vision() {
           transition={{ duration: 0.8 }}
           className="mb-20"
         >
-          <div className="text-xs font-mono text-gray-700 uppercase tracking-widest mb-6">Mission</div>
-          <blockquote className="text-[clamp(1.6rem,3.5vw,2.6rem)] font-black text-gray-900 leading-tight mb-6 max-w-3xl">
+          <div className="text-xs font-mono text-gray-700 uppercase tracking-widest mb-4 sm:mb-6">Mission</div>
+          <blockquote className="text-[clamp(1.4rem,3.5vw,2.6rem)] font-black text-gray-900 leading-tight mb-4 sm:mb-6 max-w-3xl">
             &ldquo;Make the intelligence of a professional stylist universal — free, instant, and genuinely personal to everyone.&rdquo;
           </blockquote>
           <p className="text-base text-gray-700 leading-relaxed max-w-2xl">

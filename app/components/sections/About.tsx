@@ -52,7 +52,7 @@ export default function About() {
             <h2 className="text-[clamp(2.2rem,5vw,3.8rem)] font-black text-[#111318] leading-[1.02] tracking-tight max-w-xl">
               An intelligence built to dress you — not the average person.
             </h2>
-            <p className="text-[#5a5a65] text-base leading-[1.75] max-w-xs lg:text-right font-[350]">
+            <p className="text-[#5a5a65] text-base leading-[1.75] max-w-xs lg:text-right font-[350] lg:self-end">
               Founded on the belief that great style should be accessible to everyone, not just those who can afford a personal stylist.
             </p>
           </div>

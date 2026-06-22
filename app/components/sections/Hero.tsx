@@ -1,8 +1,52 @@
 'use client'
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 
 const tags = ['Body Type Analysis', 'Outfit Matching', 'Color Palette', 'Style Learning', 'Fit Intelligence', 'Taste Engine']
+
+const STYLE_ACCENTS = ['#C4956A', '#C2185B', '#5B7339', '#7B8FBF', '#D98E04', '#2D7A8A']
+
+function InteractiveChar({ char, delay }: { char: string; delay: number }) {
+  const [hovered, setHovered] = useState(false)
+  const [clicked, setClicked] = useState(false)
+  const [accentIdx, setAccentIdx] = useState(0)
+
+  const handleClick = useCallback(() => {
+    setClicked(true)
+    setAccentIdx(i => (i + 1) % STYLE_ACCENTS.length)
+    setTimeout(() => setClicked(false), 300)
+  }, [])
+
+  return (
+    <motion.span
+      className="inline-block cursor-pointer select-none relative"
+      initial={{ opacity: 0, y: 48, rotateX: -50, filter: 'blur(4px)' }}
+      animate={{ opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)' }}
+      transition={{ duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] }}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      onClick={handleClick}
+      whileHover={{ y: -10, transition: { type: 'spring', stiffness: 600, damping: 18 } }}
+      whileTap={{ scale: 0.88, transition: { type: 'spring', stiffness: 800, damping: 20 } }}
+      style={{
+        color: hovered || clicked ? STYLE_ACCENTS[accentIdx] : undefined,
+        transition: 'color 0.18s ease',
+        textShadow: hovered ? `0 8px 24px ${STYLE_ACCENTS[accentIdx]}44` : undefined,
+      }}
+    >
+      {char}
+      {clicked && (
+        <motion.span
+          className="absolute inset-0 rounded-sm pointer-events-none"
+          initial={{ opacity: 0.5, scale: 0.8 }}
+          animate={{ opacity: 0, scale: 2 }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
+          style={{ background: `radial-gradient(circle, ${STYLE_ACCENTS[accentIdx]}33, transparent 70%)` }}
+        />
+      )}
+    </motion.span>
+  )
+}
 
 const CLOTHING_SVGS = {
   top: (
@@ -44,9 +88,6 @@ export default function Hero() {
     return () => window.removeEventListener('mousemove', handler)
   }, [rawX, rawY])
 
-  const headlineWords = ['Your', 'Style.']
-  const headline2Words = ['Finally', 'Intelligent.']
-
   return (
     <section ref={ref} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-white">
       {/* Smooth cursor spotlight */}
@@ -64,7 +105,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.025]"
         style={{ backgroundImage: 'linear-gradient(#111318 1px, transparent 1px), linear-gradient(90deg, #111318 1px, transparent 1px)', backgroundSize: '64px 64px' }} />
 
-      <motion.div style={{ y }} className="relative z-10 text-center max-w-5xl mx-auto px-5 sm:px-8 pt-40 sm:pt-48 pb-16 sm:pb-24">
+      <motion.div style={{ y }} className="relative z-10 text-center max-w-5xl mx-auto px-5 sm:px-8 pt-28 sm:pt-48 pb-12 sm:pb-24">
 
         {/* ── Premium Early Access badge ── */}
         <motion.div
@@ -119,52 +160,20 @@ export default function Hero() {
 
         {/* Headline */}
         <div className="text-[clamp(3rem,9vw,7.5rem)] font-black leading-[0.88] tracking-[-0.04em] text-[#111318] mb-3">
-          <motion.div className="flex justify-center gap-[0.18em] flex-wrap">
-            {headlineWords.map((word, wi) => (
-              <motion.span
-                key={wi}
-                initial="hidden"
-                animate="visible"
-                whileHover={{ y: -6, transition: { type: 'spring', stiffness: 500, damping: 20 } }}
-                variants={{
-                  hidden: {},
-                  visible: { transition: { staggerChildren: 0.035, delayChildren: wi * 0.12 } },
-                }}
-                className={wi === 1 ? 'relative inline-block cursor-default select-none' : 'cursor-default select-none'}
-              >
-                {/* "Style." gets a golden shimmer sweep after reveal */}
-                {wi === 1 && (
-                  <motion.span
-                    className="absolute inset-0 pointer-events-none"
-                    initial={{ backgroundPosition: '-200% center', opacity: 0 }}
-                    animate={{ backgroundPosition: ['-200% center', '200% center'], opacity: [0, 1, 0] }}
-                    transition={{ delay: 0.9, duration: 1.6, ease: 'easeInOut', repeat: Infinity, repeatDelay: 3.5 }}
-                    style={{
-                      background: 'linear-gradient(110deg, transparent 30%, rgba(196,149,106,0.55) 50%, transparent 70%)',
-                      backgroundSize: '250% auto',
-                      WebkitBackgroundClip: 'text',
-                      backgroundClip: 'text',
-                      mixBlendMode: 'overlay',
-                    }}
-                  />
-                )}
-                {word.split('').map((char, ci) => (
-                  <motion.span
-                    key={ci}
-                    className="inline-block"
-                    variants={{
-                      hidden: { opacity: 0, y: 48, rotateX: -50, filter: 'blur(4px)' },
-                      visible: { opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)', transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
-                    }}
-                  >{char}</motion.span>
-                ))}
-                {wi < headlineWords.length - 1 && <span className="inline-block w-[0.18em]" />}
-              </motion.span>
+          {/* "Your Style." — each character is independently interactive */}
+          <div className="flex justify-center gap-[0.18em] flex-wrap">
+            {'Your'.split('').map((char, ci) => (
+              <InteractiveChar key={`your-${ci}`} char={char} delay={ci * 0.035} />
             ))}
-          </motion.div>
+            <span className="inline-block w-[0.18em]" />
+            {'Style.'.split('').map((char, ci) => (
+              <InteractiveChar key={`style-${ci}`} char={char} delay={0.12 + ci * 0.035} />
+            ))}
+          </div>
 
+          {/* "Finally Intelligent." — shimmer, no click interaction */}
           <div className="shimmer-text flex justify-center gap-[0.18em] flex-wrap">
-            {headline2Words.map((word, wi) => (
+            {['Finally', 'Intelligent.'].map((word, wi) => (
               <motion.span
                 key={wi}
                 initial="hidden"
@@ -184,11 +193,21 @@ export default function Hero() {
                     }}
                   >{char}</motion.span>
                 ))}
-                {wi < headline2Words.length - 1 && <span className="inline-block w-[0.18em]" />}
+                {wi === 0 && <span className="inline-block w-[0.18em]" />}
               </motion.span>
             ))}
           </div>
         </div>
+
+        {/* Tap hint */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+          className="text-[0.65rem] font-mono text-[#9ca3af] tracking-[0.1em] uppercase mb-1 select-none"
+        >
+          tap the letters ↑
+        </motion.div>
 
         {/* Subheadline */}
         <motion.p
@@ -205,18 +224,18 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.95, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center justify-center gap-3 mb-14"
+          className="flex flex-wrap items-center justify-center gap-3 mb-10 sm:mb-14"
         >
-          <a href="#perception" className="btn-3d px-8 py-4 font-semibold text-[0.9375rem] text-white bg-[#111318] hover:bg-[#1e2230]">
+          <a href="#perception" className="btn-3d w-full sm:w-auto px-8 py-4 font-semibold text-[0.9375rem] text-white bg-[#111318] hover:bg-[#1e2230] text-center">
             Try Perception Layer
           </a>
-          <a href="/how-it-works" className="bezel px-8 py-4 rounded-full font-semibold text-[0.9375rem] text-[#5a5a65] border border-black/10 hover:text-[#111318] transition-all duration-200 bg-white/60">
+          <a href="/how-it-works" className="bezel w-full sm:w-auto px-8 py-4 rounded-full font-semibold text-[0.9375rem] text-[#5a5a65] border border-black/10 hover:text-[#111318] transition-all duration-200 bg-white/60 text-center">
             See How It Works ↓
           </a>
         </motion.div>
 
         {/* Tag cloud */}
-        <div className="flex flex-wrap justify-center gap-2 mb-20">
+        <div className="flex flex-wrap justify-center gap-2 mb-12 sm:mb-20">
           {tags.map((tag, i) => (
             <motion.span
               key={tag}
@@ -289,11 +308,11 @@ export default function Hero() {
         transition={{ duration: 1, delay: 1.5 }}
         className="relative z-10 w-full border-t border-black/[0.06] py-8 bg-white/60 backdrop-blur-sm"
       >
-        <div className="max-w-3xl mx-auto px-6 grid grid-cols-3 gap-6">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 grid grid-cols-3 gap-3 sm:gap-6">
           {[
-            { num: '<400ms', label: 'Response Time' },
-            { num: '98%',    label: 'Fit Accuracy' },
-            { num: '10K+',  label: 'Outfits Built' },
+            { num: 'Layer 01', label: 'Live in Beta', live: true },
+            { num: '6',        label: 'Intelligence Layers', live: true },
+            { num: 'Soon',     label: 'Outfit Generation', live: false },
           ].map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -302,8 +321,9 @@ export default function Hero() {
               transition={{ delay: 1.6 + i * 0.1, duration: 0.5 }}
               className="text-center"
             >
-              <div className="text-[clamp(1.5rem,3vw,2.25rem)] font-black gradient-text font-mono tracking-tight">{stat.num}</div>
-              <div className="text-[0.7rem] text-[#6b6b78] mt-1 uppercase tracking-[0.12em] font-medium">{stat.label}</div>
+              <div className={`text-[clamp(1.1rem,2.5vw,2rem)] font-black font-mono tracking-tight ${stat.live ? 'gradient-text' : 'text-[#9ca3af]'}`}>{stat.num}</div>
+              <div className="text-[0.65rem] text-[#6b6b78] mt-1 uppercase tracking-[0.12em] font-medium leading-snug">{stat.label}</div>
+              {!stat.live && <div className="text-[0.55rem] font-mono text-[#C4956A] mt-0.5 uppercase tracking-wide">Coming Soon</div>}
             </motion.div>
           ))}
         </div>

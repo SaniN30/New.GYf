@@ -47,7 +47,7 @@ export default function CTABanner() {
             <span className="shimmer-text">intelligence.</span>
           </h2>
 
-          <p className="text-[#3d3d48] text-lg mb-12 font-[350] leading-[1.7]">
+          <p className="text-[#3d3d48] text-lg mb-8 sm:mb-12 font-[350] leading-[1.7]">
             Join thousands building their AI wardrobe.
           </p>
 
@@ -90,7 +90,7 @@ export default function CTABanner() {
           )}
 
           {/* Trust signals */}
-          <div className="mt-8 flex items-center justify-center gap-6">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             {['No spam', 'Cancel anytime', 'Free forever'].map((item, i) => (
               <motion.span
                 key={item}

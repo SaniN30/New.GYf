@@ -30,7 +30,7 @@ export default function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 flex items-center justify-between h-20">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 flex items-center justify-between h-14 sm:h-20">
 
         {/* Logo */}
         <motion.div
@@ -45,7 +45,7 @@ export default function Navbar() {
                 alt="GYF"
                 width={200}
                 height={200}
-                className="h-[180px] w-auto transition-all duration-300 group-hover:brightness-90"
+                className="h-[90px] sm:h-[140px] md:h-[180px] w-auto transition-all duration-300 group-hover:brightness-90"
                 priority
               />
             </div>

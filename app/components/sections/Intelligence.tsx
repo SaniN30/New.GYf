@@ -225,7 +225,7 @@ export default function Intelligence() {
   const [activeCard, setActiveCard] = useState<number | null>(null)
 
   return (
-    <section className="py-20 sm:py-36 bg-[#FAFAF8] border-t border-black/[0.05]">
+    <section className="py-14 sm:py-36 bg-[#FAFAF8] border-t border-black/[0.05]">
       <div className="max-w-5xl mx-auto px-5 sm:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -261,7 +261,7 @@ export default function Intelligence() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-12 flex flex-wrap items-center justify-center gap-6"
+          className="mt-8 sm:mt-12 flex flex-wrap items-center justify-center gap-4 sm:gap-6"
         >
           {pillars.map((p) => (
             <div key={p.tag} className="flex items-center gap-2">

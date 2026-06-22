@@ -31,7 +31,7 @@ export default function Footer() {
             </div>
             <span className="text-gray-700 text-sm font-medium leading-none">Get Your Fit</span>
           </div>
-          <div className="flex items-center gap-8 text-sm text-gray-700">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm text-gray-700">
             <a href="#how-it-works" className="hover:text-gray-900 transition-colors">How It Works</a>
             <a href="#perception" className="hover:text-gray-900 transition-colors">Perception Layer</a>
             <a href="#cta" className="hover:text-gray-900 transition-colors">Early Access</a>
