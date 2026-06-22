@@ -126,7 +126,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Failed to send confirmation email.' }, { status: 502 })
     }
 
-    // 2. Add to Resend Audience (best-effort — don't fail the request if this errors)
+    // 2. Add to Resend Audience (best-effort)
     if (AUDIENCE_ID) {
       await fetch(`https://api.resend.com/audiences/${AUDIENCE_ID}/contacts`, {
         method: 'POST',
@@ -142,6 +142,21 @@ export async function POST(req: NextRequest) {
           data: { phone: phone.trim() },
         }),
       }).catch(e => console.error('[waitlist] Audience add error:', e))
+    }
+
+    // 3. Append row to Google Sheet via Apps Script Web App (best-effort)
+    const sheetsUrl = process.env.GOOGLE_SHEETS_SCRIPT_URL
+    if (sheetsUrl) {
+      await fetch(sheetsUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          timestamp: new Date().toISOString(),
+          name: name.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+        }),
+      }).catch(e => console.error('[waitlist] Sheets error:', e))
     }
 
     return NextResponse.json({ success: true, firstName })

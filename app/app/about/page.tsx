@@ -46,11 +46,45 @@ const STATS = [
   { value: 100,  suffix: '%',   label: 'Free for every user'        },
 ]
 
+const VALUE_ICONS = {
+  anxiety: () => (
+    <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <circle cx="14" cy="14" r="10" />
+      <circle cx="14" cy="14" r="3" />
+      <line x1="14" y1="4" x2="14" y2="7" />
+      <line x1="14" y1="21" x2="14" y2="24" />
+      <line x1="4" y1="14" x2="7" y2="14" />
+      <line x1="21" y1="14" x2="24" y2="14" />
+    </svg>
+  ),
+  understand: () => (
+    <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <circle cx="14" cy="9" r="4" />
+      <path d="M6 24 C6 18 22 18 22 24" />
+      <line x1="2" y1="9" x2="6" y2="9" strokeDasharray="1.2 1.2" />
+      <line x1="22" y1="9" x2="26" y2="9" strokeDasharray="1.2 1.2" />
+      <line x1="14" y1="2" x2="14" y2="5" strokeDasharray="1.2 1.2" />
+    </svg>
+  ),
+  trust: () => (
+    <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <path d="M14 3 L5 7 L5 15 C5 20 14 25 14 25 C14 25 23 20 23 15 L23 7 Z" />
+      <polyline points="10 14 13 17 19 11" />
+    </svg>
+  ),
+  compound: () => (
+    <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <polyline points="3 20 9 13 14 16 22 7" />
+      <polyline points="18 7 22 7 22 11" />
+    </svg>
+  ),
+}
+
 const VALUES = [
-  { emoji: '🎯', title: 'Replace anxiety', desc: 'Turn "nothing to wear" into a decision you feel good about, every single morning.' },
-  { emoji: '🧠', title: 'Truly understand you', desc: 'Not the average person. You — your body, your taste, your budget, your occasion.' },
-  { emoji: '🔒', title: 'Be trustworthy', desc: 'Explainable recommendations. Honest confidence signals. Your data is yours alone.' },
-  { emoji: '📈', title: 'Compound intelligence', desc: "Measurably better the more it's used — for you individually and everyone collectively." },
+  { icon: 'anxiety'    as const, title: 'Replace anxiety',       desc: 'Turn "nothing to wear" into a decision you feel good about, every single morning.' },
+  { icon: 'understand' as const, title: 'Truly understand you',  desc: 'Not the average person. You — your body, your taste, your budget, your occasion.' },
+  { icon: 'trust'      as const, title: 'Be trustworthy',        desc: 'Explainable recommendations. Honest confidence signals. Your data is yours alone.' },
+  { icon: 'compound'   as const, title: 'Compound intelligence', desc: "Measurably better the more it's used — for you individually and everyone collectively." },
 ]
 
 /* ─── animated counter ─── */
@@ -96,20 +130,30 @@ function MagneticWrapper({ children }: { children: React.ReactNode }) {
 function AnimatedHeading({ text, className }: { text: string; className?: string }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
+  const words = text.split(' ')
+  let charIdx = 0
 
   return (
     <h2 ref={ref} className={className} aria-label={text}>
-      {text.split('').map((char, i) => (
-        <motion.span
-          key={i}
-          initial={{ opacity: 0, y: 40, filter: 'blur(6px)' }}
-          animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-          transition={{ duration: 0.5, delay: i * 0.025, ease: [0.22, 1, 0.36, 1] }}
-          style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : 'normal' }}
-        >
-          {char}
-        </motion.span>
-      ))}
+      {words.map((word, wi) => {
+        const wordStart = charIdx
+        charIdx += word.length + 1
+        return (
+          <span key={wi} style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: wi < words.length - 1 ? '0.28em' : 0 }}>
+            {word.split('').map((char, ci) => (
+              <motion.span
+                key={ci}
+                initial={{ opacity: 0, y: 40, filter: 'blur(6px)' }}
+                animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+                transition={{ duration: 0.5, delay: (wordStart + ci) * 0.025, ease: [0.22, 1, 0.36, 1] }}
+                style={{ display: 'inline-block' }}
+              >
+                {char}
+              </motion.span>
+            ))}
+          </span>
+        )
+      })}
     </h2>
   )
 }
@@ -202,6 +246,7 @@ function ValueCard({ v, index }: { v: typeof VALUES[0]; index: number }) {
   const [hovered, setHovered] = useState(false)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
+  const Icon = VALUE_ICONS[v.icon]
 
   return (
     <motion.div
@@ -219,11 +264,11 @@ function ValueCard({ v, index }: { v: typeof VALUES[0]; index: number }) {
         animate={hovered ? { opacity: 1 } : { opacity: 0 }}
       />
       <motion.div
-        className="text-3xl mb-4 inline-block"
-        animate={hovered ? { scale: 1.15, rotate: 8 } : { scale: 1, rotate: 0 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 18 }}
+        className="w-10 h-10 rounded-xl bg-[#F7F6F3] border border-black/[0.07] flex items-center justify-center mb-4 text-[#111318]"
+        animate={hovered ? { scale: 1.08, backgroundColor: '#111318', color: '#ffffff' } : { scale: 1, backgroundColor: '#F7F6F3', color: '#111318' }}
+        transition={{ type: 'spring', stiffness: 400, damping: 22 }}
       >
-        {v.emoji}
+        <Icon />
       </motion.div>
       <h4 className="text-base font-bold text-[#111318] mb-2">{v.title}</h4>
       <p className="text-[0.875rem] text-[#5a5a65] leading-[1.7] font-[350]">{v.desc}</p>

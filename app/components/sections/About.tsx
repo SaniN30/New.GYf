@@ -53,7 +53,7 @@ function InteractiveHeading({ text, className }: { text: string; className?: str
   return (
     <h2 ref={ref} className={className}>
       {words.map((word, wi) => (
-        <span key={wi} style={{ display: 'inline-block', marginRight: '0.28em' }}>
+        <span key={wi} style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: wi < words.length - 1 ? '0.28em' : 0 }}>
           {word.split('').map((char, ci) => (
             <motion.span
               key={ci}
