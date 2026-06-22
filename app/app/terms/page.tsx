@@ -17,7 +17,7 @@ const sections = [
     title: '3. Your Account',
     items: [
       { label: 'Registration', detail: 'You may be required to create an account to access certain features. You agree to provide accurate, current information and to keep it updated.' },
-      { label: 'Security', detail: 'You are responsible for maintaining the confidentiality of your login credentials. Notify us immediately at security@getyourfit.app if you suspect unauthorised access.' },
+      { label: 'Security', detail: 'You are responsible for maintaining the confidentiality of your login credentials. Notify us immediately at hello@getyourfit.tech if you suspect unauthorised access.' },
       { label: 'One account per person', detail: 'You may not create multiple accounts to circumvent restrictions or abuse our systems.' },
     ],
   },
@@ -76,7 +76,7 @@ const sections = [
   },
   {
     title: '14. Contact',
-    body: `For questions about these Terms:\n\nlegal@getyourfit.app\n\nGet Your Fit — open beta`,
+    body: `For questions about these Terms:\n\nhello@getyourfit.tech\n\nGet Your Fit — open beta`,
   },
 ]
 

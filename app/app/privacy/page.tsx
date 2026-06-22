@@ -72,7 +72,7 @@ const sections = [
       { label: 'Objection', detail: 'Object to processing based on legitimate interests.' },
       { label: 'Restriction', detail: 'Request that we limit processing in certain circumstances.' },
     ],
-    footer: 'To exercise any of these rights, email us at privacy@getyourfit.app. We will respond within 30 days.',
+    footer: 'To exercise any of these rights, email us at hello@getyourfit.tech. We will respond within 30 days.',
   },
   {
     title: '8. Cookies',
@@ -92,7 +92,7 @@ const sections = [
   },
   {
     title: '12. Contact',
-    body: `For privacy-related questions or to exercise your rights, contact us at:\n\nprivacy@getyourfit.app\n\nGet Your Fit — open beta`,
+    body: `For privacy-related questions or to exercise your rights, contact us at:\n\nhello@getyourfit.tech\n\nGet Your Fit — open beta`,
   },
 ]
 
