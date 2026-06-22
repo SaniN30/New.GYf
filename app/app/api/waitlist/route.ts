@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzYOPIv-u0XL2clDvP5QpCLEH2c5BbKNWAhM2jNOGwBKilTl5Ig6VB9TtPVIHTSi_fh/exec'
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -16,28 +18,19 @@ export async function POST(req: NextRequest) {
 
     const firstName = name.trim().split(/\s+/)[0]
 
-    // Append row to Google Sheet via Apps Script Web App (GET with query params)
-    const sheetsUrl = process.env.GOOGLE_SHEETS_SCRIPT_URL
-    if (sheetsUrl) {
-      try {
-        const params = new URLSearchParams({
-          timestamp: new Date().toISOString(),
-          name:  name.trim(),
-          email: email.trim(),
-          phone: phone.trim(),
-        })
-        const sheetsRes = await fetch(`${sheetsUrl}?${params.toString()}`, {
-          method: 'GET',
-          redirect: 'follow',
-        })
-        const text = await sheetsRes.text()
-        console.log('[waitlist] Sheets response:', sheetsRes.status, text)
-      } catch (e) {
-        console.error('[waitlist] Sheets error:', e)
-      }
-    } else {
-      console.warn('[waitlist] GOOGLE_SHEETS_SCRIPT_URL not set')
-    }
+    const params = new URLSearchParams({
+      timestamp: new Date().toISOString(),
+      name:  name.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+    })
+
+    const sheetsRes = await fetch(`${SHEETS_URL}?${params.toString()}`, {
+      method: 'GET',
+      redirect: 'follow',
+    })
+    const text = await sheetsRes.text()
+    console.log('[waitlist] Sheets response:', sheetsRes.status, text)
 
     return NextResponse.json({ success: true, firstName })
   } catch (err) {
