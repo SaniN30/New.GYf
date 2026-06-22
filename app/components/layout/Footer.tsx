@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 const InstagramIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
@@ -48,8 +49,8 @@ export default function Footer() {
         <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-700">
           <p>© 2026 Get Your Fit. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-gray-700 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-gray-700 transition-colors">Terms</a>
+            <Link href="/privacy" className="hover:text-gray-700 transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-gray-700 transition-colors">Terms</Link>
           </div>
         </div>
       </div>
