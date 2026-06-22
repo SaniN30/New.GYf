@@ -115,7 +115,7 @@ export default function Hero() {
           className="inline-block mb-10"
         >
           <motion.a
-            href="#cta"
+            href="/#cta"
             onHoverStart={() => setBadgeHovered(true)}
             onHoverEnd={() => setBadgeHovered(false)}
             whileHover={{ scale: 1.03, y: -2 }}

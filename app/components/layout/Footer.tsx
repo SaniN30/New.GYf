@@ -35,7 +35,7 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm text-gray-700">
             <a href="#how-it-works" className="hover:text-gray-900 transition-colors">How It Works</a>
             <a href="#perception" className="hover:text-gray-900 transition-colors">Perception Layer</a>
-            <a href="#cta" className="hover:text-gray-900 transition-colors">Early Access</a>
+            <a href="/#cta" className="hover:text-gray-900 transition-colors">Early Access</a>
           </div>
           <div className="flex items-center gap-4">
             <a href="https://www.instagram.com/getyourfit.gyf?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#E1306C] transition-colors p-1.5 rounded-lg hover:bg-pink-50">

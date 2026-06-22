@@ -82,7 +82,7 @@ export default function Navbar() {
           <div className="w-px h-5 bg-black/10 mx-3" />
 
           <Link
-            href="#cta"
+            href="/#cta"
             className="btn-3d px-5 py-2.5 text-[0.8125rem] font-semibold text-white bg-[#111318] hover:bg-[#1e2230] transition-colors duration-200"
           >
             Get Early Access
@@ -134,7 +134,7 @@ export default function Navbar() {
               className="mt-3 pt-3 border-t border-black/[0.06]"
             >
               <Link
-                href="#cta"
+                href="/#cta"
                 onClick={() => setOpen(false)}
                 className="btn-3d block w-full text-center py-3.5 text-sm font-semibold text-white bg-[#111318] rounded-xl"
               >

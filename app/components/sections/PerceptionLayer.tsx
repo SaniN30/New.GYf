@@ -737,7 +737,7 @@ export default function PerceptionLayer() {
 
                       {/* CTA */}
                       <div className="px-5 pb-5 pt-3 border-t border-black/[0.05]">
-                        <motion.a href="#cta"
+                        <motion.a href="/#cta"
                           whileHover={{ scale: 1.01, y: -1 }} whileTap={{ scale: 0.99 }}
                           className="btn-3d block w-full text-center py-3 rounded-xl bg-[#111318] text-white font-semibold text-[0.8125rem] hover:bg-[#1e2230]">
                           Get Early Access →
