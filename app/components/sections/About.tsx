@@ -45,7 +45,7 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-20"
+          className="mb-10 sm:mb-20"
         >
           <div className="text-[0.68rem] font-mono text-gray-700 uppercase tracking-widest mb-4">About GYF</div>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
@@ -62,14 +62,14 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-black/[0.06] rounded-2xl overflow-hidden mb-20"
+          className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-black/[0.06] rounded-2xl overflow-hidden mb-12 sm:mb-20"
         >
           {TEAM_FACTS.map((f, i) => (
             <motion.div
               key={f.label}
               initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
               viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-              className="bg-white px-6 py-8"
+              className="bg-white px-4 py-6 sm:px-6 sm:py-8"
             >
               <div className="text-[clamp(2rem,4vw,2.75rem)] font-black text-[#111318] leading-none tracking-tight mb-2">{f.value}</div>
               <div className="text-[0.72rem] text-[#9ca3af] font-mono uppercase tracking-wide leading-snug">{f.label}</div>
@@ -85,7 +85,7 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-1 sm:grid-cols-[6rem_1fr] gap-6 sm:gap-12 py-10"
+              className="grid grid-cols-1 sm:grid-cols-[6rem_1fr] gap-4 sm:gap-12 py-8 sm:py-10"
             >
               <div className="flex sm:flex-col sm:items-start items-center gap-4 sm:gap-2 sm:pt-1">
                 <span className="text-[0.65rem] font-mono text-[#c4c4c8] tracking-[0.14em]">{p.index}</span>
@@ -103,7 +103,7 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-20 pt-16 border-t border-black/[0.05]"
+          className="mt-12 sm:mt-20 pt-10 sm:pt-16 border-t border-black/[0.05]"
         >
           <div className="max-w-2xl">
             <p className="text-[0.68rem] font-mono text-[#c4c4c8] uppercase tracking-[0.14em] mb-6">Our mission</p>

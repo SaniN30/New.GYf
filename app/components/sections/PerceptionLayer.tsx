@@ -245,7 +245,7 @@ export default function PerceptionLayer() {
 
         {/* Section header */}
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="text-center mb-14">
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="text-center mb-8 sm:mb-14">
           {/* Layer index badge */}
           <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.1] bg-white/[0.04] text-white/45 text-[0.72rem] font-mono tracking-wide backdrop-blur-sm">
@@ -271,7 +271,7 @@ export default function PerceptionLayer() {
           </p>
 
           {/* Beta callout */}
-          <div className="mt-8 inline-flex items-center gap-3 px-5 py-3 rounded-2xl border border-white/[0.07] bg-white/[0.03] backdrop-blur-sm">
+          <div className="mt-6 sm:mt-8 inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl border border-white/[0.07] bg-white/[0.03] backdrop-blur-sm">
             <div className="flex items-center gap-2">
               <motion.span
                 className="w-1.5 h-1.5 rounded-full bg-[#28C840]"

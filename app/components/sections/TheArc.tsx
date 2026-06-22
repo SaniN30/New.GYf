@@ -48,7 +48,7 @@ export default function TheArc() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mb-16"
+          className="mb-10 sm:mb-16"
         >
           <div className="text-xs font-mono text-gray-700 uppercase tracking-widest mb-4">Roadmap</div>
           <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-gray-900 leading-tight">The Arc</h2>

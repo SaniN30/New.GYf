@@ -136,7 +136,7 @@ function PillarCard({ pillar, index, isActive, onClick }: {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ rotateX: rx, rotateY: ry, perspective: 800 }}
-      className={`relative rounded-2xl border cursor-pointer overflow-hidden transition-colors duration-300 p-7 ${
+      className={`relative rounded-2xl border cursor-pointer overflow-hidden transition-colors duration-300 p-5 sm:p-7 ${
         isActive
           ? 'bg-[#111318] border-[#111318] shadow-[0_16px_56px_rgba(17,19,24,0.26)]'
           : 'bg-white border-black/[0.08] hover:border-black/20 hover:shadow-[0_4px_24px_rgba(17,19,24,0.08)]'
@@ -232,7 +232,7 @@ export default function Intelligence() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-16 text-center"
+          className="mb-10 sm:mb-16 text-center"
         >
           <div className="text-[0.68rem] font-mono text-[#6b6b78] uppercase tracking-[0.14em] mb-4">Under the Hood</div>
           <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-[#111318] leading-[1.02] tracking-tight">

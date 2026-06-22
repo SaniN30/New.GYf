@@ -214,7 +214,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[clamp(1rem,2vw,1.2rem)] text-[#3d3d48] max-w-2xl mx-auto mb-10 leading-[1.7] mt-7 font-[350]"
+          className="text-[clamp(0.9375rem,2.5vw,1.2rem)] text-[#3d3d48] max-w-2xl mx-auto mb-10 leading-[1.7] mt-5 sm:mt-7 font-[350] px-2 sm:px-0"
         >
           GYF reads your body, learns your taste, and builds complete outfits in real time — no stylist, no guesswork.
         </motion.p>

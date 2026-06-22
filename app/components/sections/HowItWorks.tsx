@@ -101,13 +101,13 @@ export default function HowItWorks() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mb-20"
+          className="mb-10 sm:mb-20"
         >
           <div className="text-xs font-mono text-gray-700 uppercase tracking-widest mb-4">Process</div>
           <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-gray-900 leading-tight">How GYF Works</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-start">
           {/* Timeline */}
           <div className="relative">
             {steps.map((step, i) => (
@@ -127,7 +127,7 @@ export default function HowItWorks() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="lg:sticky lg:top-32 bg-gray-50 rounded-2xl p-8 sm:p-10 border border-gray-100"
+            className="lg:sticky lg:top-32 bg-gray-50 rounded-2xl p-6 sm:p-10 border border-gray-100"
           >
             <div className="text-xs font-mono text-gray-700 uppercase tracking-widest mb-6">Why it works</div>
             <div className="space-y-6">

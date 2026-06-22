@@ -34,7 +34,7 @@ export default function Vision() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-20"
+          className="mb-12 sm:mb-20"
         >
           <div className="text-xs font-mono text-gray-700 uppercase tracking-widest mb-4 sm:mb-6">Mission</div>
           <blockquote className="text-[clamp(1.4rem,3.5vw,2.6rem)] font-black text-gray-900 leading-tight mb-4 sm:mb-6 max-w-3xl">
