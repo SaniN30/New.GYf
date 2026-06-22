@@ -57,13 +57,18 @@ export async function POST(req: NextRequest) {
       <td align="center">
         <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 2px 24px rgba(0,0,0,0.07);">
           <tr>
-            <td style="background:#111318;padding:32px 40px;text-align:center;">
-              <p style="margin:0;color:#ffffff;font-size:22px;font-weight:700;letter-spacing:-0.3px;">GYF</p>
-              <p style="margin:4px 0 0;color:rgba(255,255,255,0.55);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;">Get Your Fit</p>
+            <td style="background:#111318;padding:24px 40px;text-align:center;">
+              <p style="margin:0;color:#ffffff;font-size:20px;font-weight:700;letter-spacing:-0.3px;">GYF</p>
+              <p style="margin:4px 0 0;color:rgba(255,255,255,0.55);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;">Get Your Fit</p>
             </td>
           </tr>
           <tr>
-            <td style="padding:40px 40px 32px;">
+            <td style="padding:32px 40px 0;text-align:center;background:#ffffff;">
+              <img src="https://getyourfit.tech/assets/logo-new.png" alt="GYF logo" width="90" height="90" style="display:inline-block;width:90px;height:90px;object-fit:contain;" />
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:16px 40px 32px;">
               <p style="margin:0 0 8px;font-size:24px;font-weight:700;color:#111318;letter-spacing:-0.3px;">You're on the list, ${firstName}!</p>
               <p style="margin:0 0 24px;font-size:15px;color:#5a5a65;line-height:1.6;">
                 Thanks for signing up for early access to GYF. We're building an AI-native personal stylist that learns exactly what looks good on <em>you</em> — and we can't wait for you to try it.
