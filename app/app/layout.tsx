@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image" },
   metadataBase: new URL("https://getyourfit.tech"),
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
