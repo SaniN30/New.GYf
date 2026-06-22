@@ -20,7 +20,7 @@ const PILLARS = [
   {
     index: '04',
     title: 'Where we are now',
-    body: 'The Perception Layer — Layer 01 — is live in open beta. You can upload a photo and see GYF read your proportions, palette, and presence in real time. Five more layers are in active development and ship through 2025. Every layer adds a new dimension to how well GYF knows and serves you.',
+    body: 'The Perception Layer — Layer 01 — is live in open beta. You can upload a photo and see GYF read your proportions, palette, and presence in real time. Five more layers are in active development and ship through 2026. Every layer adds a new dimension to how well GYF knows and serves you.',
   },
   {
     index: '05',
@@ -32,7 +32,7 @@ const PILLARS = [
 const TEAM_FACTS = [
   { value: '6',      label: 'Intelligence layers planned' },
   { value: '01',     label: 'Layer live in open beta'     },
-  { value: '2025',   label: 'Full platform target'        },
+  { value: '2026',   label: 'Full platform target'        },
   { value: '∞',      label: 'Outfits GYF can generate'   },
 ]
 
