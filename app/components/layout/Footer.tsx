@@ -21,13 +21,13 @@ export default function Footer() {
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
           <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center h-16 w-16 flex-shrink-0">
+            <div className="flex items-center justify-center h-24 w-24 flex-shrink-0">
               <Image
                 src="/assets/logo-new.png"
                 alt="GYF"
-                width={64}
-                height={64}
-                className="h-16 w-16 object-contain"
+                width={96}
+                height={96}
+                className="h-24 w-24 object-contain"
               />
             </div>
             <span className="text-gray-700 text-sm font-medium leading-none">Get Your Fit</span>
