@@ -137,7 +137,6 @@ function PillarCard({ pillar, index }: { pillar: typeof PILLARS[0]; index: numbe
           : '0 1px 4px rgba(0,0,0,0.04)',
       }}
       whileHover={{ y: -3 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 22 }}
     >
       {/* accent bar */}
       <motion.div
