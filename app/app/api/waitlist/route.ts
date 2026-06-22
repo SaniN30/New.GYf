@@ -16,20 +16,19 @@ export async function POST(req: NextRequest) {
 
     const firstName = name.trim().split(/\s+/)[0]
 
-    // Append row to Google Sheet via Apps Script Web App
+    // Append row to Google Sheet via Apps Script Web App (GET with query params)
     const sheetsUrl = process.env.GOOGLE_SHEETS_SCRIPT_URL
     if (sheetsUrl) {
       try {
-        const sheetsRes = await fetch(sheetsUrl, {
-          method: 'POST',
-          redirect: 'follow', // Google Apps Script redirects POST — must follow
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids CORS preflight
-          body: JSON.stringify({
-            timestamp: new Date().toISOString(),
-            name: name.trim(),
-            email: email.trim(),
-            phone: phone.trim(),
-          }),
+        const params = new URLSearchParams({
+          timestamp: new Date().toISOString(),
+          name:  name.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+        })
+        const sheetsRes = await fetch(`${sheetsUrl}?${params.toString()}`, {
+          method: 'GET',
+          redirect: 'follow',
         })
         const text = await sheetsRes.text()
         console.log('[waitlist] Sheets response:', sheetsRes.status, text)
